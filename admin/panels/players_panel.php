@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
 } ?>
 <?php
-include("templates/header.php");
+include("../headers/header.php");
 ?>
 
 
@@ -38,30 +38,30 @@ include("templates/header.php");
     <div class="row">
         <div class="col-3 p-4 mt-4">
             <button type="button" class="btn btn-primary">
-                <a href="./players/players_create.php" class="text-light text-decoration-none">Új Játékos</a>
+                <a href="../players/players_create.php" class="text-light text-decoration-none">Új Játékos</a>
             </button>
         </div>
         <div class="col-3 p-4 mt-4">
             <button type="button" class="btn btn-warning">
-                <a href="./players/players_existing.php" class="text-light text-decoration-none">Meglévő játékosok módosítása</a>
+                <a href="../players/players_existing.php" class="text-light text-decoration-none">Meglévő játékosok módosítása</a>
             </button>
         </div>
         <div class="col-3 p-4 mt-4">
             <button type="button" class="btn btn-info">
-                <a href="./players/players_health.php" class="text-light text-decoration-none">Játékosok egészségügyi adatai</a>
+                <a href="../players/players_health.php" class="text-light text-decoration-none">Játékosok egészségügyi adatai</a>
             </button>
         </div>
         <div class="col-3 p-4 mt-4">
             <button type="button" class="btn btn-dark">
-                <a href="./players/players_qr_kod.php" class="text-light text-decoration-none">Játékos QR-kód létrehozása</a>
+                <a href="../players/players_qr_kod.php" class="text-light text-decoration-none">Játékos QR-kód létrehozása</a>
             </button>
         </div>
     </div>
 </div>
 
 <?php
-include("./templates/visibility.php");
+//include("./templates/visibility.php");
 ?>
 <?php
-include("templates/footer.php");
+include("../headers/footer.php");
 ?>

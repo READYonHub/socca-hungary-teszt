@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?><?php
-    include("../templates/players_header.php");
+    include("../headers/header.php");
     ?>
 
 <style>
@@ -49,8 +49,8 @@ if (!isset($_SESSION['login'])) {
 </div>
 
 <?php
-include("../templates/visibility.php");
+//include("../headers/visibility.php");
 ?>
 <?php
-include("../templates/footer.php");
+include("../headers/footer.php");
 ?>

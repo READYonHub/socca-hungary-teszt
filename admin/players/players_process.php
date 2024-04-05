@@ -16,7 +16,7 @@ if (!isset($_SESSION['login'])) {
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
             $_SESSION["create"] = "Player added successfully";
-            header("Location:../players_panel.php");
+            header("Location:../panels/players_panel.php");
         } else {
             die("Data is not inserted!");
         }
@@ -35,7 +35,7 @@ if (isset($_POST["update"])) {
     if (mysqli_query($conn, $sqlUpdate)) {
         session_start();
         $_SESSION["update"] = "Post udpated successfully";
-        header("Location:../players_panel.php");
+        header("Location:../panels/players_panel.php");
     } else {
         die("Data is not updated!");
     }

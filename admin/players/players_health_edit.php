@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
 <?php
-include("../templates/players_header.php");
+include("../headers/header.php");
 ?>
 
 <?php
@@ -62,5 +62,5 @@ if ($id) {
     </form>
 </div>
 <?php
-include("../templates/footer.php");
+include("../headers/footer.php");
 ?>

@@ -27,12 +27,12 @@ if ($id) {
              ";
 
     $eredmeny  =   mysqli_query($conn, $sql);
+        print_r($eredmeny) ;
 
     while ($sor = mysqli_fetch_assoc($eredmeny)) {
 
         $qr_id = sha1((string) $sor['player_id'] . '' . str_replace(' ', '', $sor['name']) . '' . $sor['registration_number']);
     }
-    echo $qr_id;
     $qr_code    =   QrCode::create($qr_id)
         ->setSize(600)
         ->setMargin(40)

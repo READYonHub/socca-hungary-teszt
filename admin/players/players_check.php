@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
 <?php
-include("../templates/players_header.php");
+include("../headers/header.php");
 ?>
 
 <div class="post w-100 bg-light p-5">
@@ -29,5 +29,5 @@ include("../templates/players_header.php");
 </div>
 
 <?php
-include("../templates/footer.php");
+include("../headers/footer.php");
 ?>

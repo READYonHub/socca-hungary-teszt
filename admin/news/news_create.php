@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?><?php
-    include("../templates/news_header.php");
+    include("../headers/header.php");
     ?>
 <div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
     <form action="./news_process.php" method="post">
@@ -25,5 +25,5 @@ if (!isset($_SESSION['login'])) {
     </form>
 </div>
 <?php
-include("../templates/footer.php");
+include("../headers/footer.php");
 ?>
