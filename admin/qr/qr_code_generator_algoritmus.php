@@ -27,7 +27,6 @@ if ($id) {
              ";
 
     $eredmeny  =   mysqli_query($conn, $sql);
-        print_r($eredmeny) ;
 
     while ($sor = mysqli_fetch_assoc($eredmeny)) {
 
