@@ -21,6 +21,7 @@
 .dashboard {
     width: 100%;
     padding: 20px;
+    min-width: 250px;
     text-align: center;
     text-decoration: none;
     font-variant: small-caps;
@@ -90,4 +91,8 @@
 .logout {
     text-decoration: none;
     color: rgb(200, 0, 0);
+}
+
+.logout:hover {
+    text-decoration: underline;
 }
