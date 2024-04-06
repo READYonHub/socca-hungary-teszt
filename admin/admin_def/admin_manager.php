@@ -38,6 +38,10 @@ if (!isset($_SESSION['login'])) {
         font-weight: bold;
     }
 
+    .delete:hover {
+        text-decoration: underline;
+    }
+
     .notice {
         background-color: #131313;
         padding: 10px;
