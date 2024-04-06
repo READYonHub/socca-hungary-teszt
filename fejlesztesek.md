@@ -26,4 +26,4 @@ logput gomb sidebar alsó részén fixálása
 * naplózás (email, ip)
 * admin letrehozas, modositas, torles, megtekintes
 * qr kod genralas vlm logika szerint - PHP-ban
-* 
+
