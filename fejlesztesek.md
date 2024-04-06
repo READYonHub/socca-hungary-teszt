@@ -1,4 +1,4 @@
-í# FELDATOK:
+# FELDATOK:
 
 kereso beszurasa -konnyebb navigacióval keressük meg azt a játékosokat
 oldalon megjeleno adatok korlátozása
