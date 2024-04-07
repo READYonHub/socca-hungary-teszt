@@ -8,7 +8,7 @@ if (!isset($_SESSION['login'])) {
 include("../headers/header.php");
 ?>
 <div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
-    <form action="./players_process.php" method="post" enctype="multipart/form-data">
+    <form action="./players_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="form-field mb-4">
             <label for="name"><strong>Név:</strong></label>
             <input type="text" class="form-control" name="name" id="" placeholder="Add meg a Játékos nevét:" required>

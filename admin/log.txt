@@ -56,3 +56,5 @@
 =======
  2024-04-05 21:06:45  SIKERES Bejelentkezés a(z) asd@asd.asd címről (127.0.0.1) 
 >>>>>>> 4fa27e22fa57189ea2aa4d82b0a6f73648bc4b77
+ 2024-04-07 14:29:04  SIKERES KIjelentkezés a(z)  címről (::1) 
+ 2024-04-07 14:29:20  SIKERES Bejelentkezés a(z) emailed@gmail.com címről (::1) 
