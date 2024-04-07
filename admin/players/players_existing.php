@@ -8,7 +8,13 @@ if (!isset($_SESSION['login'])) {
     ?>
 <div class="posts-list w-100 p-5">
 
-    <table class="table table-bordered">
+    <!-- JQUERY -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+
+    <!--Táblázat-->
+    <table class="table table-bordered" id="news-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -43,6 +49,12 @@ if (!isset($_SESSION['login'])) {
         </tbody>
     </table>
 
+    <!--JQUERY-->
+    <script>
+        $(document).ready(function() {
+            $('#news-table-data').DataTable();
+        });
+    </script>
 </div>
 <?php
 //include("../headers/visibility.php");

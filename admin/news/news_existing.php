@@ -43,35 +43,52 @@ if (!isset($_SESSION['login'])) {
         unset($_SESSION["delete"]);
     }
     ?>
+    <!-- JQUERY -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
 
-    <table class="news-table">
-        <tr>
-            <th style="width:15%;">Létrehozás dátuma</th>
-            <th style="width:15%;">Cím</th>
-            <th style="width:45%;">Hír tartalma</th>
-            <th style="width:25%;">Művelet</th>
-        </tr>
-        <?php
-        include('../../connect.php');
-        $sqlSelect = "SELECT * FROM news";
-        $result = mysqli_query($conn, $sqlSelect);
-        while ($data = mysqli_fetch_array($result)) {
-        ?>
+    <!--Táblázat-->
+    <table class="news-table" id="news-table-data">
+        <thead>
             <tr>
-                <td><?php echo $data["date"] ?></td>
-                <td><?php echo $data["title"] ?></td>
-                <td><?php echo $data["summary"] ?></td>
-                <td class="actions">
-                    <a class="action" href="news_check.php?id=<?php echo $data["id"] ?>">Nézet</a>
-                    <a class="action" href="news_edit.php?id=<?php echo $data["id"] ?>">Szerk.</a>
-                    <a class="action" href="news_delete.php?id=<?php echo $data["id"] ?>">Törlés</a>
-                </td>
+                <th style="width:15%;">Létrehozás dátuma</th>
+                <th style="width:15%;">Cím</th>
+                <th style="width:45%;">Hír tartalma</th>
+                <th style="width:25%;">Művelet</th>
             </tr>
-        <?php
-        }
-        ?>
+        </thead>
+        <tbody>
+            
+            <?php
+            include('../../connect.php');
+            $sqlSelect = "SELECT * FROM news";
+            $result = mysqli_query($conn, $sqlSelect);
+            while ($data = mysqli_fetch_array($result)) {
+            ?>
+                <tr>
+                    <td><?php echo $data["date"] ?></td>
+                    <td><?php echo $data["title"] ?></td>
+                    <td><?php echo $data["summary"] ?></td>
+                    <td class="actions">
+                        <a class="action" href="news_check.php?id=<?php echo $data["id"] ?>">Nézet</a>
+                        <a class="action" href="news_edit.php?id=<?php echo $data["id"] ?>">Szerk.</a>
+                        <a class="action" href="news_delete.php?id=<?php echo $data["id"] ?>">Törlés</a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
     </table>
 
+    <!--JQUERY-->
+    <script>
+        $(document).ready(function() {
+            $('#news-table-data').DataTable();
+        });
+    </script>
+    
 </div>
 <style>
     .action {
