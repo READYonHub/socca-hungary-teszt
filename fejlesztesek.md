@@ -5,6 +5,7 @@
 * cimsor átírás
 * posztok törlésekor, illetve játékosok törlésekor legyen egy megerősítéses popup
 * log fajlt adatbazisba logoljon
+* a feltölthető képeknek kell vlm szabály, hogy mennyi legyen a képfelbontás, méret, tb. megkell szabni
 
 # FRONTEND:
 sidebar fixalasa
@@ -27,4 +28,5 @@ logput gomb sidebar alsó részén fixálása
 * naplózás (email, ip)
 * admin letrehozas, modositas, torles, megtekintes
 * qr kod genralas vlm logika szerint - PHP-ban
+* képfeltöltés
 
