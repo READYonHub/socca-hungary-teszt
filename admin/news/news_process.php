@@ -34,7 +34,7 @@ if (isset($_POST["update"])) {
     if (mysqli_query($conn, $sqlUpdate)) {
         session_start();
         $_SESSION["update"] = "Post udpated successfully";
-        header("Location:../panels/news_panel.php");
+        header("Location:../news/news_existing.php");
     } else {
         die("Data is not updated!");
     }
