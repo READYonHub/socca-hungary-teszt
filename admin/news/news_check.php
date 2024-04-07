@@ -7,7 +7,9 @@ if (!isset($_SESSION['login'])) {
     include("../headers/header.php");
     ?>
 
-<div class="post w-100 bg-light p-5">
+<div class="pev-container">
+    <a href="./news_existing.php" class="back-btn">Vissza</a>
+
     <?php
     $id = $_GET["id"];
     if ($id) {
@@ -26,6 +28,28 @@ if (!isset($_SESSION['login'])) {
     }
     ?>
 </div>
+
+<style>
+    .back-btn {
+        color: gray;
+        text-decoration: none;
+        width: min-content;
+    }
+
+    .back-btn:hover {
+        text-decoration: underline;
+    }
+
+    .pev-container {
+        display: flex;
+        padding: 30px;
+        background-color: #252525;
+        flex-direction: column;
+        gap: 15px;
+        color: #fff;
+        width: 100vw;
+    }
+</style>
 
 <?php
 include("../headers/footer.php");

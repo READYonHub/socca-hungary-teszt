@@ -14,36 +14,46 @@ if ($id) {
     $sqlEdit = "SELECT * FROM news WHERE id = $id";
     $result = mysqli_query($conn, $sqlEdit);
 } else {
-    echo "No post found";
+    echo "Nincs ilyen poszt";
 }
 
 ?>
-<div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
-    <form action="./news_process.php" method="post">
-        <?php
-        while ($data = mysqli_fetch_array($result)) {
-        ?>
+<form action="./news_process.php" method="post" class="news-container">
+    <?php
+    while ($data = mysqli_fetch_array($result)) {
+    ?>
+        <input type="text" name="title" id="" placeholder="Cím" value="<?php echo $data['title']; ?>">
+        <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló"><?php echo $data['summary']; ?></textarea>
+        <textarea name="content" cols="30" rows="10" placeholder="Poszt"><?php echo $data['content']; ?></textarea>
+        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="submit" value="Elküldés" name="update">
+    <?php
+    }
+    ?>
+</form>
 
-            <div class="form-field mb-4">
-                <input type="text" class="form-control" name="title" id="" placeholder="Enter Title:" value="<?php echo $data['title']; ?>">
-            </div>
-            <div class="form-field mb-4">
-                <textarea name="summary" class="form-control" id="" cols="30" rows="10" placeholder="Enter Summary:"><?php echo $data['summary']; ?></textarea>
-            </div>
-            <div class="form-field mb-4">
-                <textarea name="content" class="form-control" id="" cols="30" rows="10" placeholder="Enter Post:"><?php echo $data['content']; ?></textarea>
-            </div>
-            <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <div class="form-field">
-                <input type="submit" class="btn btn-primary" value="Submit" name="update">
-            </div>
+<style>
+    .news-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 30px;
+        background-color: #252525;
+        width: 100vw;
+    }
 
-        <?php
-        }
-        ?>
-    </form>
-</div>
+    .news-container input,
+    textarea {
+        font-size: 14pt;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 800px;
+        resize: vertical;
+    }
+</style>
+
 <?php
 include("../headers/footer.php");
 ?>

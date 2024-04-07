@@ -6,24 +6,36 @@ if (!isset($_SESSION['login'])) {
 } ?><?php
     include("../headers/header.php");
     ?>
-<div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
-    <form action="./news_process.php" method="post">
-        <div class="form-field mb-4">
-            <input type="text" class="form-control" name="title" id="" placeholder="Enter Title:">
-        </div>
-        <div class="form-field mb-4">
-            <textarea name="summary" class="form-control" id="" cols="30" rows="10" placeholder="Enter Summary:"></textarea>
-        </div>
-        <div class="form-field mb-4">
-            <textarea name="content" class="form-control" id="" cols="30" rows="10" placeholder="Enter Post:"></textarea>
-        </div>
-        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
 
-        <div class="form-field">
-            <input type="submit" class="btn btn-primary" value="Submit" name="create">
-        </div>
-    </form>
-</div>
+<style>
+    .news-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 30px;
+        background-color: #252525;
+        width: 100vw;
+    }
+
+    .news-container input, textarea {
+        font-size: 14pt;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 800px;
+        resize: vertical;
+    }
+</style>
+
+<form action="./news_process.php" method="post" class="news-container">
+    <input type="text" name="title" id="" placeholder="Cím">
+    <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló"></textarea>
+    <textarea name="content" cols="30" rows="10" placeholder="Poszt"></textarea>
+    <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+
+    <input type="submit" value="Elküldés" name="create">
+</form>
+
 <?php
 include("../headers/footer.php");
 ?>

@@ -1,8 +1,9 @@
 # FELDATOK:
 
-kereso beszurasa -konnyebb navigacióval keressük meg azt a játékosokat
-oldalon megjeleno adatok korlátozása
-cimsor átírás
+* kereso beszurasa -konnyebb navigacióval keressük meg azt a játékosokat
+* oldalon megjeleno adatok korlátozása
+* cimsor átírás
+* posztok törlésekor, illetve játékosok törlésekor legyen egy megerősítéses popup
 * log fajlt adatbazisba logoljon
 
 # FRONTEND:
