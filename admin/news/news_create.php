@@ -6,7 +6,42 @@ if (!isset($_SESSION['login'])) {
 } ?><?php
     include("../headers/header.php");
     ?>
-
+<?php
+if (isset($_SESSION["create"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["create"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["create"]);
+}
+?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}
+?>
 <style>
     .news-container {
         display: flex;
@@ -17,7 +52,8 @@ if (!isset($_SESSION['login'])) {
         width: 100vw;
     }
 
-    .news-container input, textarea {
+    .news-container input,
+    textarea {
         font-size: 14pt;
         border: none;
         padding: 10px;
@@ -27,10 +63,10 @@ if (!isset($_SESSION['login'])) {
     }
 </style>
 
-<form action="./news_process.php" method="post" class="news-container">
-    <input type="text" name="title" id="" placeholder="Cím">
-    <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló"></textarea>
-    <textarea name="content" cols="30" rows="10" placeholder="Poszt"></textarea>
+<form action="./news_process.php" method="post" class="news-container" autocomplete="off">
+    <input type="text" name="title" id="" placeholder="Cím" required>
+    <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló" required></textarea>
+    <textarea name="content" cols="30" rows="10" placeholder="Poszt" required></textarea>
     <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
 
     <input type="submit" value="Elküldés" name="create">

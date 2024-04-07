@@ -3,6 +3,44 @@
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
+
+<!--Művelet értesítők create/edit/delete-->
+<?php
+if (isset($_SESSION["create"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["create"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["create"]);
+}
+?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}
+?>
 <style>
     .admin-create-container {
         display: flex;
@@ -42,10 +80,10 @@ if (!isset($_SESSION['login'])) {
 </style>
 <div class="admin-create-container">
     <h2>Hozzáférés hozzáadása</h2>
-    <form action="../../admin/admin_def/admin_process.php" method="post" class="new-admin-form">
+    <form action="../../admin/admin_def/admin_process.php" method="post" class="new-admin-form" autocomplete="off">
         <div class="inputs">
-            <input class="inarea" type="text" class="form-control" name="email" placeholder="Hozzáférő E-mail címe">
-            <input class="inarea" type="password" name="passwrd" class="form-control" placeholder="Hozzáférő Jelszava">
+            <input class="inarea" type="text" class="form-control" name="email" placeholder="Hozzáférő E-mail címe" required>
+            <input class="inarea" type="password" name="passwrd" class="form-control" placeholder="Hozzáférő Jelszava" required>
             <input type="hidden" name="date" value="<?php echo date("Y-m-d H-i-d"); ?>">
             <input type="submit" value="Regisztrálás" name="submit_a">
         </div>

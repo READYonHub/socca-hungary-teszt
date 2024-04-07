@@ -6,12 +6,10 @@ if (!isset($_SESSION['login'])) {
 } ?><?php
     include("../headers/header.php");
     ?>
-
-
 <?php
 if (isset($_SESSION["create"])) {
 ?>
-    <div class="message">
+    <div class="alert alert-success">
         <?php
         echo $_SESSION["create"];
         ?>
@@ -20,11 +18,35 @@ if (isset($_SESSION["create"])) {
     unset($_SESSION["create"]);
 }
 ?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}
+?>
 
 <div class="news-container">
     <h1>Műveletek</h1>
     <div class="news-actions">
-        <a href="../news/news_create.php ." class="text-light text-decoration-none">Új Hír</a>
+        <a href="../news/news_create.php" class="text-light text-decoration-none">Új Hír</a>
         <a href="../news/news_existing.php" class="text-light text-decoration-none">Meglévő hírek módosítása</a>
     </div>
 </div>

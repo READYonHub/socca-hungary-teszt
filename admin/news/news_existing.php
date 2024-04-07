@@ -73,7 +73,7 @@ if (!isset($_SESSION['login'])) {
                     <td class="actions">
                         <a class="action" href="news_check.php?id=<?php echo $data["id"] ?>">Nézet</a>
                         <a class="action" href="news_edit.php?id=<?php echo $data["id"] ?>">Szerk.</a>
-                        <a class="action" href="news_delete.php?id=<?php echo $data["id"] ?>">Törlés</a>
+                        <a class="action" onclick="return confirm('Biztosan törli a hírt?');" href="news_delete.php?id=<?php echo $data["id"] ?>">Törlés</a>
                     </td>
                 </tr>
             <?php

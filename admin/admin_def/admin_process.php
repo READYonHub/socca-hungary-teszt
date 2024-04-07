@@ -1,3 +1,47 @@
+<?php
+/* Lapvédelem mindig legfelül*/
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: ../login.php");
+}
+?>
+<!--Művelet értesítők create/edit/delete-->
+<?php
+if (isset($_SESSION["create"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["create"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["create"]);
+}
+?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}
+?>
 <style>
     .alert {
         position: fixed;
@@ -13,25 +57,21 @@
     }
 </style>
 
-<?php
-/* Lapvédelem */
-session_start();
-if (!isset($_SESSION['login'])) {
-    header("Location: ../login.php");
-}
 
+<?php
 if (isset($_POST["submit_a"])) {
     include("../../connect.php");
 
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $passwrd = sha1(mysqli_real_escape_string($conn, $_POST["passwrd"]));
-    $date = mysqli_real_escape_string($conn, $_POST["date"]);
+    $email      =   trim(strip_tags(strtolower(mysqli_real_escape_string($conn, $_POST["email"]))));
+    $passwrd    =   trim(strip_tags(sha1(mysqli_real_escape_string($conn, $_POST["passwrd"]))));
+    $date       =   mysqli_real_escape_string($conn, $_POST["date"]);
 
-    $sqlCheck = "SELECT * FROM admin_default WHERE email = '$email'";
-    $result = mysqli_query($conn, $sqlCheck);
+    $sqlCheck   =   "SELECT * FROM admin_default WHERE email = '$email'";
+    $result     =   mysqli_query($conn, $sqlCheck);
 
     if (mysqli_num_rows($result) > 0) {
         echo <<<WARNING
+        <?php echo $muvelet_ertesito ?>
         <div class="alert" role="alert">
             A megadott E-mail cím már használatban van! <button onclick="closeAlert()"><Értettem</button>
         </div>

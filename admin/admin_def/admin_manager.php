@@ -3,7 +3,44 @@
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
-
+<!--Művelet értesítők create/edit/delete-->
+<?php
+$muvelet_ertesito   =   '
+if (isset($_SESSION["create"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["create"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["create"]);
+}
+?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="alert alert-success">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}';
+?>
 <style>
     .admin-manager-container {
         display: flex;
@@ -20,7 +57,9 @@ if (!isset($_SESSION['login'])) {
         border-collapse: collapse;
     }
 
-    .admin-table, th, td {
+    .admin-table,
+    th,
+    td {
         padding: 10px;
     }
 
@@ -28,8 +67,9 @@ if (!isset($_SESSION['login'])) {
         background-color: #212121;
     }
 
-    .admin-table, th {
-        border:  2px solid transparent;
+    .admin-table,
+    th {
+        border: 2px solid transparent;
     }
 
     .delete {
@@ -114,8 +154,9 @@ if (!isset($_SESSION['login'])) {
                 <td><?php echo $data["id_adm"] ?></td>
                 <td><?php echo $data["email"] ?></td>
                 <td>
-
-                    <a class="delete" href="../../admin/admin_def/admin_delete.php?id_adm=<?php echo $data["id_adm"] ?>">Törlés</a>
+                    <a class="delete" onclick="return confirm('Biztosan eltávolítja az ADMINISZTRÁTORT a rendszerből?');" href="../../admin/admin_def/admin_delete.php?id_adm=<?php echo $data["id_adm"] ?>">
+                        Törlés
+                    </a>
                 </td>
             </tr>
         <?php
