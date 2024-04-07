@@ -7,8 +7,49 @@ if (!isset($_SESSION['login'])) {
     include("../headers/header.php");
     ?>
 <div class="posts-list w-100 p-5">
+    <?php
+    if (isset($_SESSION["create"])) {
+    ?>
+        <div class="message">
+            <?php
+            echo $_SESSION["create"];
+            ?>
+        </div>
+    <?php
+        unset($_SESSION["create"]);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION["update"])) {
+    ?>
+        <div class="message">
+            <?php
+            echo $_SESSION["update"];
+            ?>
+        </div>
+    <?php
+        unset($_SESSION["update"]);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION["delete"])) {
+    ?>
+        <div class="message">
+            <?php
+            echo $_SESSION["delete"];
+            ?>
+        </div>
+    <?php
+        unset($_SESSION["delete"]);
+    }
+    ?>
+    <!-- JQUERY -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-    <table class="table table-bordered">
+    <!--Táblázat-->
+    <table class="table table-bordered" id="players-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -51,6 +92,13 @@ if (!isset($_SESSION['login'])) {
 
         </tbody>
     </table>
+
+    <!--JQUERY-->
+    <script>
+        $(document).ready(function() {
+            $('#players-table-data').DataTable(); // A megfelelő azonosítót használjuk a DataTables inicializálásakor
+        });
+    </script>
 
 </div>
 <?php
