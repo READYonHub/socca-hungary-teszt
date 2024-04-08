@@ -36,18 +36,21 @@ if ($id) {
         ->setSize(600)
         ->setMargin(40)
         ->setForegroundColor(new Color(0, 0, 0))
-        ->setBackgroundColor(new Color(255, 128, 0));
+        // ->setBackgroundColor(new Color(255, 128, 0));
+        ->setBackgroundColor(new Color(255, 255, 255));
 
-    $label      =    Label::create("SOCCA-HUNGARY")
-        ->setTextColor(new Color(255, 255, 0));
+    // ================================================
+    // $label      =    Label::create("SOCCA-HUNGARY")
+    //     ->setTextColor(new Color(255, 255, 0));
 
-    $logo = Logo::create("./socca_loggo.png")
-        ->setResizeToWidth(500);
-
+    // $logo = Logo::create("./socca_loggo.png")
+    //     ->setResizeToWidth(500);
+    // ================================================
 
     $writer     =   new PngWriter;
 
-    $result     =   $writer->write($qr_code, $logo, $label);
+    // $result     =   $writer->write($qr_code, $logo, $label);
+    $result     =   $writer->write($qr_code);
 
     header("Content-Type:" . $result->getMimeType());
 
