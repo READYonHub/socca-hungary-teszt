@@ -94,6 +94,21 @@ if (isset($_SESSION["delete"])) {
         border-radius: 7px;
         border: 1px solid rgb(200, 0, 0);
     }
+
+    .message {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: transparent;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+        padding: 10px;
+        background-color: rgb(0, 200, 0);
+        border-radius: 8px;
+    }
 </style>
 <div class="admin-manager-container">
     <h2>Hozzáférések kezelése</h2>
@@ -103,7 +118,7 @@ if (isset($_SESSION["delete"])) {
     <?php
     if (isset($_SESSION["create"])) {
     ?>
-        <div class="alert alert-success">
+        <div class="message">
             <?php
             echo $_SESSION["create"];
             ?>
@@ -115,7 +130,7 @@ if (isset($_SESSION["delete"])) {
     <?php
     if (isset($_SESSION["update"])) {
     ?>
-        <div class="alert alert-success">
+        <div class="message">
             <?php
             echo $_SESSION["update"];
             ?>
@@ -127,7 +142,7 @@ if (isset($_SESSION["delete"])) {
     <?php
     if (isset($_SESSION["delete"])) {
     ?>
-        <div class="alert alert-success">
+        <div class="message">
             <?php
             echo $_SESSION["delete"];
             ?>

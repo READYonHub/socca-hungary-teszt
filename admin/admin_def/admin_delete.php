@@ -8,7 +8,7 @@ if (!isset($_SESSION['login'])) {
 <?php
 if (isset($_SESSION["create"])) {
 ?>
-    <div class="alert alert-success">
+    <div class="message">
         <?php
         echo $_SESSION["create"];
         ?>
@@ -20,7 +20,7 @@ if (isset($_SESSION["create"])) {
 <?php
 if (isset($_SESSION["update"])) {
 ?>
-    <div class="alert alert-success">
+    <div class="message">
         <?php
         echo $_SESSION["update"];
         ?>
@@ -32,7 +32,7 @@ if (isset($_SESSION["update"])) {
 <?php
 if (isset($_SESSION["delete"])) {
 ?>
-    <div class="alert alert-success">
+    <div class="message">
         <?php
         echo $_SESSION["delete"];
         ?>
