@@ -9,19 +9,19 @@ if (!isset($_SESSION['login'])) {
 <div class="player-table-main-container">
 
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
 
     <!--Táblázat-->
     <table class="p-table" id="news-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
-                <th style="width:15%;">Játékos neve</th>
-                <th style="width:45%;">Játékos Sorszáma</th>
-                <th style="width:45%;">Játékos Státusz</th>
-                <th style="width:25%;">Művelet</th>
+                <th style="width:40%;">Játékos neve</th>
+                <th style="width:15%;">Játékos Sorszáma</th>
+                <th style="width:30%;">Játékos Státusz</th>
+                <th style="width:15%;">Művelet</th>
             </tr>
         </thead>
         <tbody>
@@ -74,8 +74,6 @@ if (!isset($_SESSION['login'])) {
         .p-table {
             border-collapse: collapse;
             margin-top: 10px;
-            width: 100%;
-            /* Ensure the table takes up the full width */
         }
 
         .p-table,

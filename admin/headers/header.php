@@ -18,7 +18,7 @@
             <h1 class="dashboard"><a href="../panels/dashboard_panel.php">Vezérlőpult</a></h1>
             <div class="menu-container">
                 <!--ADMINISTRATION-->
-                <a href="../panels/admin_panel.php" class="admin">Adminisztrátor</a>
+                <a href="../panels/admin_panel.php" class="admin">Hozzáférés</a>
                 <!--NEWS-->
                 <a href="../panels/news_panel.php" class="news">Hírek</a>
                 <!--PLYAER-->

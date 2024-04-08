@@ -44,12 +44,12 @@ if (!isset($_SESSION['login'])) {
     }
     ?>
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
 
     <!--Táblázat-->
-    <table class="p-table" id="players-table-data">
+    <table class="p-health-table" id="players-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -99,52 +99,52 @@ if (!isset($_SESSION['login'])) {
             $('#players-table-data').DataTable(); // A megfelelő azonosítót használjuk a DataTables inicializálásakor
         });
     </script>
-
-    <style>
-        .action {
-            display: flex;
-            text-decoration: none;
-            color: #aaa;
-        }
-
-        .actions {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .p-table {
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .p-table,
-        th,
-        td {
-            padding: 10px;
-        }
-
-        .p-table tr:nth-child(even) {
-            background-color: #303030;
-        }
-
-        .p-table,
-        th {
-            border: 2px solid transparent;
-        }
-
-        .player-health-container {
-            display: flex;
-            background-color: #252525;
-            width: 100vw;
-            padding: 30px;
-            color: #fff;
-        }
-    </style>
-
 </div>
+
+<style>
+    .action {
+        display: flex;
+        text-decoration: none;
+        color: #aaa;
+    }
+
+    .actions {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .p-health-table {
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .p-health-table,
+    th,
+    td {
+        padding: 10px;
+    }
+
+    .p-health-table tr:nth-child(even) {
+        background-color: #303030;
+    }
+
+    .p-health-table,
+    th {
+        border: 2px solid transparent;
+    }
+
+    .player-health-container {
+        display: flex;
+        background-color: #252525;
+        width: 100vw;
+        padding: 30px;
+        color: #fff;
+    }
+</style>
+
 <?php
 //include("../headers/visibility.php");
 ?>

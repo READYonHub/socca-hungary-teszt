@@ -44,16 +44,16 @@ if (!isset($_SESSION['login'])) {
     }
     ?>
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
 
     <!--Táblázat-->
     <table class="news-table" id="news-table-data">
         <thead>
             <tr>
-                <th style="width:15%;">Létrehozás dátuma</th>
-                <th style="width:15%;">Cím</th>
+                <th style="width:10%;">Létrehozás dátuma</th>
+                <th style="width:25%;">Cím</th>
                 <th style="width:45%;">Hír tartalma</th>
                 <th style="width:25%;">Művelet</th>
             </tr>
