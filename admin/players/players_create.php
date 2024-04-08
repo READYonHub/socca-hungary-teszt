@@ -7,39 +7,43 @@ if (!isset($_SESSION['login'])) {
 <?php
 include("../headers/header.php");
 ?>
-<div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
-    <form action="./players_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
-        <div class="form-field mb-4">
-            <label for="name"><strong>Név:</strong></label>
-            <input type="text" class="form-control" name="name" id="" placeholder="Add meg a Játékos nevét:" required>
-        </div>
-        <div class="form-field mb-4">
-            <label for="name"><strong>Sorszám:</strong></label>
-            <input type="number" name="registration_number" class="form-control" id="" placeholder="Add meg a Játékos SZORSZÁMÁT:" required></input>
-        </div>
-        <div class="form-field mb-4">
-            <label for="name"><strong>Érvényesség Dátumát:</strong></label>
-            <input type="date" name="validity_date" class="form-control" id="" placeholder="Add meg a Játékos ÉRVÉNYESSÉGÉNEK a DÁTUMÁT:" required></input>
-        </div>
-        <div class="form-field mb-4">
-            <label for="name"><strong>Státusz:</strong></label>
-            <input name="status" class="form-control" id="" placeholder="Add meg a Játékos STÁTUSZÁT:" required></input>
-        </div>
-        <div class="form-field mb-4">
-            <label for="name"><strong>Játékos Eltiltásának Határideje:</strong></label>
-            <input type="date" name="status" class="form-control" id="" placeholder="Add meg a Játékos Meddig legyen eltiltva:"></input>
-        </div>
-        <div class="form-field mb-4">
-            <label for="profile_pic"><strong>Játékos Profilképének feltöltése:</strong></label>
-            <input type="file" name="profile_pic" class="form-control" id="" placeholder="Tölsd fel a játékosnak a profilképét:" required></input>
-        </div>
-        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+<form action="./players_process.php" method="post" enctype="multipart/form-data" autocomplete="off" class="p-container">
+    <h1>Játékos hozzáadása</h1>
 
-        <div class="form-field">
-            <input type="submit" class="btn btn-primary" value="Submit" name="create">
-        </div>
-    </form>
-</div>
+    <input type="text" class="form-control" name="name" id="" placeholder="Név" required>
+    <input type="number" name="registration_number" class="form-control" placeholder="Sorszám" required></input>
+    <input type="date" name="validity_date" class="form-control" id="" placeholder="Érvényesség dátum" required></input>
+    <input name="status" class="form-control" id="" placeholder="Státusz" required></input>
+    <input type="date" name="status" class="form-control" id="" placeholder="Eltiltás vágének dátuma"></input>
+    <input type="file" name="profile_pic" class="form-control" id="" placeholder="Játékoskép" required></input>
+    <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+
+    <input type="submit" class="btn btn-primary" value="Submit" name="create">
+</form>
+
+<style>
+    .p-container {
+        display: flex;
+        flex-direction: column;
+        background-color: #252525;
+        width: 100vw;
+        gap: 10px;
+        padding: 30px;
+        color: #fff;
+    }
+
+    .p-container h1 {
+        margin-bottom: 10px;
+    }
+
+    .p-container input {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
+    }
+</style>
+
 <?php
 include("../headers/footer.php");
 ?>

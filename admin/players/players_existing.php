@@ -6,7 +6,7 @@ if (!isset($_SESSION['login'])) {
 } ?><?php
     include("../headers/header.php");
     ?>
-<div class="posts-list w-100 p-5">
+<div class="player-table-main-container">
 
     <!-- JQUERY -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
@@ -14,7 +14,7 @@ if (!isset($_SESSION['login'])) {
     <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
 
     <!--Táblázat-->
-    <table class="table table-bordered" id="news-table-data">
+    <table class="p-table" id="news-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -36,10 +36,10 @@ if (!isset($_SESSION['login'])) {
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
                     <td><?php echo $data["status"] ?></td>
-                    <td>
-                        <a class="btn btn-info" href="players_check.php?id=<?php echo $data["player_id"] ?>">View</a>
-                        <a class="btn btn-warning" href="players_edit.php?id=<?php echo $data["player_id"] ?>">Edit</a>
-                        <a class="btn btn-danger" href="players_delete.php?id=<?php echo $data["player_id"] ?>">Delete</a>
+                    <td class="actions">
+                        <a class="action" href="players_check.php?id=<?php echo $data["player_id"] ?>">View</a>
+                        <a class="action" href="players_edit.php?id=<?php echo $data["player_id"] ?>">Edit</a>
+                        <a class="action" href="players_delete.php?id=<?php echo $data["player_id"] ?>">Delete</a>
                     </td>
                 </tr>
             <?php
@@ -55,6 +55,53 @@ if (!isset($_SESSION['login'])) {
             $('#news-table-data').DataTable();
         });
     </script>
+
+    <style>
+        .action {
+            display: flex;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .actions {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .p-table {
+            border-collapse: collapse;
+            margin-top: 10px;
+            width: 100%;
+            /* Ensure the table takes up the full width */
+        }
+
+        .p-table,
+        th,
+        td {
+            padding: 10px;
+            border: 2px solid transparent;
+            /* Add border style to table cells */
+        }
+
+        .p-table tr:nth-child(even) {
+            background-color: #303030;
+            /* Background color for even rows */
+        }
+
+        .player-table-main-container {
+            display: flex;
+            background-color: #252525;
+            width: 100vw;
+            padding: 30px;
+            color: #fff;
+            overflow-x: auto;
+            /* Add horizontal scrollbar if table overflows */
+        }
+    </style>
+
 </div>
 <?php
 //include("../headers/visibility.php");
