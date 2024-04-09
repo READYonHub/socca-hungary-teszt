@@ -9,7 +9,7 @@ if (!isset($_SESSION['login'])) {
 <div class="player-table-main-container">
 
     <!-- JQUERY -->
-    <?php include('../lib/jquery/players_jquery.php')?>
+    <?php include('../lib/jquery/players_jquery.php') ?>
 
     <!--Táblázat-->
     <table class="p-table" id="players-table-data">
@@ -30,7 +30,7 @@ if (!isset($_SESSION['login'])) {
             $result = mysqli_query($conn, $sqlSelect);
             while ($data = mysqli_fetch_array($result)) {
             ?>
-                <tr>
+                <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
                     <td><?php echo $data["status"] ?></td>
@@ -90,6 +90,11 @@ if (!isset($_SESSION['login'])) {
             color: #fff;
             width: 100vw;
             padding: 30px;
+        }
+
+        #players-table-data .playerRow:hover {
+            color: orange;
+            background-color: black;
         }
     </style>
 

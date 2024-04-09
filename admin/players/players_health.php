@@ -72,7 +72,7 @@ if (!isset($_SESSION['login'])) {
             $result = mysqli_query($conn, $sqlSelect);
             while ($data = mysqli_fetch_array($result)) {
             ?>
-                <tr>
+                <tr  class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
                     <td><?php echo $data["blood_group"] ?></td>
@@ -135,6 +135,11 @@ if (!isset($_SESSION['login'])) {
         padding: 30px;
         color: #fff;
     }
+
+    #players-table-data .playerRow:hover {
+            color: orange;
+            background-color: black;
+        }
 </style>
 
 <?php

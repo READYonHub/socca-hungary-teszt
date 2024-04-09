@@ -64,7 +64,7 @@ if (!isset($_SESSION['login'])) {
             $result = mysqli_query($conn, $sqlSelect);
             while ($data = mysqli_fetch_array($result)) {
             ?>
-                <tr>
+                <tr class="playerRow">
                     <td><?php echo $data["date"] ?></td>
                     <td><?php echo $data["title"] ?></td>
                     <td><?php echo $data["summary"] ?></td>
@@ -124,6 +124,11 @@ if (!isset($_SESSION['login'])) {
         color: #fff;
         width: 100vw;
         padding: 30px;
+    }
+
+    #news-table-data .playerRow:hover {
+        color: orange;
+        background-color: black;
     }
 </style>
 
