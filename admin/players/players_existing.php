@@ -18,10 +18,10 @@ if (!isset($_SESSION['login'])) {
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
-                <th style="width:40%;">Játékos neve</th>
-                <th style="width:15%;">Játékos Sorszáma</th>
-                <th style="width:30%;">Játékos Státusz</th>
-                <th style="width:15%;">Művelet</th>
+                <th>Játékos neve</th>
+                <th>Játékos Sorszáma</th>
+                <th>Játékos Státusz</th>
+                <th>Művelet</th>
             </tr>
         </thead>
         <tbody>
@@ -71,32 +71,35 @@ if (!isset($_SESSION['login'])) {
             gap: 15px;
         }
 
+        .message {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            background-color: transparent;
+            font-weight: bold;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            padding: 10px;
+            background-color: rgb(0, 200, 0);
+            border-radius: 8px;
+        }
+
         .p-table {
             border-collapse: collapse;
             margin-top: 10px;
         }
 
-        .p-table,
-        th,
-        td {
-            padding: 10px;
-            border: 2px solid transparent;
-            /* Add border style to table cells */
-        }
-
         .p-table tr:nth-child(even) {
             background-color: #303030;
-            /* Background color for even rows */
         }
 
         .player-table-main-container {
-            display: flex;
             background-color: #252525;
+            color: #fff;
             width: 100vw;
             padding: 30px;
-            color: #fff;
-            overflow-x: auto;
-            /* Add horizontal scrollbar if table overflows */
         }
     </style>
 

@@ -52,10 +52,10 @@ if (!isset($_SESSION['login'])) {
     <table class="news-table" id="news-table-data">
         <thead>
             <tr>
-                <th style="width:10%;">Létrehozás dátuma</th>
-                <th style="width:25%;">Cím</th>
-                <th style="width:45%;">Hír tartalma</th>
-                <th style="width:25%;">Művelet</th>
+                <th>Létrehozás dátuma</th>
+                <th>Cím</th>
+                <th>Hír tartalma</th>
+                <th>Művelet</th>
             </tr>
         </thead>
         <tbody>
@@ -125,19 +125,8 @@ if (!isset($_SESSION['login'])) {
         margin-top: 10px;
     }
 
-    .news-table,
-    th,
-    td {
-        padding: 10px;
-    }
-
     .news-table tr:nth-child(even) {
         background-color: #303030;
-    }
-
-    .news-table,
-    th {
-        border: 2px solid transparent;
     }
 
     .news-container {
