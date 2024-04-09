@@ -70,8 +70,8 @@ if (isset($_POST['login'])) {
         <form class="login-form" action="login.php" method="post">
             <img src="./images/soccalogo-779x1024.png" alt="">
             <div class="inputs">
-                <input class="textin" type="email" name="email" id="" placeholder="E-mail">
-                <input class="textin" type="password" name="passwrd" id="" placeholder="Jelszó">
+                <input class="textin" type="email" name="email" placeholder="E-mail">
+                <input class="textin" type="password" name="passwrd" placeholder="Jelszó">
                 <input class="logbtn" type="submit" value="Bejelentkezés" name="login">
             </div>
         </form>

@@ -71,29 +71,34 @@ if (isset($_POST["submit_a"])) {
     $sqlCheck   =   "SELECT * FROM admin_default WHERE email = '$email'";
     $result     =   mysqli_query($conn, $sqlCheck);
 
+
+
     if (mysqli_num_rows($result) > 0) {
         echo <<<WARNING
-        <?php echo $muvelet_ertesito ?>
-        <div class="alert" role="alert">
-            A megadott E-mail cím már használatban van! <button onclick="closeAlert()"><Értettem</button>
-        </div>
         <script type="text/javascript">
-            function closeAlert() {
-                var alertBox = document.querySelector('.alert');
-                alertBox.style.display = 'none';
-                window.location.href = "../panels/admin_panel.php";
-            }
+            alert("A megadott E-mail cím már használatban van!");
+            window.location.replace("../panels/admin_panel.php");
         </script>
 WARNING;
     } else {
-        $sqlInsert = "INSERT INTO admin_default(date, email, passwrd) VALUES ('$date','$email', '$passwrd')";
-
-        if (mysqli_query($conn, $sqlInsert)) {
-            session_start();
-            $_SESSION["submit_a"] = "Administrator added successfully";
-            header("Location: ../panels/admin_panel.php");
+        $pattern = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+        if (!preg_match($pattern, $email)) {
+            echo <<<WARNING
+        <script type="text/javascript">
+            alert("Helytelen E-mail cím!");
+            window.location.replace("../panels/admin_panel.php");
+        </script>
+WARNING;
         } else {
-            die("Data is not inserted!");
+            $sqlInsert = "INSERT INTO admin_default(date, email, passwrd) VALUES ('$date','$email', '$passwrd')";
+
+            if (mysqli_query($conn, $sqlInsert)) {
+                session_start();
+                $_SESSION["submit_a"] = "Administrator added successfully";
+                header("Location: ../panels/admin_panel.php");
+            } else {
+                die("Data is not inserted!");
+            }
         }
     }
 }
