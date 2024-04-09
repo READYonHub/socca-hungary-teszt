@@ -50,18 +50,18 @@ include("../headers/header.php");
         require_once('../../connect.php');
 
         //-------JÁTÉKOSOK SZÁMA
-        $sql = "SELECT COUNT(name) AS count FROM `players_data`";
+        $sql = "SELECT COUNT(*) AS eltiltottak FROM players_data WHERE status = 'érvényes'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            echo "<span><span class=\"result\">{$row['count']}</span> <span class=\"green\">ÉRVÉNYES</span></span>";
+            echo "<span><span class=\"result\">{$row['eltiltottak']}</span> <span class=\"green\">ÉRVÉNYES</span></span>";
         } else {
             echo '<span>Nincsenek Játékosok</span>';
         }
 
         //-------ELTILTOTT JÁTÉKOSOK SZÁMA
-        $sql = "SELECT COUNT(status) AS eltiltottak FROM players_data WHERE status = 'eltiltva'";
+        $sql = "SELECT COUNT(*) AS eltiltottak FROM players_data WHERE status = 'eltiltva'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
