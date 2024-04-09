@@ -5,7 +5,6 @@ if (!isset($_SESSION['login'])) {
 } ?>
 <!--Művelet értesítők create/edit/delete-->
 <?php
-$muvelet_ertesito   =   '
 if (isset($_SESSION["create"])) {
 ?>
     <div class="message">
@@ -39,7 +38,7 @@ if (isset($_SESSION["delete"])) {
     </div>
 <?php
     unset($_SESSION["delete"]);
-}';
+};
 ?>
 <style>
     .admin-manager-container {
@@ -115,42 +114,6 @@ if (isset($_SESSION["delete"])) {
     <div class="notice">
         Csak olyan embereknek adjon hozzáférést akikben megbízik! A hozzáféréssel rendelkező emberek szintén képesek további hozzáféréseket adni!
     </div>
-    <?php
-    if (isset($_SESSION["create"])) {
-    ?>
-        <div class="message">
-            <?php
-            echo $_SESSION["create"];
-            ?>
-        </div>
-    <?php
-        unset($_SESSION["create"]);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION["update"])) {
-    ?>
-        <div class="message">
-            <?php
-            echo $_SESSION["update"];
-            ?>
-        </div>
-    <?php
-        unset($_SESSION["update"]);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION["delete"])) {
-    ?>
-        <div class="message">
-            <?php
-            echo $_SESSION["delete"];
-            ?>
-        </div>
-    <?php
-        unset($_SESSION["delete"]);
-    }
-    ?>
     <table class="admin-table">
         <tr>
             <th>Létrehozás dátuma</th>

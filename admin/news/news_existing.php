@@ -44,9 +44,7 @@ if (!isset($_SESSION['login'])) {
     }
     ?>
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <?php include('../lib/jquery/news_jquery.php'); ?>
 
     <!--Táblázat-->
     <table class="news-table" id="news-table-data">
@@ -59,7 +57,7 @@ if (!isset($_SESSION['login'])) {
             </tr>
         </thead>
         <tbody>
-            
+
             <?php
             include('../../connect.php');
             $sqlSelect = "SELECT * FROM news";
@@ -81,14 +79,6 @@ if (!isset($_SESSION['login'])) {
             ?>
         </tbody>
     </table>
-
-    <!--JQUERY-->
-    <script>
-        $(document).ready(function() {
-            $('#news-table-data').DataTable();
-        });
-    </script>
-    
 </div>
 <style>
     .action {

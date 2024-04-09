@@ -44,9 +44,7 @@ if (!isset($_SESSION['login'])) {
     }
     ?>
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <?php include('../lib/jquery/players_health_jquery.php'); ?>
 
     <!--Táblázat-->
     <table class="p-health-table" id="players-table-data">
@@ -93,12 +91,6 @@ if (!isset($_SESSION['login'])) {
         </tbody>
     </table>
 
-    <!--JQUERY-->
-    <script>
-        $(document).ready(function() {
-            $('#players-table-data').DataTable(); // A megfelelő azonosítót használjuk a DataTables inicializálásakor
-        });
-    </script>
 </div>
 
 <style>
