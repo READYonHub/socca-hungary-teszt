@@ -9,12 +9,10 @@ if (!isset($_SESSION['login'])) {
 <div class="player-table-main-container">
 
     <!-- JQUERY -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <?php include('../lib/jquery/players_jquery.php') ?>
 
     <!--Táblázat-->
-    <table class="p-table" id="news-table-data">
+    <table class="p-table" id="players-table-data">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -32,7 +30,7 @@ if (!isset($_SESSION['login'])) {
             $result = mysqli_query($conn, $sqlSelect);
             while ($data = mysqli_fetch_array($result)) {
             ?>
-                <tr>
+                <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
                     <td><?php echo $data["status"] ?></td>
@@ -48,14 +46,6 @@ if (!isset($_SESSION['login'])) {
 
         </tbody>
     </table>
-
-    <!--JQUERY-->
-    <script>
-        $(document).ready(function() {
-            $('#news-table-data').DataTable();
-        });
-    </script>
-
     <style>
         .action {
             display: flex;
@@ -100,6 +90,11 @@ if (!isset($_SESSION['login'])) {
             color: #fff;
             width: 100vw;
             padding: 30px;
+        }
+
+        #players-table-data .playerRow:hover {
+            color: orange;
+            background-color: black;
         }
     </style>
 

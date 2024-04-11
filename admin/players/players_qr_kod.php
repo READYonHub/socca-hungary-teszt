@@ -7,16 +7,11 @@ if (!isset($_SESSION['login'])) {
     include("../headers/header.php");
     ?>
 
-<style>
-    #playersTable .playerRow:hover {
-        color: orange;
-        background-color: black;
-        font-weight: bold;
-    }
-</style>
+<div class="player-table-main-container">
+    <!--JQUERY-->
+    <?php include('../lib/jquery/players_qr_jquery.php'); ?>
 
-<div class="posts-list w-100 p-5">
-    <table class="table table-bordered" id="playersTable">
+    <table class="p-table" id="playersTable">
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
@@ -38,7 +33,7 @@ if (!isset($_SESSION['login'])) {
                 <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
-                    <td><a class="btn btn-dark" href="../qr/qr_code_generator_algoritmus.php?player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a></td>
+                    <td class="actions"><a class="action" href="../qr/qr_code_generator_algoritmus.php?player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a></td>
 
                 </tr>
             <?php
@@ -46,6 +41,57 @@ if (!isset($_SESSION['login'])) {
             ?>
         </tbody>
     </table>
+    <style>
+        .action {
+            display: flex;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .actions {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .message {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            background-color: transparent;
+            font-weight: bold;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            padding: 10px;
+            background-color: rgb(0, 200, 0);
+            border-radius: 8px;
+        }
+
+        .p-table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .p-table tr:nth-child(even) {
+            background-color: #303030;
+        }
+
+        .player-table-main-container {
+            background-color: #252525;
+            color: #fff;
+            width: 100vw;
+            padding: 30px;
+        }
+
+        #playersTable .playerRow:hover {
+            color: orange;
+            background-color: black;
+        }
+    </style>
 </div>
 
 <?php
