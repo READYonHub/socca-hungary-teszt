@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2024. Ápr 08. 07:24
+-- Létrehozás ideje: 2024. Ápr 14. 18:37
 -- Kiszolgáló verziója: 8.2.0
 -- PHP verzió: 8.2.13
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `admin_default` (
   `email` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
   `passwrd` char(40) COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`id_adm`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- A tábla adatainak kiíratása `admin_default`
@@ -44,6 +44,30 @@ CREATE TABLE IF NOT EXISTS `admin_default` (
 
 INSERT INTO `admin_default` (`id_adm`, `date`, `email`, `passwrd`) VALUES
 (5, '2024-04-02', 'emailed@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+CREATE TABLE IF NOT EXISTS `logs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL,
+  `state` varchar(20) COLLATE utf8mb4_german2_ci NOT NULL,
+  `action` varchar(30) COLLATE utf8mb4_german2_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_german2_ci NOT NULL,
+  `ip_address` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- A tábla adatainak kiíratása `logs`
+--
+
+INSERT INTO `logs` (`id`, `timestamp`, `state`, `action`, `email`, `ip_address`) VALUES
+(6, '2024-04-14 16:33:34', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1');
 
 -- --------------------------------------------------------
 
@@ -59,20 +83,17 @@ CREATE TABLE IF NOT EXISTS `news` (
   `summary` text COLLATE utf8mb4_general_ci NOT NULL,
   `content` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `news`
 --
 
 INSERT INTO `news` (`id`, `date`, `title`, `summary`, `content`) VALUES
-(8, '2024/04/07', 'Cim', 'S', 'P'),
-(26, '2024/04/07', '', '', ''),
-(27, '2024/04/07', 'hová', 'tűnt ', 'a regex? !ÁDÁM!'),
-(28, '2024/04/07', '<a href=\"https://github.com/READYonHub/socca-hungary-teszt/issues/new\">cim</a>', 's', 's'),
-(29, '2024/04/07', 'sdasd . ads as', 's asdqa. asd aqs . adsda', 'ads.ads as.d asd as.\r\n'),
-(30, '2024/04/07', 'Asdas d.da sd. asd. asd. asd', ' asd asd-. ads asd .a sd aqsd. asd.ds', 'Wev wgefr.gwbr g..w4e r..fwesa'),
-(31, '2024/04/07', 'ide', 'szovegek', 'đäd .');
+(29, '2024/04/14', '', '', ''),
+(31, '2024/04/07', 'ide', 'szovegek', 'đäd .'),
+(33, '2024/04/14', 'Erqw', 'Adsef', 'Da'),
+(34, '2024/04/14', 'D', 'S', 'S');
 
 -- --------------------------------------------------------
 
@@ -91,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `players_data` (
   `suspension_end_date` date DEFAULT NULL,
   `profile_pic` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=764 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=766 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `players_data`
@@ -528,7 +549,6 @@ INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validit
 (428, 'Balogh Kevin Márk', '0428', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (429, 'Román Viktor', '0429', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (430, 'Fehér-Kaplár Zsombor', '0430', '2024-12-31', 'érvényes', NULL, NULL, ''),
-(431, 'Ales Patrik', '0431', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (432, 'Farkas Olivér', '0432', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (433, 'Lesták Benedek', '0433', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (434, 'Horváth Barnabás', '0434', '2024-12-31', 'érvényes', NULL, NULL, ''),
@@ -787,9 +807,9 @@ INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validit
 (687, 'Király Viktor', '0687', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (688, 'Szabó Vencel', '0688', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (689, 'Polgár Szilárd', '0689', '2024-12-31', 'érvényes', NULL, NULL, ''),
-(690, 'Kádár Péter', '0690', '2024-12-31', 'érvényes', NULL, NULL, '');
+(690, 'Kádár Péter', '0690', '2024-12-31', 'érvényes', NULL, NULL, ''),
+(691, 'Andirkó István', '0691', '2024-12-31', 'érvényes', NULL, NULL, '');
 INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validity_date`, `status`, `suspension_start_date`, `suspension_end_date`, `profile_pic`) VALUES
-(691, 'Andirkó István', '0691', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (692, 'Dudás Gergő', '0692', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (693, ' Dufla Domokos', '0693', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (694, 'Jakab Ádám', '0694', '2024-12-31', 'érvényes', NULL, NULL, ''),
@@ -851,7 +871,9 @@ INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validit
 (760, 'asd', '4444', NULL, '', NULL, NULL, '1712502285'),
 (761, 'asdqw3421', '7777', NULL, '', NULL, NULL, '17125031116.jpg'),
 (762, 'GAZDAG ÁDÁM', '6666', NULL, 'eltiltva', NULL, NULL, '17125224894.jpg'),
-(763, 'GAZDAG ÁDÁM', '6666', NULL, '', NULL, NULL, '17125225874.jpg');
+(763, 'GAZDAG ÁDÁM', '6666', NULL, '', NULL, NULL, '17125225874.jpg'),
+(764, 'Gazdag Ádám', '8998', NULL, '', NULL, NULL, '1713117003Képkivágás.PNG'),
+(765, 'ggg', '21', NULL, '', NULL, NULL, '1713117181hire uj utan hiba.PNG');
 
 -- --------------------------------------------------------
 
