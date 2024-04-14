@@ -1,49 +1,53 @@
 <?php
-include("../../connect.php");
+session_start(); // Munkamenet kezdése
 
+include("../../connect.php"); // Adatbázis kapcsolat létrehozása
 
+// Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
+if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_number'])) {
+    $player_id = $_SESSION['player_id']; // Játékos azonosítójának kiolvasása a SESSION-ből
 
-$kapott_id  = "758";
+    // SQL lekérdezés összeállítása a játékos adatainak lekérdezésére
+    $sql = "SELECT * FROM `players_data`
+            WHERE `player_id` = {$player_id}";
 
-$sql    = "SELECT * FROM `players_data`
-            WHERE `player_id` = {$kapott_id}";
+    // Lekérdezés végrehajtása
+    $result = mysqli_query($conn, $sql);
 
+    // Ellenőrizzük, hogy van-e eredmény a lekérdezésben
+    if (mysqli_num_rows($result) == 1) {
+        // Ha van eredmény, akkor kinyerjük az adatokat
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+        $registration_number = $row['registration_number'];
+        // A validity_date stringből DateTime objektummá alakítása
+        $validity_date = new DateTime($row['validity_date']);
+        $validity_date = $validity_date->format('Y-m-d'); // Újra formázás stringgé
+        $status = $row['status'];
+        $player_profile_pic = $row['profile_pic'];
 
-$eredmeny = mysqli_query($conn, $sql);
+        // Játékos képének az elérési útvonala
+        $player_profile_pic_path = "http://localhost/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
 
-/* Létező játékos */
-if (mysqli_num_rows($eredmeny) == 1) {
-    $sor = mysqli_fetch_assoc($eredmeny);
-    $name                       = $sor['name'];
-    $registration_number        = $sor['registration_number'];
-    // A validity_date stringből DateTime objektummá alakítása
-    $validity_date              = new DateTime($sor['validity_date']);
-    $validity_date              = $validity_date->format('Y-m-d'); // Újra formázás stringgé
-    $status                     = $sor['status'];
-    $player_profile_pic         = $sor['profile_pic'];
+        // Sablon beolvasása
+        $template = file_get_contents("player_data.html");
+
+        // Elemek cseréje a sablonban
+        $template = str_replace("{{name}}", $name, $template);
+        $template = str_replace("{{registration_number}}", $registration_number, $template);
+        $template = str_replace("{{validity_date}}", $validity_date, $template);
+        $template = str_replace("{{status}}", $status, $template);
+        $template = str_replace("{{player_profile_pic}}", $player_profile_pic_path, $template);
+
+        // Sablon kiírása
+        echo $template;
+    } else {
+        // Nincs találat
+        echo "Nincs ilyen játékos az adatbázisban.";
+    }
+} else {
+    // Hiányzó vagy érvénytelen adatok
+    echo "Hiányzó vagy érvénytelen adatok!";
 }
-/* NEM létező játékos */ else {
-    $name                       = "Nincs ilyen név";
-    $registration_number        = "Hiba";
-    $validity_date              = "Hiba";
-    $status                     = "Hiba";
-    $player_profile_pic         = "Hiba";
-}
-//vagy lehet ide egy header is valami 404-es errorral (.htaccess)
 
-//jatekos képeinek az elérési utvonala
-$player_profile_pic_path = "http://localhost/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
-
-
-//elemek kicserélése
-//sablon
-$sablon = file_get_contents("player_data.html");
-//elemek
-$sablon = str_replace("{{name}}",                   $name,                      $sablon);
-$sablon = str_replace("{{registration_number}}",    $registration_number,       $sablon);
-$sablon = str_replace("{{validity_date}}",          $validity_date,             $sablon);
-$sablon = str_replace("{{status}}",                 $status,                    $sablon);
-$sablon = str_replace("{{player_profile_pic}}",     $player_profile_pic_path,   $sablon);
-
-print $sablon;
-mysqli_close($conn);
+mysqli_close($conn); // Adatbázis kapcsolat bezárása

@@ -52,8 +52,13 @@ if (isset($_GET['hi']) && !empty($_GET['hi'])) {
         echo "Kinyert adatok: <br>";
         print_r($decoded_data);
 
-        // Átirányítás a player_data.php oldalra a kinyert adatokkal
-        header("Location: player_data.php?player_id=" . $decoded_data['player_id'] . "&name=" . urlencode($decoded_data['name']) . "&registration_number=" . $decoded_data['registration_number']);
+        // Adatok mentése a session-be
+        $_SESSION['player_id'] = $decoded_data['player_id'];
+        $_SESSION['name'] = $decoded_data['name'];
+        $_SESSION['registration_number'] = $decoded_data['registration_number'];
+
+        // Töröljük a hash-t a GET paraméterből, hogy ne legyen látható az URL-ben
+        header("Location: player_data.php");
         exit;
     } else {
         // Ha nincs találat, értesítést adunk
