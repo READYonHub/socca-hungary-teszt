@@ -41,14 +41,42 @@ if (isset($_POST['login'])) {
                      LIMIT 1";
         $result =   mysqli_query($conn, $sql);
 
+        //sikeres
         if (mysqli_num_rows($result) > 0) {
             $_SESSION['login']  =   true;
             $_SESSION['email']  =   $email;
-            $log    =   date(" Y-m-d H:i:s ") . " SIKERES Bejelentkezés a(z) {$email} címről ({$_SERVER['REMOTE_ADDR']}) \n";
+
+            $log_datum      =   date("Y-m-d H:i:s");;
+            $log_allapot    =   "SIKERES";
+            $log_muvelet    =   "Bejelentkezés";
+            $log_email      =   $_SESSION['email'];
+            $log_cim        =   $_SERVER['REMOTE_ADDR'];
+
+            $log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
+
+            //LOG BESZURASA ADATBÁZISBA
+            $sqlInsert = "INSERT INTO logs(timestamp, state, action, email, ip_address) VALUES ('$log_datum', '$log_allapot','$log_muvelet', '$log_email', '$log_cim' )";
+            mysqli_query($conn, $sqlInsert);
+
+
+
             file_put_contents("log.txt", $log, FILE_APPEND);
             header("Location: ./panels/dashboard_panel.php ");
-        } else {
-            $log    =   date(" Y-m-d H:i:s ") . " SIKERTELEN Bejelentkezés a(z) {$email} címről ({$_SERVER['REMOTE_ADDR']}) \n";
+        }
+        //sikertelen 
+        else {
+            $log_datum      =   date("Y-m-d H:i:s");;
+            $log_allapot    =   "SIKERTELEN";
+            $log_muvelet    =   "Bejelentkezés";
+            $log_email      =   $_SESSION['email'];
+            $log_cim        =   $_SERVER['REMOTE_ADDR'];
+
+            $log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
+
+            //LOG BESZURASA ADATBÁZISBA
+            $sqlInsert = "INSERT INTO logs(timestamp, state, action, email, ip_address) VALUES ('$log_datum', '$log_allapot','$log_muvelet', '$log_email', '$log_cim' )";
+            mysqli_query($conn, $sqlInsert);
+
             file_put_contents("log.txt", $log, FILE_APPEND);
             $kimenet    .=   "<p>Sikertelen bejelentkezés.</p>";
         }
