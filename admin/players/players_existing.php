@@ -37,7 +37,7 @@ if (!isset($_SESSION['login'])) {
                     <td class="actions">
                         <a class="action" href="players_check.php?id=<?php echo $data["player_id"] ?>">View</a>
                         <a class="action" href="players_edit.php?id=<?php echo $data["player_id"] ?>">Edit</a>
-                        <a class="action" href="players_delete.php?id=<?php echo $data["player_id"] ?>">Delete</a>
+                        <a class="action" onclick="return confirm('Biztosan törli a játékost?');" href="players_delete.php?id=<?php echo $data["player_id"] ?>">Delete</a>
                     </td>
                 </tr>
             <?php

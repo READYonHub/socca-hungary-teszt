@@ -1,6 +1,6 @@
 # FELDATOK:
 
-* cimsor átírás
+❌ cimsor átírás - fölösleges, ugyis belső adminisztrálásra lesz használva
 * posztok törlésekor, illetve játékosok törlésekor legyen egy megerősítéses popup
 * log fajlt adatbazisba logoljon
 * a feltölthető képeknek kell vlm szabály, hogy mennyi legyen a képfelbontás, méret, tb. megkell szabni

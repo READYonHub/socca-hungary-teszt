@@ -3,9 +3,11 @@
 session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
-} ?><?php
-    include("../headers/header.php");
-    ?>
+    exit; // Fontos az exit, hogy ne folytatódjon a kód futása
+}
+
+include("../headers/header.php");
+?>
 
 <div class="player-table-main-container">
     <!--JQUERY-->
@@ -17,7 +19,7 @@ if (!isset($_SESSION['login'])) {
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
                 <th style="width:15%;">Játékos neve</th>
                 <th style="width:5%;">Játékos Sorszáma</th>
-                <th style="width:5%;">QR-kód</th>
+                <th style="width:5%;">QR-kód generálás</th>
             </tr>
         </thead>
         <tbody>
@@ -33,8 +35,7 @@ if (!isset($_SESSION['login'])) {
                 <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
-                    <td class="actions"><a class="action" href="../qr/qr_code_generator_algoritmus.php?player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a></td>
-
+                    <td class="actions"><a class="action" href="../qr/choose_generation_method.php?player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a></td>
                 </tr>
             <?php
             }
@@ -94,9 +95,6 @@ if (!isset($_SESSION['login'])) {
     </style>
 </div>
 
-<?php
-//include("../headers/visibility.php");
-?>
 <?php
 include("../headers/footer.php");
 ?>

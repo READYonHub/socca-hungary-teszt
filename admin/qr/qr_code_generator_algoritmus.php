@@ -1,58 +1,77 @@
 <?php
-/* Lapvédelem */
 session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
-} ?>
-<?php
+    exit;
+}
+
 require "vendor/autoload.php";
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Color\Color;
-use Endroid\QrCode\Label\Label;
-use Endroid\QrCode\Logo\Logo;
 
-$id = $_GET["player_id"];
-if ($id) {
-    require_once("../../connect.php");
+$id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonosítóját
+$type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
 
-    $keresett_Jatekos   =       "";
+$url    =   "http://localhost/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
 
+if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
+    require_once("../../connect.php"); // Adatbázis kapcsolat létrehozása
 
-    $sql    =   "SELECT player_id, name, registration_number
-             FROM players_data 
-             WHERE player_id = {$id}
-             LIMIT 1
-             ";
-
-    $eredmeny  =   mysqli_query($conn, $sql);
-
-    while ($sor = mysqli_fetch_assoc($eredmeny)) {
-
-        $qr_id = sha1((string) $sor['player_id'] . '' . str_replace(' ', '', $sor['name']) . '' . $sor['registration_number']);
+    // Lekérdezés összeállítása az adott játékos adatainak lekérdezésére
+    if ($type === 'health') {
+        // Ha az egészségügyi adatokat használjuk a QR kód generálásához
+        $sql = "SELECT pd.player_id, pd.name, pd.registration_number, ph.record_id, ph.blood_group, ph.drug_allergies, ph.chronic_illness
+                FROM players_data pd
+                LEFT JOIN players_health ph
+                ON pd.player_id = ph.player_id
+                WHERE pd.player_id = {$id}";
+    } else {
+        // Ha az általános adatokat használjuk a QR kód generálásához
+        $sql = "SELECT player_id, name, registration_number
+                FROM players_data
+                WHERE player_id = {$id}";
     }
-    $qr_code    =   QrCode::create($qr_id)
-        ->setSize(600)
-        ->setMargin(40)
-        ->setForegroundColor(new Color(0, 0, 0))
-        // ->setBackgroundColor(new Color(255, 128, 0));
-        ->setBackgroundColor(new Color(255, 255, 255));
 
-    // ================================================
-    // $label      =    Label::create("SOCCA-HUNGARY")
-    //     ->setTextColor(new Color(255, 255, 0));
+    // Lekérdezés végrehajtása
+    $result = mysqli_query($conn, $sql);
 
-    // $logo = Logo::create("./socca_loggo.png")
-    //     ->setResizeToWidth(500);
-    // ================================================
+    // Ellenőrizzük, hogy van-e eredmény a lekérdezésben
+    if (mysqli_num_rows($result) > 0) {
+        // Ha van eredmény, akkor kinyerjük az adatokat és létrehozzuk a QR kódot
+        $row = mysqli_fetch_assoc($result);
 
-    $writer     =   new PngWriter;
+        // QR kód adatok összeállítása az adatok alapján
+        if ($type === 'health') {
+            // Ha az egészségügyi adatokat használjuk
+            $qr_id = $url . sha1((string) $row['player_id'] . '' . str_replace(' ', '', $row['name']) . '' . $row['record_id'] . 'ph');
+        } else {
+            // Ha az általános adatokat használjuk
+            $qr_id = $url . sha1((string) $row['player_id'] . '' . str_replace(' ', '', $row['name']) . '' . $row['registration_number'].'pd');
+        }
 
-    // $result     =   $writer->write($qr_code, $logo, $label);
-    $result     =   $writer->write($qr_code);
+        // QR kód létrehozása az adatok alapján
+        $qr_code = QrCode::create($qr_id)
+            ->setSize(600)
+            ->setMargin(40)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
 
-    header("Content-Type:" . $result->getMimeType());
+        // QR kód írása PNG formátumban
+        $writer = new PngWriter;
+        $result = $writer->write($qr_code);
 
-    echo $result->getString();
+        // HTTP fejléc beállítása a PNG típusra
+        header("Content-Type:" . $result->getMimeType());
+
+        // PNG adatok kiírása
+        echo $result->getString();
+    } else {
+        // Ha nincs eredmény a lekérdezésben
+        echo "Nincs megfelelő adat a megadott játékoshoz!";
+    }
+} else {
+    // Ha hiányzik a player_id vagy a type GET paraméter
+    echo "Hiányzó vagy érvénytelen paraméterek!";
 }
