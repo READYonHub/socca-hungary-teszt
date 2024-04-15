@@ -72,7 +72,7 @@ if (!isset($_SESSION['login'])) {
             $result = mysqli_query($conn, $sqlSelect);
             while ($data = mysqli_fetch_array($result)) {
             ?>
-                <tr  class="playerRow">
+                <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
                     <td><?php echo $data["blood_group"] ?></td>
@@ -136,10 +136,25 @@ if (!isset($_SESSION['login'])) {
         color: #fff;
     }
 
+    .message {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: transparent;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+        padding: 10px;
+        background-color: rgb(0, 200, 0);
+        border-radius: 8px;
+    }
+
     #players-table-data .playerRow:hover {
-            color: orange;
-            background-color: black;
-        }
+        color: orange;
+        background-color: black;
+    }
 </style>
 
 <?php

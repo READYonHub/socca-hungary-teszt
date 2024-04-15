@@ -14,7 +14,7 @@ if (!isset($_SESSION['login'])) {
             $_SESSION["delete"] = "Player Health deleted successfully";
             header("Location:players_health.php");
         } else {
-            die("Something is not write. Data is not deleted");
+            die("Something is not right. Data is not deleted");
         }
     } else {
         echo "Player Health not found";
