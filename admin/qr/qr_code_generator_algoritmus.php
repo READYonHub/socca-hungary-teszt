@@ -13,8 +13,9 @@ use Endroid\QrCode\Color\Color;
 
 $id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonosítóját
 $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
+$ip = "192.168.1.181";
 
-$url    =   "http://localhost/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
+$url    =   "http://".$ip."/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
 
 if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
     require_once("../../connect.php"); // Adatbázis kapcsolat létrehozása
