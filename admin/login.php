@@ -20,12 +20,10 @@ if (isset($_POST['login'])) {
     //változók ellenőrzése
     if (empty($email))
         $hibak[]     =   "Nem adott meg e-mail címet!";
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-        $hibak[]     =   "Nem megfelelő az e-mail formátum!";
+   
     if (empty($passwrd))
         $hibak[]     =   "Nem adott meg jelszót!";
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $passwrd))
-        $hibak[]     =   "A jelszó csak ékezet nélküli betűket és számokat tartalmazhat";
+   
     /* hibák összegyűjtése */
     if (isset($hibak)) {
         foreach ($hibak as $hiba) {

@@ -116,16 +116,16 @@ WARNING;
 //függvények
 function checkPassword($password)
 {
-    $pass_errors    =   [];
+    $pass_errors    =   "";
 
 
     // Hossz 8-48 karakter között
     if (strlen($password) < 8 || strlen($password) > 48) {
-        $pass_errors    .=   "A jelszónak 8 és 48 karakter között kell lennie.";
+        $pass_errors    .=   $pass_errors . "A jelszónak 8 és 48 karakter között kell lennie. ";
     }
     // Ne tartalmazzon szóközt
     if (strpos($password, ' ') !== false) {
-        $pass_errors    .=    "A jelszó nem tartalmazhat szóközt.";
+        $pass_errors    .=    $pass_errors . "A jelszó nem tartalmazhat szóközt. ";
     }
 
     // Tartalmazzon számot, betűt, kisbetűt, nagybetűt, és különleges karaktert
@@ -133,7 +133,7 @@ function checkPassword($password)
         "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",
         $password
     )) {
-        $pass_errors    .=    "A jelszónak tartalmaznia kell számot, kisbetűt, nagybetűt, és különleges karaktert.";
+        $pass_errors    .=    $pass_errors . "A jelszónak tartalmaznia kell számot, kisbetűt, nagybetűt, és különleges karaktert. ";
     }
 
 
