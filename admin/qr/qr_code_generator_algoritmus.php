@@ -4,7 +4,6 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
     exit;
 }
-include("../constans.php");
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -12,8 +11,9 @@ use Endroid\QrCode\Color\Color;
 
 $id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonosítóját
 $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
-
 require "vendor/autoload.php";
+
+include("../constans.php");
 $url    =   "http://".$domain."/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
 
 if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e

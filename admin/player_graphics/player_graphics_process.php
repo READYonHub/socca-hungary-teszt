@@ -4,7 +4,8 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
     exit;
 }
-
+$row1 = array();
+$row2 = array();
 // Ellenőrizze, hogy a 'hi' GET paraméter létezik-e és nem üres
 if (isset($_GET['hi']) && !empty($_GET['hi'])) {
     $hash = $_GET['hi'];
@@ -27,38 +28,54 @@ if (isset($_GET['hi']) && !empty($_GET['hi'])) {
         $result1 = mysqli_query($conn, $sql1);
         $result2 = mysqli_query($conn, $sql2);
 
+        $data = array();
+
         // Ellenőrizzük, hogy van-e eredmény a lekérdezésben és hogy a hash megfelel-e valamelyiknek
         while ($row1 = mysqli_fetch_assoc($result1)) {
             if (sha1((string) $row1['player_id'] . '' . str_replace(' ', '', $row1['name']) . '' . $row1['record_id'] . 'ph') === $hash) {
-                return $row1;
+                $data['row1'] = $row1;
             }
         }
 
         while ($row2 = mysqli_fetch_assoc($result2)) {
             if (sha1((string) $row2['player_id'] . '' . str_replace(' ', '', $row2['name']) . '' . $row2['registration_number'] . 'pd') === $hash) {
-                return $row2;
+                $data['row2'] = $row2;
             }
         }
 
-        return false; // Ha nincs találat, visszaadunk false értéket
+        return $data;        // Ha nincs találat, visszaadunk false értéket
     }
-
     // Visszafejtett adatok lekérése a hash alapján
     $decoded_data = decode($hash);
 
-    if ($decoded_data) {
+    if (isset($decoded_data['row1'])) {
         // Ha van találat, kiírjuk az adatokat
-        echo "Kapott hash: $hash <br>";
-        echo "Kinyert adatok: <br>";
-        print_r($decoded_data);
+        //health
+        $row1 = $decoded_data['row1'];
+
+        // Ha van találat, kiírjuk az adatokat
+        //echo "Kapott hash: $hash <br>";
+        //echo "Kinyert adatok: <br>";
+        //print_r($decoded_data);
 
         // Adatok mentése a session-be
-        $_SESSION['player_id'] = $decoded_data['player_id'];
-        $_SESSION['name'] = $decoded_data['name'];
-        $_SESSION['registration_number'] = $decoded_data['registration_number'];
+        $_SESSION['player_id'] = $row1['player_id'];
+        $_SESSION['name'] = $row1['name'];
+        $_SESSION['record_id'] = $row2['record_id'];
 
         // Töröljük a hash-t a GET paraméterből, hogy ne legyen látható az URL-ben
-        header("Location: player_data.php");
+        header("Location: ./player_healthsheet/player_health.php");
+        exit;
+    } elseif (isset($decoded_data['row2'])) {
+        //data
+        $row2 = $decoded_data['row2'];
+
+        $_SESSION['player_id'] = $row2['player_id'];
+        $_SESSION['name'] = $row2['name'];
+        $_SESSION['registration_number'] = $row1['registration_number'];
+
+        // Töröljük a hash-t a GET paraméterből, hogy ne legyen látható az URL-ben
+        header("Location: ./player_datasheet/player_data.php");
         exit;
     } else {
         // Ha nincs találat, értesítést adunk

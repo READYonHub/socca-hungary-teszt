@@ -1,13 +1,13 @@
 <?php
 session_start(); // Munkamenet kezdése
 
-include("../../connect.php"); // Adatbázis kapcsolat létrehozása
-include("../constans.php");
+include("../../../connect.php"); // Adatbázis kapcsolat létrehozása
 
 // Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
 if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_number'])) {
     $player_id = $_SESSION['player_id']; // Játékos azonosítójának kiolvasása a SESSION-ből
-
+    include("../../constans.php");
+    
     // SQL lekérdezés összeállítása a játékos adatainak lekérdezésére
     $sql = "SELECT * FROM `players_data`
             WHERE `player_id` = {$player_id}";

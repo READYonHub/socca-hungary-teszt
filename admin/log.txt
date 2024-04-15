@@ -4,3 +4,5 @@
 2024-04-15 14:11:38	SIKERES	Bejelentkezés	socca_hungary@gmail.com	 címről (192.168.1.94) 
 2024-04-15 14:11:55	SIKERES	Bejelentkezés	socca_hungary@gmail.com	 címről (192.168.1.94) 
 2024-04-15 14:12:33	SIKERES	Bejelentkezés	socca_hungary@gmail.com	 címről (192.168.1.94) 
+2024-04-15 14:20:14	SIKERES	Bejelentkezés	socca_hungary@gmail.com	 címről (192.168.1.94) 
+2024-04-15 21:23:35	SIKERES	Bejelentkezés	emailed@gmail.com	 címről (192.168.1.94) 
