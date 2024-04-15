@@ -2,6 +2,7 @@
 session_start(); // Munkamenet kezdése
 
 include("../../connect.php"); // Adatbázis kapcsolat létrehozása
+include("../constans.php");
 
 // Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
 if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_number'])) {
@@ -27,7 +28,7 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_num
         $player_profile_pic = $row['profile_pic'];
 
         // Játékos képének az elérési útvonala
-        $player_profile_pic_path = "http://localhost/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
+        $player_profile_pic_path = "http://".$domain."/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
 
         // Sablon beolvasása
         $template = file_get_contents("player_data.html");
