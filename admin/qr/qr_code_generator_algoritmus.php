@@ -14,12 +14,8 @@ $id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonos�
 $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
 $ip = "192.168.1.181";
 
-<<<<<<< HEAD
-$url    =   "http://".$ip."/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
-=======
 require "vendor/autoload.php";
 $url    =   "http://".$domain."/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
->>>>>>> 7910e0fd76062a4123cf7a4c745aa824d2bd5d92
 
 if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
     require_once("../../connect.php"); // Adatbázis kapcsolat létrehozása
