@@ -11,6 +11,11 @@ use Endroid\QrCode\Color\Color;
 
 $id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonosítóját
 $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
+<<<<<<< HEAD
+=======
+$ip = "192.168.1.181";
+
+>>>>>>> e941a7f479aa282ceb56ca3fe6036a0f72f03b65
 require "vendor/autoload.php";
 
 include("../constans.php");
