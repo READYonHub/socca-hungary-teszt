@@ -11,15 +11,12 @@ use Endroid\QrCode\Color\Color;
 
 $id = $_GET["player_id"]; // A GET paraméterből kinyerjük a játékos azonosítóját
 $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
-<<<<<<< HEAD
-=======
-$ip = "192.168.1.181";
-
->>>>>>> e941a7f479aa282ceb56ca3fe6036a0f72f03b65
+//print_r($id);
+//print_r($type);
 require "vendor/autoload.php";
 
 include("../constans.php");
-$url    =   "http://".$domain."/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
+$url    =   "http://" . $domain . "/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
 
 if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
     require_once("../../connect.php"); // Adatbázis kapcsolat létrehozása
@@ -32,7 +29,8 @@ if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
                 LEFT JOIN players_health ph
                 ON pd.player_id = ph.player_id
                 WHERE pd.player_id = {$id}";
-    } else {
+    }
+    if ($type === 'data') {
         // Ha az általános adatokat használjuk a QR kód generálásához
         $sql = "SELECT player_id, name, registration_number
                 FROM players_data
@@ -51,10 +49,12 @@ if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
         if ($type === 'health') {
             // Ha az egészségügyi adatokat használjuk
             $qr_id = $url . sha1((string) $row['player_id'] . '' . str_replace(' ', '', $row['name']) . '' . $row['record_id'] . 'ph');
-        } else {
-            // Ha az általános adatokat használjuk
-            $qr_id = $url . sha1((string) $row['player_id'] . '' . str_replace(' ', '', $row['name']) . '' . $row['registration_number'].'pd');
         }
+        if ($type === 'data') {
+            // Ha az általános adatokat használjuk
+            $qr_id = $url . sha1((string) $row['player_id'] . '' . str_replace(' ', '', $row['name']) . '' . $row['registration_number'] . 'pd');
+        }
+      
 
         // QR kód létrehozása az adatok alapján
         $qr_code = QrCode::create($qr_id)

@@ -1,2 +1,2 @@
 <?php
-$domain = "192.168.1.94";   //domain vagy ip cím
+$domain = "192.168.1.96";   //domain vagy ip cím
