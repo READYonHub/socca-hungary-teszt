@@ -36,8 +36,10 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_num
         $template = str_replace("{{name}}", $name, $template);
         $template = str_replace("{{registration_number}}", $registration_number, $template);
         $template = str_replace("{{validity_date}}", $validity_date, $template);
-        $template = str_replace("{{status}}", $status, $template);
+        $template = str_replace("{{status}}", $status == "érvényes" ? "<span id=\"status-green\">Érvényes</span>" : "<span id=\"status-red\">Érvénytelen</span>", $template);
         $template = str_replace("{{player_profile_pic}}", $player_profile_pic_path, $template);
+
+        
 
         // Sablon kiírása
         echo $template;

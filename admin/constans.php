@@ -1,2 +1,5 @@
 <?php
-$domain = "192.168.1.96";   //domain vagy ip cím
+$domain = "172.20.10.13";   //domain vagy ip cím
+
+// emailed@gmail.com
+// 1234
