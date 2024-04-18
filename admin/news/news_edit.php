@@ -22,9 +22,10 @@ if ($id) {
     <?php
     while ($data = mysqli_fetch_array($result)) {
     ?>
-        <input type="text" name="title" id="" placeholder="Cím" value="<?php echo $data['title']; ?>">
-        <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló"><?php echo $data['summary']; ?></textarea>
-        <textarea name="content" cols="30" rows="10" placeholder="Poszt"><?php echo $data['content']; ?></textarea>
+        <input type="text" name="title" id="" placeholder="Cím" value="<?php echo $data['title']; ?>" required>
+        <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló" required><?php echo $data['summary']; ?></textarea>
+        <textarea name="content" cols="30" rows="10" placeholder="Poszt" required><?php echo $data['content']; ?></textarea>
+        
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <input type="submit" value="Elküldés" name="update">

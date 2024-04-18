@@ -23,44 +23,57 @@ if ($id) {
 }
 
 ?>
-<div class="create-form w-100 mx-auto p-4" style="max-width:700px;">
-    <form action="./players_health_process.php" method="post">
-        <?php
-        while ($data = mysqli_fetch_array($result)) {
-        ?>
+<form action="./players_health_process.php" class="player-health-edit-container" method="post">
+    <?php
+    while ($data = mysqli_fetch_array($result)) {
+    ?>
 
-            <div class="form-field mb-4">
-                <label for="name"><strong>Név:</strong></label>
-                <input type="text" class="form-control" name="name" id="" placeholder="Add meg a Játékos NEVÉT:" value="<?php echo $data['name']; ?>" disabled>
-            </div>
-            <div class="form-field mb-4">
-                <label for="registration_number"><strong>Sorszám:</strong></label>
-                <input name="registration_number" class="form-control" id="" placeholder="Add meg a Játékos SORSZÁMÁT:" value="<?php echo $data['registration_number']; ?>" disabled>
-            </div>
-            <div class="form-field mb-4">
-                <label for="blood_group"><strong>Vércsoport:</strong></label>
-                <textarea name="blood_group" class="form-control" id="" cols="30" rows="10" placeholder="Add meg a Játékos VÉRCSOPORTJÁT:"><?php echo $data['blood_group']; ?></textarea>
-            </div>
-            <div class="form-field mb-4">
-                <label for="drug_allergies"><strong>Gyószerallergia:</strong></label>
-                <textarea name="drug_allergies" class="form-control" id="" cols="30" rows="10" placeholder="Add meg a Játékos GYÓGYSZERALLERGIÁJÁT:"><?php echo $data['drug_allergies']; ?></textarea>
-            </div>
-            <div class="form-field mb-4">
-                <label for="drug_allergies"><strong>Krónikus betegség:</strong></label>
-                <textarea name="chronic_illness" class="form-control" id="" cols="30" rows="10" placeholder="Add meg a Játékos KRÓNIKUS BETEGSÉGÉT, ha van:"><?php echo $data['chronic_illness']; ?></textarea>
-            </div>
+        <input type="text" name="name" value="<?php echo $data['name']; ?>" disabled>
+        <input name="registration_number" value="<?php echo $data['registration_number']; ?>" disabled>
 
-            <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
-            <input type="hidden" name="player_id" value="<?php echo $id; ?>">
-            <div class="form-field">
-                <input type="submit" class="btn btn-primary" value="Submit" name="update">
-            </div>
+        <input type="text" name="blood_group" placeholder="Játékos vércsoportja"><?php echo $data['blood_group']; ?></input>
 
-        <?php
-        }
-        ?>
-    </form>
-</div>
+        <input type="text" name="drug_allergies" placeholder="Játékos gyógyszerallergia"><?php echo $data['drug_allergies']; ?></input>
+
+        <input type="text" name="chronic_illness" placeholder="Játékos krónikus betegségei"><?php echo $data['chronic_illness']; ?></input>
+
+
+        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+        <input type="hidden" name="player_id" value="<?php echo $id; ?>">
+        <input type="submit" value="Elküldés" name="update">
+
+    <?php
+    }
+    ?>
+</form>
+
+<style>
+    .player-health-edit-container {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        height: 100vh;
+        width: 100vw;
+        background-color: #252525;
+        padding: 30px;
+        gap: 30px;
+    }
+
+    .player-health-edit-container input {
+        font-size: 14pt;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 300px;
+        width: 100%;
+        max-height: 40px;
+        resize: none;
+    }
+
+    .player-health-edit-container input[disabled] {
+        color: #000;
+    }
+</style>
 <?php
 include("../headers/footer.php");
 ?>
