@@ -12,7 +12,7 @@ include("../headers/header.php");
 <?php
 if (isset($_SESSION["create"])) {
 ?>
-    <div class="alert alert-success">
+    <div class="message">
         <?php
         echo $_SESSION["create"];
         ?>
@@ -24,7 +24,7 @@ if (isset($_SESSION["create"])) {
 <?php
 if (isset($_SESSION["update"])) {
 ?>
-    <div class="alert alert-success">
+    <div class="message">
         <?php
         echo $_SESSION["update"];
         ?>
@@ -36,10 +36,10 @@ if (isset($_SESSION["update"])) {
 
 <div class="player-container">
     <h1>Műveletek</h1>
-    <a href="../players/players_create.php" class="text-light text-decoration-none">Új Játékos</a>
-    <a href="../players/players_existing.php" class="text-light text-decoration-none">Meglévő játékosok módosítása</a>
-    <a href="../players/players_health.php" class="text-light text-decoration-none">Játékosok egészségügyi adatai</a>
-    <a href="../players/players_qr_kod.php" class="text-light text-decoration-none">Játékos QR-kód létrehozása</a>
+    <a href="../players/players_create.php">Új Játékos</a>
+    <a href="../players/players_existing.php">Meglévő játékosok módosítása</a>
+    <a href="../players/players_health.php">Játékosok egészségügyi adatai</a>
+    <a href="../players/players_qr_kod.php">Játékos QR-kód létrehozása</a>
 </div>
 
 <style>
