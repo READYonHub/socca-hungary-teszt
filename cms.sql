@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2024. Ápr 14. 18:37
+-- Létrehozás ideje: 2024. Ápr 20. 13:14
 -- Kiszolgáló verziója: 8.2.0
 -- PHP verzió: 8.2.13
 
@@ -36,14 +36,15 @@ CREATE TABLE IF NOT EXISTS `admin_default` (
   `email` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
   `passwrd` char(40) COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`id_adm`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- A tábla adatainak kiíratása `admin_default`
 --
 
 INSERT INTO `admin_default` (`id_adm`, `date`, `email`, `passwrd`) VALUES
-(5, '2024-04-02', 'emailed@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
+(5, '2024-04-02', 'emailed@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
+(21, '2024-04-15 14-06-15', 'socca_hungary@gmail.com', 'e48d96e16be6e01c14721b486e4b93e4069207c3');
 
 -- --------------------------------------------------------
 
@@ -60,14 +61,44 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `email` varchar(100) COLLATE utf8mb4_german2_ci NOT NULL,
   `ip_address` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- A tábla adatainak kiíratása `logs`
 --
 
 INSERT INTO `logs` (`id`, `timestamp`, `state`, `action`, `email`, `ip_address`) VALUES
-(6, '2024-04-14 16:33:34', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1');
+(9, '2024-04-14 19:29:49', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(8, '2024-04-14 19:13:57', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(7, '2024-04-14 17:54:18', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(6, '2024-04-14 16:33:34', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(10, '2024-04-15 09:05:46', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(11, '2024-04-15 09:17:26', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.91'),
+(12, '2024-04-15 09:55:12', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.91'),
+(13, '2024-04-15 10:28:06', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.249'),
+(14, '2024-04-15 10:30:19', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.91'),
+(15, '2024-04-15 11:32:15', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(16, '2024-04-15 11:36:44', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(17, '2024-04-15 11:47:35', 'SIKERES', 'Kijelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(18, '2024-04-15 11:48:22', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(19, '2024-04-15 12:05:33', 'SIKERES', 'Kijelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(20, '2024-04-15 12:06:09', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(21, '2024-04-15 12:07:20', 'SIKERES', 'Kijelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(22, '2024-04-15 12:11:38', 'SIKERES', 'Bejelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(23, '2024-04-15 12:11:44', 'SIKERES', 'Kijelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(24, '2024-04-15 12:11:55', 'SIKERES', 'Bejelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(25, '2024-04-15 12:12:01', 'SIKERES', 'Kijelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(26, '2024-04-15 12:12:33', 'SIKERES', 'Bejelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(27, '2024-04-15 12:13:32', 'SIKERES', 'Kijelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(28, '2024-04-15 12:20:14', 'SIKERES', 'Bejelentkezés', 'socca_hungary@gmail.com', '192.168.1.94'),
+(29, '2024-04-15 19:23:35', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.94'),
+(30, '2024-04-16 07:40:11', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(31, '2024-04-16 07:47:15', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.96'),
+(32, '2024-04-17 16:01:31', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.96'),
+(33, '2024-04-17 16:47:53', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
+(34, '2024-04-20 09:18:13', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.110'),
+(35, '2024-04-20 09:23:35', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.249'),
+(36, '2024-04-20 10:49:19', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.110');
 
 -- --------------------------------------------------------
 
@@ -83,17 +114,16 @@ CREATE TABLE IF NOT EXISTS `news` (
   `summary` text COLLATE utf8mb4_general_ci NOT NULL,
   `content` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `news`
 --
 
 INSERT INTO `news` (`id`, `date`, `title`, `summary`, `content`) VALUES
-(29, '2024/04/14', '', '', ''),
-(31, '2024/04/07', 'ide', 'szovegek', 'đäd .'),
-(33, '2024/04/14', 'Erqw', 'Adsef', 'Da'),
-(34, '2024/04/14', 'D', 'S', 'S');
+(34, '2024/04/14', 'D', 'S', 'S'),
+(35, '2024/04/14', 'D', 'D', 'D'),
+(36, '2024/04/20', 'H', 'J', 'Hj');
 
 -- --------------------------------------------------------
 
@@ -107,12 +137,12 @@ CREATE TABLE IF NOT EXISTS `players_data` (
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `registration_number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `validity_date` date DEFAULT NULL,
-  `status` enum('érvényes','eltiltva') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` enum('érvényes','eltiltva','érvényletelen') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `suspension_start_date` date DEFAULT NULL,
   `suspension_end_date` date DEFAULT NULL,
   `profile_pic` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=766 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=768 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `players_data`
@@ -865,15 +895,15 @@ INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validit
 (744, 'Bartha Flórián Sebestyén', '0744', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (745, 'Juhász Csaba', '0745', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (746, 'Fekete Róbert', '1111', '2024-12-31', 'érvényes', NULL, NULL, ''),
-(755, 'Kaszonyi Krisztián', '3333', NULL, '', NULL, NULL, ''),
-(758, 'Kaszonyi Krisztián', '3333', NULL, 'érvényes', NULL, NULL, 'readykepnagyban.jpg'),
+(758, 'Kaszonyi Krisztián', '3333', '2024-12-31', 'érvényes', NULL, NULL, 'readykepnagyban.jpg'),
 (759, 'ksa', '3344', NULL, '', NULL, NULL, '1712502166'),
 (760, 'asd', '4444', NULL, '', NULL, NULL, '1712502285'),
 (761, 'asdqw3421', '7777', NULL, '', NULL, NULL, '17125031116.jpg'),
-(762, 'GAZDAG ÁDÁM', '6666', NULL, 'eltiltva', NULL, NULL, '17125224894.jpg'),
-(763, 'GAZDAG ÁDÁM', '6666', NULL, '', NULL, NULL, '17125225874.jpg'),
+(762, 'GAZDAG ÁDÁM', '6666', '2024-12-31', 'eltiltva', NULL, NULL, '17125224894.jpg'),
 (764, 'Gazdag Ádám', '8998', NULL, '', NULL, NULL, '1713117003Képkivágás.PNG'),
-(765, 'ggg', '21', NULL, '', NULL, NULL, '1713117181hire uj utan hiba.PNG');
+(765, 'ggg', '21', NULL, '', NULL, NULL, '1713117181hire uj utan hiba.PNG'),
+(766, 'teszt1', '9911', NULL, '', NULL, NULL, '1713131238readykepnagyban.jpg'),
+(767, 'Nyisztor Virág', '3334', NULL, '', NULL, NULL, '1713618729Képkivágás.PNG');
 
 -- --------------------------------------------------------
 
@@ -890,7 +920,14 @@ CREATE TABLE IF NOT EXISTS `players_health` (
   `chronic_illness` text CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`record_id`),
   KEY `fk_player_id` (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- A tábla adatainak kiíratása `players_health`
+--
+
+INSERT INTO `players_health` (`record_id`, `player_id`, `blood_group`, `drug_allergies`, `chronic_illness`) VALUES
+(3, 758, 'blood_group 111', 'drug_allergies 222', 'chronic_illness 333');
 
 --
 -- Megkötések a kiírt táblákhoz
