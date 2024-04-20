@@ -4,7 +4,6 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 }
 
-$pic_uploaded = 0;
 if (isset($_POST["create"])) {
     include("../../connect.php");
 
@@ -14,39 +13,13 @@ if (isset($_POST["create"])) {
     $date = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $profile_pic = time() . $_FILES["profile_pic"]["name"]; // Corrected index
 
-    //Kép feltöltés és ellenőrzés
-    if (move_uploaded_file(
-        $_FILES["profile_pic"]["tmp_name"], // Corrected index
-        $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic
-    )) {
-
-        $target_file    =   $_SERVER['DOCUMENT_ROOT'] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic;
-        $imageFileType  =   strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $picname        =   basename($_FILES["profile_pic"]["name"]);
-        $photo          =   time() . $picname;
-        if (
-            $imageFileType != "jpg" && $imageFileType != "jpeg" &&
-            $imageFileType != "png"
-        ) { ?>
-            <script>
-                alert("Csak a .jpg/.jpeg/.png típusú képeket tölthetsz fel!");
-            </script>
-        <?php
-        } else if ($_FILES["profile_pic"]["size"] > 5000000) { ?>
-            <script>
-                alert("A kép mérete meghaladja a maximum méretet!");
-            </script>
-        <?php } else {
-            $pic_uploaded = 1;
-        }
-    }
 
     // név ellenőrzés
     if (isset($name)) {
         $nev_OK = 0;
         // ha név tartalmaz 3-nál több szóközt
         if (preg_match('/^\s*(?:\S+\s+){3,}\S*$/', $name)) {
-        ?>
+?>
             <script>
                 alert("Hiba: A név nem tartalmazhat 3-nál több szóközt!");
                 window.location.href = "./players_create.php";
@@ -112,21 +85,51 @@ if (isset($_POST["create"])) {
                 window.location.href = "./players_create.php";
             </script>
         <?php
-        }
-
-        elseif ($selected_date_timestamp > $max_validity_date_timestamp) {
+        } elseif ($selected_date_timestamp > $max_validity_date_timestamp) {
             $ervenyesseg_OK = 0;
         ?>
             <script>
                 alert("Hiba: A megadott érvényesség dátuma túl késői!");
                 window.location.href = "./players_create.php";
             </script>
-<?php
+            <?php
         } else {
             $ervenyesseg_OK = 1;
         }
     }
 
+    //Kép feltöltés és ellenőrzés
+    if (isset($profile_pic) && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1) {
+
+        if (move_uploaded_file(
+            $_FILES["profile_pic"]["tmp_name"], // Corrected index
+            $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic
+        )) {
+
+            $pic_uploaded = 0;
+            $target_file    =   $_SERVER['DOCUMENT_ROOT'] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic;
+            $imageFileType  =   strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $picname        =   basename($_FILES["profile_pic"]["name"]);
+            $photo          =   time() . $picname;
+            if (
+                $imageFileType != "jpg" && $imageFileType != "jpeg" &&
+                $imageFileType != "png"
+            ) {
+                $pic_uploaded = 0;  ?>
+                <script>
+                    alert("Csak a .jpg/.jpeg/.png típusú képeket tölthetsz fel!");
+                </script>
+            <?php
+            } else if ($_FILES["profile_pic"]["size"] > 5000000) {
+                $pic_uploaded = 0; ?>
+                <script>
+                    alert("A kép mérete meghaladja a maximum méretet!");
+                </script>
+<?php } else {
+                $pic_uploaded = 1;
+            }
+        }
+    }
 
 
     if ($pic_uploaded == 1 && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1) {
