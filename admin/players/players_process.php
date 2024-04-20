@@ -11,7 +11,7 @@ if (isset($_POST["create"])) {
     $name = mysqli_real_escape_string($conn, $_POST["name"]);
     $registration_number = mysqli_real_escape_string($conn, $_POST["registration_number"]);
     $status = mysqli_real_escape_string($conn, $_POST["status"]);
-    $date = mysqli_real_escape_string($conn, $_POST["date"]);
+    $date = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $profile_pic = time() . $_FILES["profile_pic"]["name"]; // Corrected index
 
     //Kép feltöltés és ellenőrzés
@@ -52,7 +52,7 @@ if (isset($_POST["create"])) {
                 window.location.href = "./players_create.php";
             </script>
         <?php
-            $nev_OK = 0; 
+            $nev_OK = 0;
         }
 
         // csak kis- és nagybetűket tartalmaz
@@ -84,13 +84,55 @@ if (isset($_POST["create"])) {
                 alert("Ez a sorszám már használatban van!");
                 window.location.href = "./players_create.php";
             </script>
-<?php
+        <?php
         }
     }
 
-    if ($pic_uploaded == 1 && $sorszam_OK == 0 && $nev_OK == 1) {
+    //validity_date ellenőrzés
+    if (isset($date)) {
+        $ervenyesseg_OK = 0;
 
-        $sqlInsert = "INSERT INTO players_data(name, registration_number, status, profile_pic) VALUES ('$name', '$registration_number','$status', '$profile_pic' )";
+        // Az aktuális dátum timestampje
+        $today_timestamp = strtotime(date("Y-m-d"));
+
+        // A megadott dátum timestampje
+        $selected_date_timestamp = strtotime($date);
+
+        // Az aktuális dátumtól egy évvel korábbi timestamp
+        $min_validity_date_timestamp = strtotime('-1  year', $today_timestamp);
+
+        // Az aktuális dátumhoz 24 év hozzáadása
+        $max_validity_date_timestamp = strtotime('+24 year', $today_timestamp);
+
+        if ($selected_date_timestamp < $min_validity_date_timestamp) {
+            $ervenyesseg_OK = 0;
+        ?>
+            <script>
+                alert("Hiba: A megadott érvényesség dátuma túl korai!");
+                window.location.href = "./players_create.php";
+            </script>
+        <?php
+        }
+
+        elseif ($selected_date_timestamp > $max_validity_date_timestamp) {
+            $ervenyesseg_OK = 0;
+        ?>
+            <script>
+                alert("Hiba: A megadott érvényesség dátuma túl késői!");
+                window.location.href = "./players_create.php";
+            </script>
+<?php
+        } else {
+            $ervenyesseg_OK = 1;
+        }
+    }
+
+
+
+    if ($pic_uploaded == 1 && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1) {
+
+        $sqlInsert = "INSERT INTO players_data(name, registration_number, status, validity_date, profile_pic) VALUES ('$name', '$registration_number','$status','$date', '$profile_pic')";
+
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
             $_SESSION["create"] = "Player added successfully";
