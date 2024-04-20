@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
+/*if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
     exit;
-}
+}*/
 $row1 = array();
 $row2 = array();
 

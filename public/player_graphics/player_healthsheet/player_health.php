@@ -6,8 +6,8 @@ include("../../../connect.php"); // Adatbázis kapcsolat létrehozása
 // Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
 if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['record_id'])) {
     $player_id = $_SESSION['player_id']; // Játékos azonosítójának kiolvasása a SESSION-ből
-    include("../../constans.php");
-    
+    include("../../../admin/constans.php");
+
     // SQL lekérdezés összeállítása a játékos adatainak lekérdezésére
     $sql = "SELECT pd.name, ph.blood_group, ph.drug_allergies 
         FROM players_health ph 
@@ -37,6 +37,9 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['record_id'])) {
         $template = str_replace("{{blood_group}}",          $blood_group,       $template);
         $template = str_replace("{{drug_allergies}}",       $drug_allergies,    $template);
         //$template = str_replace("{{chronic_illness}}",      $chronic_illness,     $template);
+
+
+        unset($_SESSION);
 
         // Sablon kiírása
         echo $template;

@@ -1,12 +1,12 @@
 <?php
 session_start(); // Munkamenet kezdése
-
 include("../../../connect.php"); // Adatbázis kapcsolat létrehozása
 // Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
 if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_number'])) {
+
     $player_id = $_SESSION['player_id']; // Játékos azonosítójának kiolvasása a SESSION-ből
-    include("../../constans.php");
-    
+    include("../../../admin/constans.php");
+
     // SQL lekérdezés összeállítása a játékos adatainak lekérdezésére
     $sql = "SELECT * FROM `players_data`
             WHERE `player_id` = {$player_id}";
@@ -27,7 +27,7 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_num
         $player_profile_pic = $row['profile_pic'];
 
         // Játékos képének az elérési útvonala
-        $player_profile_pic_path = "http://".$domain."/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
+        $player_profile_pic_path = "http://" . $domain . "/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
 
         // Sablon beolvasása
         $template = file_get_contents("player_data.html");
@@ -39,9 +39,7 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_num
         $template = str_replace("{{status}}", $status == "érvényes" ? "<span id=\"status-green\">Érvényes</span>" : "<span id=\"status-red\">Érvénytelen</span>", $template);
         $template = str_replace("{{player_profile_pic}}", $player_profile_pic_path, $template);
 
-        
-
-        // Sablon kiírása
+        unset($_SESSION);
         echo $template;
     } else {
         // Nincs találat

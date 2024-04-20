@@ -66,6 +66,8 @@
 
   ### uj jatekos
   ### meglevo jatekos
+  ### jatekos egesszsegugy
+    *  http://192.168.1.110/socca-hungary-teszt/admin/players/players_health.php nem reszponziv
 
 # KÉSZ 
 

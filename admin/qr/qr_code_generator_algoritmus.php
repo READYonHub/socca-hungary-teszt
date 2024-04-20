@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
+/*if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
     exit;
-}
+}*/
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -16,7 +16,7 @@ $type = $_GET["type"]; // Az adatok alapján QR kód generálás típusa
 require "vendor/autoload.php";
 
 include("../constans.php");
-$url    =   "http://" . $domain . "/socca-hungary-teszt/admin/player_graphics/player_graphics_process.php?hi=";
+$url    =   "http://" . $domain . "/socca-hungary-teszt/public/player_graphics/player_graphics_process.php?hi=";
 
 if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
     require_once("../../connect.php"); // Adatbázis kapcsolat létrehozása

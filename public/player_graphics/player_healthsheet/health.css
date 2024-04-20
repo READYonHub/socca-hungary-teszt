@@ -49,10 +49,11 @@ body {
     margin-top: 10px;
 }
 
-#player-image {
+#health-image {
     background-color: #fff;
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
     object-fit: cover;
 }
 
@@ -67,53 +68,27 @@ body {
     flex-direction: column;
 }
 
-#player-name {
+#vercsoport {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     padding: 8px;
     width: 90vw;
+    height: 80px;
     max-width: 450px;
     font-size: 16pt;
 }
 
-.mid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-}
-
-#player-avail,
-#player-number {
+#erzekenyseg {
+    display: block;
+    overflow: auto;
     background-color: #fff;
     padding: 8px;
-    width: 40vw;
-    max-width: 205px;
-    font-size: 16pt;
-    text-align: center;
-}
-
-.bot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#status-green,
-#status-red {
-    background-color: #fff;
     width: 90vw;
-    padding: 8px;
+    height: 200px;
     max-width: 450px;
     font-size: 16pt;
-    text-align: center;
-}
-
-#status-green {
-    background-color: rgb(0, 200, 0);
-}
-
-#status-red {
-    background-color: rgb(200, 0, 0);
 }
 
 #bottom-image {
