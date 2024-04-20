@@ -13,7 +13,12 @@ include("../headers/header.php");
     <input type="text" class="form-control" name="name" id="" placeholder="Név" required>
     <input type="number" name="registration_number" class="form-control" placeholder="Sorszám" required></input>
     <input type="date" name="validity_date" class="form-control" id="" placeholder="Érvényesség dátum" required></input>
-    <input name="status" class="form-control" id="" placeholder="Státusz" required></input>
+    <!--<input name="status" class="form-control" id="" placeholder="Státusz" required></input>-->
+    <select name="status" id="status">
+        <option value="érvényes">érvényes</option>
+        <option value="eltiltva">eltiltva</option>
+        <option value="érvényletelen">érvényletelen</option>
+    </select>
     <input type="date" name="status" class="form-control" id="" placeholder="Eltiltás vágének dátuma"></input>
     <input type="file" name="profile_pic" class="form-control" id="" placeholder="Játékoskép" required></input>
     <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
@@ -37,6 +42,13 @@ include("../headers/header.php");
     }
 
     .p-container input {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .p-container select {
         padding: 10px;
         max-width: 400px;
         border-radius: 8px;

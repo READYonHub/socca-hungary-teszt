@@ -14,6 +14,7 @@ if (isset($_POST["create"])) {
     $date = mysqli_real_escape_string($conn, $_POST["date"]);
     $profile_pic = time() . $_FILES["profile_pic"]["name"]; // Corrected index
 
+    //Kép feltöltés és ellenőrzés
     if (move_uploaded_file(
         $_FILES["profile_pic"]["tmp_name"], // Corrected index
         $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic
@@ -35,11 +36,28 @@ if (isset($_POST["create"])) {
             <script>
                 alert("A kép mérete meghaladja a maximum méretet!");
             </script>
-<?php } else {
+        <?php } else {
             $pic_uploaded = 1;
         }
     }
-    if ($pic_uploaded == 1) {
+
+    //sorszám ellenőrzés
+    if (isset($registration_number)) {
+        $sql = "SELECT * FROM players_data WHERE registration_number = '$registration_number'";
+        $sorszam_egyezes    =   mysqli_query($conn, $sql);
+        $sorszam_OK =   0;
+        if (mysqli_num_rows($sorszam_egyezes) > 0) {
+            $sorszam_OK =   1;
+        ?>
+            <script>
+                alert("Ez a sorszám már használatban van!");
+            </script>
+<?php
+header("Location: ./players_create.php");
+        }
+    }
+
+    if ($pic_uploaded == 1 && $sorszam_OK == 0) {
 
         $sqlInsert = "INSERT INTO players_data(name, registration_number, status, profile_pic) VALUES ('$name', '$registration_number','$status', '$profile_pic' )";
         if (mysqli_query($conn, $sqlInsert)) {
