@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
             $log_email      =   $_SESSION['email'];
             $log_cim        =   $_SERVER['REMOTE_ADDR'];
 
-            $log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
+           // $log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
 
             //LOG BESZURASA ADATBÁZISBA
             $sqlInsert = "INSERT INTO logs(timestamp, state, action, email, ip_address) VALUES ('$log_datum', '$log_allapot','$log_muvelet', '$log_email', '$log_cim' )";
@@ -58,7 +58,7 @@ if (isset($_POST['login'])) {
 
 
 
-            file_put_contents("log.txt", $log, FILE_APPEND);
+           // file_put_contents("log.txt", $log, FILE_APPEND);
             header("Location: ./panels/dashboard_panel.php ");
         }
         //sikertelen 
@@ -69,13 +69,13 @@ if (isset($_POST['login'])) {
             $log_email      =   $_SESSION['email'];
             $log_cim        =   $_SERVER['REMOTE_ADDR'];
 
-            $log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
+            //$log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
 
             //LOG BESZURASA ADATBÁZISBA
             $sqlInsert = "INSERT INTO logs(timestamp, state, action, email, ip_address) VALUES ('$log_datum', '$log_allapot','$log_muvelet', '$log_email', '$log_cim' )";
             mysqli_query($conn, $sqlInsert);
 
-            file_put_contents("log.txt", $log, FILE_APPEND);
+            //file_put_contents("log.txt", $log, FILE_APPEND);
             $kimenet    .=   "<p>Sikertelen bejelentkezés.</p>";
         }
     }
