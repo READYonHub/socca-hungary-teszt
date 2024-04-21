@@ -12,6 +12,7 @@ if (isset($_POST["create"])) {
     $status = mysqli_real_escape_string($conn, $_POST["status"]);
     $date = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $profile_pic = time() . $_FILES["profile_pic"]["name"]; // Corrected index
+    $suspension_end_date    =   mysqli_real_escape_string($conn, $_POST["suspension_end_date"]);
 
 
     // név ellenőrzés
@@ -92,14 +93,50 @@ if (isset($_POST["create"])) {
                 alert("Hiba: A megadott érvényesség dátuma túl késői!");
                 window.location.href = "./players_create.php";
             </script>
-            <?php
+        <?php
         } else {
             $ervenyesseg_OK = 1;
         }
     }
 
+    //suspension_end_date ellenőrzés
+    if (isset($suspension_end_date)) {
+        $eltiltas_vege_OK = 0;
+
+        // Az aktuális dátum timestampje
+        $today_timestamp = strtotime(date("Y-m-d"));
+
+        // A megadott dátum timestampje
+        $selected_date_timestamp = strtotime($suspension_end_date);
+
+        // A megengedett minimum dátum: az aktuális dátum
+        $min_suspension_end_date_timestamp = $today_timestamp;
+
+        // A megengedett maximum dátum: az aktuális dátumhoz fél év hozzáadása
+        $max_suspension_end_date_timestamp = strtotime('+6 month', $today_timestamp);
+
+        if ($selected_date_timestamp < $min_suspension_end_date_timestamp) {
+        ?>
+            <script>
+                alert("Hiba: A megadott eltiltás dátuma túl korai!");
+                window.location.href = "./players_create.php";
+            </script>
+        <?php
+        } elseif ($selected_date_timestamp > $max_suspension_end_date_timestamp) {
+        ?>
+            <script>
+                alert("Hiba: A megadott eltiltás dátuma túl késői!");
+                window.location.href = "./players_create.php";
+            </script>
+            <?php
+        } else {
+            $eltiltas_vege_OK = 1;
+        }
+    }
+
+
     //Kép feltöltés és ellenőrzés
-    if (isset($profile_pic) && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1) {
+    if (isset($profile_pic) && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1 && $eltiltas_vege_OK == 1) {
 
         if (move_uploaded_file(
             $_FILES["profile_pic"]["tmp_name"], // Corrected index
@@ -132,9 +169,9 @@ if (isset($_POST["create"])) {
     }
 
 
-    if ($pic_uploaded == 1 && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1) {
+    if ($pic_uploaded == 1 && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1 && $eltiltas_vege_OK == 1) {
 
-        $sqlInsert = "INSERT INTO players_data(name, registration_number, status, validity_date, profile_pic) VALUES ('$name', '$registration_number','$status','$date', '$profile_pic')";
+        $sqlInsert = "INSERT INTO players_data(name, registration_number, status, validity_date, suspension_end_date, profile_pic) VALUES ('$name', '$registration_number','$status','$date','$suspension_end_date', '$profile_pic')";
 
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
