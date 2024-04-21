@@ -307,7 +307,7 @@ if (isset($_POST["update"])) {
         // A megengedett maximum dátum: az aktuális dátumhoz fél év hozzáadása
         $max_suspension_end_date_timestamp_edit = strtotime('+6 month', $today_timestamp_edit);
 
-        if ($selected_date_timestamp_edit < $min_suspension_end_date_timestamp_edit) {
+        if ($selected_date_timestamp_edit < $min_suspension_end_date_timestamp_edit && $selected_date_timestamp_edit != NULL) {
         ?>
             <script>
                 alert("Hiba: A megadott eltiltás dátuma túl korai!");
