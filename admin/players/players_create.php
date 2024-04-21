@@ -20,7 +20,7 @@ include("../headers/header.php");
     <input type="date" name="validity_date" id="validity_date" placeholder="Érvényesség dátuma" required></input>
 
     <!--<input name="status"  id="" placeholder="Státusz" required></input>-->
-    <label for="status">Státusz:</label>
+    <label for="status" required>Státusz:</label>
     <select name="status" id="status">
         <option id="status" value="érvényes">érvényes</option>
         <option id="status" value="eltiltva">eltiltva</option>
@@ -35,7 +35,7 @@ include("../headers/header.php");
 
     <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
 
-    <input type="submit" class="btn btn-primary" value="Submit" name="create">
+    <input type="submit" class="btn btn-primary" value="Létrehozás" name="create">
 </form>
 
 <style>
