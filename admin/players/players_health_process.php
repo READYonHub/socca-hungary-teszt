@@ -26,24 +26,39 @@ if (!isset($_SESSION['login'])) {
 <?php
 if (isset($_POST["update"])) {
     include("../../connect.php");
+
+    $id = mysqli_real_escape_string($conn, $_POST["player_id"]);
     //$name = mysqli_real_escape_string($conn, $_POST["name"]);
     //$registration_number = mysqli_real_escape_string($conn, $_POST["registration_number"]);
     $blood_group = mysqli_real_escape_string($conn, $_POST["blood_group"]);
     $drug_allergies = mysqli_real_escape_string($conn, $_POST["drug_allergies"]);
     $chronic_illness = mysqli_real_escape_string($conn, $_POST["chronic_illness"]);
-    // $date = mysqli_real_escape_string($conn, $_POST["date"]);
-    $id = mysqli_real_escape_string($conn, $_POST["player_id"]);
+    $date = mysqli_real_escape_string($conn, $_POST["date"]);
 
-    $sqlUpdatePlayersHealth = "UPDATE players_health SET blood_group = '$blood_group', drug_allergies = '$drug_allergies', chronic_illness = '$chronic_illness' WHERE player_id = $id";
+    // Ellenőrizzük, hogy van-e már egészségügyi rekord az adott játékoshoz
+    $checkHealthRecordQuery = "SELECT * FROM players_health WHERE player_id = $id";
+    $checkHealthRecordResult = mysqli_query($conn, $checkHealthRecordQuery);
+    if (mysqli_num_rows($checkHealthRecordResult) == 0) {
+        // Ha még nincs egészségügyi rekord, beszúrjuk az adatokat
+        $insertHealthRecordQuery = "INSERT INTO players_health (player_id, blood_group, drug_allergies, chronic_illness, edit_date) VALUES ($id, '$blood_group', '$drug_allergies', '$chronic_illness', '$date')";
+        if (mysqli_query($conn, $insertHealthRecordQuery)) {
+            // Beszúrás sikeres, folytathatjuk az adatok frissítésével vagy más teendőkkel
+        } else {
+            // Ha a beszúrás sikertelen, hibát jelezhetünk
+            die("Hiba az egészségügyi adatok beszúrásakor: " . mysqli_error($conn));
+        }
+    }
+
+    // Ezután frissítjük az egészségügyi adatokat
+    $sqlUpdatePlayersHealth = "UPDATE players_health SET blood_group = '$blood_group', drug_allergies = '$drug_allergies', chronic_illness = '$chronic_illness', edit_date='$date' WHERE player_id = $id";
 
     if (mysqli_query($conn, $sqlUpdatePlayersHealth)) {
-
         session_start();
-        $_SESSION["update"] = "Post updated successfully";
+        $_SESSION["update"] = "A játékos egészségügyi adatai sikeresen módosítva!";
         header("Location:../panels/players_panel.php");
     } else {
         mysqli_rollback($conn);
-        die("Data is not updated in players_health table!");
+        die("A játékos egészségügyi adatai sikertelnül módosítva: " . mysqli_error($conn));
     }
 }
 ?>

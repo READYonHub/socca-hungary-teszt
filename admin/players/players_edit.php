@@ -23,34 +23,60 @@ if (isset($_GET['id'])) {
     <h1>Játékos módosítása</h1>
 
     <?php
-        while ($data = mysqli_fetch_array($result)) {
+    while ($data = mysqli_fetch_array($result)) {
     ?>
-
+        <!---------------------------------------JÁTÉKOS NEVE--------------------------------------->
         <label for="name">Név:</label>
         <input type="text" name="name" id="name" placeholder="Név" value="<?php echo $data['name']; ?>" required>
 
+        <!---------------------------------------JÁTÉKOS SORSZÁMA--------------------------------------->
         <label for="registration_number">Sorszám:</label>
         <input name="registration_number" id="registration_number" placeholder="Sorszám" value="<?php echo $data['registration_number']; ?>" required>
 
+        <!---------------------------------------ÉRVÉNYESSÉG DÁTUMA--------------------------------------->
         <label for="validity_date">Érvényesség dátuma:</label>
         <input type="date" name="validity_date" id="validity_date" placeholder="Érvényesség dátuma:" value="<?php echo $data['validity_date']; ?>" required>
 
+        <!---------------------------------------JÁTÉKOS STÁTUSZA--------------------------------------->
         <label for="status" required>Státusz:</label>
         <select name="status" id="status">
-            <option id="status" value="érvényes">érvényes</option>
-            <option id="status" value="eltiltva">eltiltva</option>
-            <option id="status" value="érvényletelen">érvényletelen</option>
+            <?php
+            $possible_statuses = array("érvényes", "eltiltva", "érvényletelen");
+            $sqlEdit = "SELECT status FROM players_data WHERE player_id = $id";
+            $result = mysqli_query($conn, $sqlEdit);
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $db_status = $row['status'];
+                if (in_array($db_status, $possible_statuses)) {
+                    echo "<option value='$db_status' selected>$db_status</option>";
+                }
+            }
+            foreach ($possible_statuses as $status) {
+                if ($status !== $db_status) {
+                    echo "<option value='$status'>$status</option>";
+                }
+            }
+            ?>
         </select>
 
-        <label for="suspension_end_date">Eltiltás vágének dátuma (ha van):</label>
+        <!---------------------------------------ELTILTÁS VÉGÉNEK DÁTUMA (HA VAN)--------------------------------------->
+        <label for="suspension_end_date">Eltiltás végének dátuma (ha van):</label>
         <input type="date" name="suspension_end_date" id="suspension_end_date" placeholder="Eltiltás vágének dátuma"></input>
 
+        <!---------------------------------------JÁTÉKOS PROFILKÉP--------------------------------------->
         <label for="profile_pic">Játékos profilkép:</label>
-        <input type="file" name="profile_pic" id="profile_pic" placeholder="Játékoskép" value="<?php echo $data['profile_pic']; ?>"></input>
+        <input type="text" name="profile_pic" id="profile_pic" value="<?php echo isset($data['profile_pic']) ? $data['profile_pic'] : ''; ?>" readonly>
 
+        <label for="new_profile_pic">Új kép:</label>
+        <input type="file" id="new_profile_pic" name="new_profile_pic">
+
+        <!---------------------------------------MÓDOSÍTÁS DÁTUMA--------------------------------------->
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+
+        <!---------------------------------------AKTUÁLIS JÁTÉKOS AZONOSÍTÓJA--------------------------------------->
         <input type="hidden" name="player_id" value="<?php echo $id; ?>">
 
+        <!---------------------------------------KÜLDÉS--------------------------------------->
         <input type="submit" value="Frissítés" name="update">
 
     <?php
