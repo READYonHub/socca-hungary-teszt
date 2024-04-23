@@ -51,12 +51,12 @@ if (!isset($_SESSION['login'])) {
         <thead>
             <tr>
                 <!--<th style="width:15%;">létrehozás dátuma</th>-->
-                <th style="width:15%;">Játékos neve</th>
-                <th style="width:5%;">Játékos Sorszáma</th>
-                <th style="width:20%;">Játékos Egészségügyi adatai</th>
-                <th style="width:20%;">Játékos Gyógyszer allergia</th>
-                <th style="width:20%;">Játékos Krónikus Betegségei</th>
-                <th style="width:20%;">Művelet</th>
+                <th>Játékos neve</th>
+                <th>Játékos Sorszáma</th>
+                <th>Játékos Egészségügyi adatai</th>
+                <th>Játékos Gyógyszer allergia</th>
+                <th>Játékos Krónikus Betegségei</th>
+                <th>Művelet</th>
             </tr>
         </thead>
         <tbody>
@@ -108,28 +108,11 @@ if (!isset($_SESSION['login'])) {
         gap: 15px;
     }
 
-    .p-health-table {
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    .p-health-table,
-    th,
-    td {
-        padding: 10px;
-    }
-
     .p-health-table tr:nth-child(even) {
         background-color: #303030;
     }
 
-    .p-health-table,
-    th {
-        border: 2px solid transparent;
-    }
-
     .player-health-container {
-        display: flex;
         background-color: #252525;
         width: 100vw;
         padding: 30px;

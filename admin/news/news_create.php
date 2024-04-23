@@ -52,12 +52,18 @@ if (isset($_SESSION["delete"])) {
         width: 100vw;
     }
 
-    .news-container input,
-    textarea {
+    .news-container input {
         font-size: 14pt;
         border: none;
         padding: 10px;
-        border-radius: 8px;
+        border-radius: 4px;
+        max-width: 800px;
+    }
+
+    .news-container textarea {
+        padding: 8px;
+        border-radius: 4px;
+        border: none;
         max-width: 800px;
         resize: vertical;
     }
