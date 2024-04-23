@@ -14,7 +14,7 @@ include("../headers/header.php");
     <input type="text" name="name" id="name" placeholder="Név" required>
 
     <label for="registration_number">Sorszám:</label>
-    <input type="number" name="registration_number" id="registration_number" placeholder="Sorszám" required></input>
+    <input type="number" name="registration_number" id="registration_number" placeholder="Sorszám" min="0" required></input>
 
     <label for="validity_date">Érvényesség dátuma:</label>
     <input type="date" name="validity_date" id="validity_date" placeholder="Érvényesség dátuma" required></input>
