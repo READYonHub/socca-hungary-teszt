@@ -9,8 +9,8 @@ include("../headers/header.php");
 ?>
 
 <?php
-$id = $_GET['id'];
-if ($id) {
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     include("../../connect.php");
     $sqlEdit = "SELECT pd.player_id, pd.name, pd.registration_number, ph.blood_group, ph.drug_allergies, ph.chronic_illness
                 FROM players_data pd
@@ -23,24 +23,37 @@ if ($id) {
 }
 
 ?>
-<form action="./players_health_process.php" class="player-health-edit-container" method="post">
+<form action="./players_health_process.php" class="player-health-edit-container p-container" method="post" autocomplete="off">
+    <h1>Játékos egészségügyi adatai</h1>
     <?php
     while ($data = mysqli_fetch_array($result)) {
     ?>
+        <!-----------------------Név------------------------------------>
+        <label for="name">Név:</label>
+        <input type="text" name="name" id="name" value="<?php echo $data['name']; ?>" disabled>
 
-        <input type="text" name="name" value="<?php echo $data['name']; ?>" disabled>
-        <input name="registration_number" value="<?php echo $data['registration_number']; ?>" disabled>
+        <!-----------------------Sorszám------------------------------------>
+        <label for="registration_number">Sorszám:</label>
+        <input type="text" name="registration_number" id="registration_number" value="<?php echo $data['registration_number']; ?>" disabled>
 
-        <input type="text" name="blood_group" placeholder="Játékos vércsoportja"><?php echo $data['blood_group']; ?></input>
+        <!-----------------------Vércsoport------------------------------------>
+        <label for="blood_group">Vércsoport:</label>
+        <input type="text" name="blood_group" id="blood_group" placeholder="Játékos vércsoportja" value="<?php echo $data['blood_group']; ?>" required>
 
-        <input type="text" name="drug_allergies" placeholder="Játékos gyógyszerallergia"><?php echo $data['drug_allergies']; ?></input>
+        <!-----------------------Gyógyszerallergia------------------------------------>
+        <label for="blood_group">Gyógyszerallergia:</label>
+        <input type="text" name="drug_allergies" id="drug_allergies" placeholder="Játékos gyógyszerallergia" value="<?php echo $data['drug_allergies']; ?>" required>
 
-        <input type="text" name="chronic_illness" placeholder="Játékos krónikus betegségei"><?php echo $data['chronic_illness']; ?></input>
+        <!-----------------------Krónikus betegségek------------------------------------>
+        <label for="blood_group">Krónikus betegségek:</label>
+        <input type="text" name="chronic_illness" id="chronic_illness" placeholder="Játékos krónikus betegségei" value="<?php echo $data['chronic_illness']; ?>" required>
 
 
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
-        <input type="hidden" name="player_id" value="<?php echo $id; ?>">
-        <input type="submit" value="Elküldés" name="update">
+        <input type="hidden" name="player_id" id="player_id" value="<?php echo $id; ?>">
+
+        <br>
+        <input type="submit" value="Elküldés" name="update" id="update">
 
     <?php
     }
@@ -48,26 +61,32 @@ if ($id) {
 </form>
 
 <style>
-    .player-health-edit-container {
+    .p-container {
         display: flex;
         flex-direction: column;
-        align-items: baseline;
-        height: 100vh;
-        width: 100vw;
         background-color: #252525;
+        width: 100vw;
+        gap: 10px;
         padding: 30px;
-        gap: 30px;
+        color: #fff;
     }
 
-    .player-health-edit-container input {
-        font-size: 14pt;
-        border: none;
+    .p-container h1 {
+        margin-bottom: 10px;
+    }
+
+    .p-container input {
         padding: 10px;
+        max-width: 400px;
         border-radius: 8px;
-        max-width: 300px;
-        width: 100%;
-        max-height: 40px;
-        resize: none;
+        border: none;
+    }
+
+    .p-container select {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
     }
 
     .player-health-edit-container input[disabled] {
