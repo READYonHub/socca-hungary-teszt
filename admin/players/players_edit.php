@@ -60,15 +60,15 @@ if (isset($_GET['id'])) {
         </select>
 
         <!---------------------------------------ELTILTÁS VÉGÉNEK DÁTUMA (HA VAN)--------------------------------------->
-        <label for="suspension_end_date">Eltiltás végének dátuma (ha van):</label>
-        <input type="date" name="suspension_end_date" id="suspension_end_date" placeholder="Eltiltás vágének dátuma"></input>
+        <label for="new_suspension_end_date">Eltiltás végének dátuma (ha van):</label>
+        <input type="date" name="new_suspension_end_date" id="new_suspension_end_date" placeholder="Eltiltás vágének dátuma" value="<?php echo $data['suspension_end_date']; ?>">
 
         <!---------------------------------------JÁTÉKOS PROFILKÉP--------------------------------------->
-        <label for="profile_pic">Játékos profilkép:</label>
-        <input type="text" name="profile_pic" id="profile_pic" value="<?php echo isset($data['profile_pic']) ? $data['profile_pic'] : ''; ?>" readonly>
+        <label for="old_profile_pic">Játékos profilkép:</label>
+        <input type="text" name="old_profile_pic" id="old_profile_pic" value="<?php echo isset($data['profile_pic']) ? $data['profile_pic'] : ''; ?>" readonly>
 
         <label for="new_profile_pic">Új kép:</label>
-        <input type="file" id="new_profile_pic" name="new_profile_pic">
+        <input type="file" id="new_profile_pic" name="new_profile_pic" >
 
         <!---------------------------------------MÓDOSÍTÁS DÁTUMA--------------------------------------->
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">

@@ -43,14 +43,6 @@ if (isset($_SESSION["delete"])) {
 }
 ?>
 
-<div class="news-container">
-    <h1>Műveletek</h1>
-    <div class="news-actions">
-        <a href="../news/news_create.php" class="text-light text-decoration-none">Új Hír</a>
-        <a href="../news/news_existing.php" class="text-light text-decoration-none">Meglévő hírek módosítása</a>
-    </div>
-</div>
-
 <style>
     .news-container {
         display: flex;
@@ -99,10 +91,14 @@ if (isset($_SESSION["delete"])) {
         border-radius: 8px;
     }
 </style>
+<div class="news-container">
+    <h1>Műveletek</h1>
+    <div class="news-actions">
+        <a href="../news/news_create.php">Új Hír</a>
+        <a href="../news/news_existing.php">Meglévő hírek módosítása</a>
+    </div>
+</div>
 
-<?php
-//include("./templates/visibility.php");
-?>
 <?php
 //include("templates/footer.php");
 include("../headers/footer.php");

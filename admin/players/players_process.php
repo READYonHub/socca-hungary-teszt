@@ -198,7 +198,7 @@ if (isset($_POST["update"])) {
     $registration_number_edit = mysqli_real_escape_string($conn, $_POST["registration_number"]);
     $status_edit = mysqli_real_escape_string($conn, $_POST["status"]);
     $date_edit = mysqli_real_escape_string($conn, $_POST["validity_date"]);
-    $suspension_end_date_edit    =   mysqli_real_escape_string($conn, $_POST["suspension_end_date"]);
+    $suspension_end_date_edit    =   mysqli_real_escape_string($conn, $_POST["new_suspension_end_date"]);
     $new_profile_pic    = time() . $_FILES['new_profile_pic']['name'];
 
     //-----------------------ELLENŐRZÉSEK------------------------------------
@@ -341,11 +341,6 @@ if (isset($_POST["update"])) {
         }
         if ($_FILES["new_profile_pic"]["size"] > 5000000) {
             exit("Error: A fájl mérete meghaladja a maximális limitet.");
-        }
-
-        // Fájl áthelyezése a célkönyvtárba
-        if (!move_uploaded_file($_FILES["new_profile_pic"]["tmp_name"], $target_file)) {
-            exit("Error: Hiba történt a fájl feltöltése során.");
         }
     }
 

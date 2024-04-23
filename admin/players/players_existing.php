@@ -3,24 +3,83 @@
 session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
-} ?><?php
-    include("../headers/header.php");
-    ?>
+} ?>
+
+<?php
+include("../headers/header.php");
+?>
+<!-- JQUERY -->
+<?php include('../lib/jquery/players_jquery.php') ?>
+<style>
+    .action {
+        display: flex;
+        text-decoration: none;
+        color: #aaa;
+    }
+
+    .actions {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .message {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: transparent;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+        padding: 10px;
+        background-color: rgb(0, 200, 0);
+        border-radius: 8px;
+    }
+
+    .p-table {
+        border-collapse: collapse;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    .p-table tr:nth-child(even) {
+        background-color: #303030;
+    }
+
+    .player-table-main-container {
+        background-color: #252525;
+        color: #fff;
+        width: 100vw;
+        padding: 30px;
+    }
+
+    #players-table-data .playerRow:hover {
+        color: orange;
+        background-color: black;
+    }
+
+   /* .p-table th:not(:last-child),
+    .p-table td:not(:last-child) {
+        border-right: 1px solid #ccc;
+    }*/
+</style>
+
 <div class="player-table-main-container">
 
-    <!-- JQUERY -->
-    <?php include('../lib/jquery/players_jquery.php') ?>
+
 
     <!--Táblázat-->
     <table class="p-table" id="players-table-data">
         <thead>
-            <tr>
-                <!--<th style="width:15%;">létrehozás dátuma</th>-->
-                <th>Játékos neve</th>
-                <th>Játékos Sorszáma</th>
-                <th>Játékos Státusz</th>
-                <th>Művelet</th>
-            </tr>
+            <!--<th style="width:15%;">létrehozás dátuma</th>-->
+            <th>Játékos neve</th>
+            <th>Játékos Sorszáma</th>
+            <th>Játékos Státusz</th>
+            <th>Művelet</th>
         </thead>
         <tbody>
 
@@ -46,57 +105,6 @@ if (!isset($_SESSION['login'])) {
 
         </tbody>
     </table>
-    <style>
-        .action {
-            display: flex;
-            text-decoration: none;
-            color: #aaa;
-        }
-
-        .actions {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .message {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            text-align: center;
-            background-color: transparent;
-            font-weight: bold;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin: 20px;
-            padding: 10px;
-            background-color: rgb(0, 200, 0);
-            border-radius: 8px;
-        }
-
-        .p-table {
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .p-table tr:nth-child(even) {
-            background-color: #303030;
-        }
-
-        .player-table-main-container {
-            background-color: #252525;
-            color: #fff;
-            width: 100vw;
-            padding: 30px;
-        }
-
-        #players-table-data .playerRow:hover {
-            color: orange;
-            background-color: black;
-        }
-    </style>
 
 </div>
 <?php

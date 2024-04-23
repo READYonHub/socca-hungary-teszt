@@ -40,6 +40,7 @@ if (isset($_SESSION["delete"])) {
     unset($_SESSION["delete"]);
 };
 ?>
+
 <style>
     .admin-manager-container {
         display: flex;
@@ -109,18 +110,21 @@ if (isset($_SESSION["delete"])) {
         border-radius: 8px;
     }
 </style>
+<!-- JQUERY -->
+<?php include('../lib/jquery/admins_jquery.php'); ?>
 <div class="admin-manager-container">
     <h2>Hozzáférések kezelése</h2>
     <div class="notice">
         Csak olyan embereknek adjon hozzáférést akikben megbízik! A hozzáféréssel rendelkező emberek szintén képesek további hozzáféréseket adni!
     </div>
-    <table class="admin-table">
-        <tr>
+    <!--táblázat-->
+    <table class="admin-table" id="admins-table-data">
+        <thead>
             <th>Létrehozás dátuma</th>
             <th>ID</th>
             <th>Adminisztrátor</th>
             <th>Művelet</th>
-        </tr>
+        </thead>
         <?php
         include('../../connect.php');
         $sqlSelect = "SELECT id_adm, email, date FROM admin_default";

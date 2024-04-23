@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2024. Ápr 20. 13:14
+-- Létrehozás ideje: 2024. Ápr 23. 22:49
 -- Kiszolgáló verziója: 8.2.0
 -- PHP verzió: 8.2.13
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `admin_default` (
   `email` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
   `passwrd` char(40) COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`id_adm`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- A tábla adatainak kiíratása `admin_default`
@@ -44,7 +44,13 @@ CREATE TABLE IF NOT EXISTS `admin_default` (
 
 INSERT INTO `admin_default` (`id_adm`, `date`, `email`, `passwrd`) VALUES
 (5, '2024-04-02', 'emailed@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
-(21, '2024-04-15 14-06-15', 'socca_hungary@gmail.com', 'e48d96e16be6e01c14721b486e4b93e4069207c3');
+(21, '2024-04-15 14-06-15', 'socca_hungary@gmail.com', 'e48d96e16be6e01c14721b486e4b93e4069207c3'),
+(22, '2024-04-23 21-56-23', 'ggg@sdss.com', '528188f2f0e6b6fcdf2539234fb3748ef0f4b69b'),
+(23, '2024-04-23 21-57-23', 'rrr@rrr.com', '542f9215ec6245cbaf8a75cee11487fcce0c6634'),
+(24, '2024-04-23 21-57-23', 'tt@tt.com', '6ca0a4e13abd8e0179298adceb8cc7a8fdfd338f'),
+(25, '2024-04-23 21-58-23', 'zzzzz@gmail.com', 'a0eab1731d64e34406e249d6a9443766172fd407'),
+(26, '2024-04-23 21-58-23', 'uu@hg.com', '0da76b128107b7e8233da777d587b51d8b7eef7c'),
+(27, '2024-04-23 21-58-23', 'aaaa@aaa.com', '9bb60ccc99a393580a0b2cd20feb12ddd4a24b04');
 
 -- --------------------------------------------------------
 
@@ -61,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `email` varchar(100) COLLATE utf8mb4_german2_ci NOT NULL,
   `ip_address` varchar(48) COLLATE utf8mb4_german2_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- A tábla adatainak kiíratása `logs`
@@ -98,7 +104,10 @@ INSERT INTO `logs` (`id`, `timestamp`, `state`, `action`, `email`, `ip_address`)
 (33, '2024-04-17 16:47:53', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '::1'),
 (34, '2024-04-20 09:18:13', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.110'),
 (35, '2024-04-20 09:23:35', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.249'),
-(36, '2024-04-20 10:49:19', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.110');
+(36, '2024-04-20 10:49:19', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.110'),
+(37, '2024-04-20 16:45:00', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.116'),
+(38, '2024-04-21 18:57:19', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.119'),
+(39, '2024-04-23 19:16:29', 'SIKERES', 'Bejelentkezés', 'emailed@gmail.com', '192.168.1.124');
 
 -- --------------------------------------------------------
 
@@ -109,21 +118,21 @@ INSERT INTO `logs` (`id`, `timestamp`, `state`, `action`, `email`, `ip_address`)
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `date` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `date` timestamp NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `summary` text COLLATE utf8mb4_general_ci NOT NULL,
   `content` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `news`
 --
 
 INSERT INTO `news` (`id`, `date`, `title`, `summary`, `content`) VALUES
-(34, '2024/04/14', 'D', 'S', 'S'),
-(35, '2024/04/14', 'D', 'D', 'D'),
-(36, '2024/04/20', 'H', 'J', 'Hj');
+(34, '2024-04-22 22:00:00', '', '', ''),
+(35, '2024-04-13 22:00:00', 'D', 'D', 'D'),
+(36, '2024-04-19 22:00:00', 'H', 'J', 'Hj');
 
 -- --------------------------------------------------------
 
@@ -142,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `players_data` (
   `suspension_end_date` date DEFAULT NULL,
   `profile_pic` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=768 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=797 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `players_data`
@@ -896,14 +905,15 @@ INSERT INTO `players_data` (`player_id`, `name`, `registration_number`, `validit
 (745, 'Juhász Csaba', '0745', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (746, 'Fekete Róbert', '1111', '2024-12-31', 'érvényes', NULL, NULL, ''),
 (758, 'Kaszonyi Krisztián', '3333', '2024-12-31', 'érvényes', NULL, NULL, 'readykepnagyban.jpg'),
-(759, 'ksa', '3344', NULL, '', NULL, NULL, '1712502166'),
-(760, 'asd', '4444', NULL, '', NULL, NULL, '1712502285'),
-(761, 'asdqw3421', '7777', NULL, '', NULL, NULL, '17125031116.jpg'),
 (762, 'GAZDAG ÁDÁM', '6666', '2024-12-31', 'eltiltva', NULL, NULL, '17125224894.jpg'),
-(764, 'Gazdag Ádám', '8998', NULL, '', NULL, NULL, '1713117003Képkivágás.PNG'),
 (765, 'ggg', '21', NULL, '', NULL, NULL, '1713117181hire uj utan hiba.PNG'),
-(766, 'teszt1', '9911', NULL, '', NULL, NULL, '1713131238readykepnagyban.jpg'),
-(767, 'Nyisztor Virág', '3334', NULL, '', NULL, NULL, '1713618729Képkivágás.PNG');
+(767, 'Nyisztor Virág', '3334', NULL, '', NULL, NULL, '1713618729Képkivágás.PNG'),
+(791, 'GAZDAG ÁDÁM', '6669', '2024-12-31', 'érvényes', NULL, NULL, '1713738586qr_code_generator_algoritmus (27).png'),
+(792, 'GAZDAG ÁDÁM', '6670', '2024-12-31', 'érvényes', NULL, '0000-00-00', '1713738790qr_code_generator_algoritmus (25).png'),
+(793, 'tezsh', '99999', '2024-11-13', 'érvényletelen', NULL, '2024-05-12', '1713741408qr_code_generator_algoritmus (24).png'),
+(794, 'uj', '88888', '2024-12-11', 'érvényes', NULL, '2024-04-23', '1713742686'),
+(795, 'tesztelem', '1234321', '2024-05-12', 'érvényletelen', NULL, '2024-05-12', '1713911782_qr_code_generator_algoritmus (26).png'),
+(796, 'tesztekem', '12345', '2024-06-02', 'érvényes', NULL, '2024-05-12', '1713912421');
 
 -- --------------------------------------------------------
 
