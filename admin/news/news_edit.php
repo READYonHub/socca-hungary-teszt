@@ -18,16 +18,22 @@ if ($id) {
 }
 
 ?>
-<form action="./news_process.php" method="post" class="news-container">
+<form action="./news_process.php" method="post" class="n-container">
     <?php
     while ($data = mysqli_fetch_array($result)) {
     ?>
-        <input type="text" name="title" id="" placeholder="Cím" value="<?php echo $data['title']; ?>" required>
-        <textarea name="summary" cols="30" rows="10" placeholder="Összefoglaló" required><?php echo $data['summary']; ?></textarea>
-        <textarea name="content" cols="30" rows="10" placeholder="Poszt" required><?php echo $data['content']; ?></textarea>
-        
+        <label for="title">Cím:</label>
+        <input type="text" name="title" id="title" placeholder="Cím" value="<?php echo $data['title']; ?>" required>
+
+        <label for="content">Tartalom:</label>
+        <textarea name="content" id="content" cols="30" rows="10" placeholder="Poszt" required><?php echo $data['content']; ?></textarea>
+
+        <label for="summary">Összefoglaló:</label>
+        <textarea name="summary" id="summary" cols="30" rows="10" placeholder="Összefoglaló" required><?php echo $data['summary']; ?></textarea>
+
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <br>
         <input type="submit" value="Elküldés" name="update">
     <?php
     }
@@ -35,29 +41,32 @@ if ($id) {
 </form>
 
 <style>
-    .news-container {
+    .n-container {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        padding: 30px;
         background-color: #252525;
         width: 100vw;
+        gap: 10px;
+        padding: 30px;
+        color: #fff;
     }
 
-    .news-container input {
-        font-size: 14pt;
-        border: none;
+    .n-container h1 {
+        margin-bottom: 10px;
+    }
+
+    .n-container input {
         padding: 10px;
-        border-radius: 4px;
-        max-width: 800px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
     }
 
-    .news-container textarea {
-        padding: 8px;
-        border-radius: 4px;
+    .n-container textarea {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
         border: none;
-        max-width: 800px;
-        resize: vertical;
     }
 </style>
 
