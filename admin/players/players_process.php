@@ -183,8 +183,8 @@ if (isset($_POST["create"])) {
 
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
-            $_SESSION["create"] = "Player added successfully";
-            header("Location:../panels/players_panel.php");
+            $_SESSION["create"] = "Játékos sikeresen hozzáadva";
+            header("Location:../players/players_existing.php");
         } else {
             die("Data is not inserted!");
         }
@@ -374,7 +374,7 @@ if (isset($_POST["update"])) {
                 // Adatbázis frissítése
                 if (mysqli_query($conn, $sqlUpdate)) {
                     $_SESSION["update"] = "A játékos sikeresen frissítve lett.";
-                    header("Location: ../panels/players_panel.php");
+                    header("Location: ../players/players_existing.php");
                     exit();
                 } else {
                     exit("Error: " . mysqli_error($conn));

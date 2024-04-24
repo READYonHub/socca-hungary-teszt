@@ -4,10 +4,47 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
-
 <?php
 include("../headers/header.php");
 ?>
+
+<?php
+if (isset($_SESSION["create"])) {
+?>
+    <div class="message-g">
+        <?php
+        echo $_SESSION["create"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["create"]);
+}
+?>
+<?php
+if (isset($_SESSION["update"])) {
+?>
+    <div class="message-g">
+        <?php
+        echo $_SESSION["update"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["update"]);
+}
+?>
+<?php
+if (isset($_SESSION["delete"])) {
+?>
+    <div class="message-r">
+        <?php
+        echo $_SESSION["delete"];
+        ?>
+    </div>
+<?php
+    unset($_SESSION["delete"]);
+}
+?>
+
 <style>
     .action {
         display: flex;

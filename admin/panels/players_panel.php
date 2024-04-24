@@ -8,32 +8,6 @@ if (!isset($_SESSION['login'])) {
 include("../headers/header.php");
 ?>
 
-
-<?php
-if (isset($_SESSION["create"])) {
-?>
-    <div class="message-g">
-        <?php
-        echo $_SESSION["create"];
-        ?>
-    </div>
-<?php
-    unset($_SESSION["create"]);
-}
-?>
-<?php
-if (isset($_SESSION["update"])) {
-?>
-    <div class="message-g">
-        <?php
-        echo $_SESSION["update"];
-        ?>
-    </div>
-<?php
-    unset($_SESSION["update"]);
-}
-?>
-
 <div class="player-container">
     <h1>Műveletek</h1>
     <a href="../players/players_create.php">Új Játékos</a>
