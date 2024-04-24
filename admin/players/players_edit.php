@@ -101,8 +101,11 @@ if (isset($_GET['id'])) {
         </select>
 
         <!---------------------------------------ELTILTÁS VÉGÉNEK DÁTUMA (HA VAN)--------------------------------------->
-        <label for="new_suspension_end_date">Eltiltás végének dátuma (ha van):</label>
-        <input type="date" name="new_suspension_end_date" id="new_suspension_end_date" placeholder="Eltiltás vágének dátuma..." value="<?php echo $data['suspension_end_date']; ?>">
+
+        <div class="suspDate" id="suspDate" style="display: none;">
+            <label for="new_suspension_end_date">Eltiltás végének dátuma:</label>
+            <input type="date" name="new_suspension_end_date" id="new_suspension_end_date" placeholder="Eltiltás vágének dátuma..." value="<?php echo $data['suspension_end_date']; ?>">
+        </div>
 
         <!---------------------------------------JÁTÉKOS PROFILKÉP--------------------------------------->
         <label for="old_profile_pic">Játékos profilkép:</label>
@@ -124,6 +127,25 @@ if (isset($_GET['id'])) {
     }
     ?>
 </form>
+
+<script>
+    function toggleSuspDate() {
+        var status = document.getElementById("status").value;
+        var suspDateDiv = document.getElementById("suspDate");
+
+        if (status === "eltiltva" || status === "érvénytelen") {
+            suspDateDiv.style.display = "block";
+            suspDateDiv.style.flexDirection = "column";
+            suspDateDiv.style.gap = "10px";
+        } else {
+            suspDateDiv.style.display = "none";
+        }
+    }
+
+    window.addEventListener("load", toggleSuspDate);
+    document.getElementById("status").addEventListener("change", toggleSuspDate);
+</script>
+
 
 <?php
 include("../headers/footer.php");

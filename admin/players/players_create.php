@@ -24,11 +24,13 @@ include("../headers/header.php");
     <select name="status" id="status">
         <option id="status" value="érvényes">érvényes</option>
         <option id="status" value="eltiltva">eltiltva</option>
-        <option id="status" value="érvényletelen">érvényletelen</option>
+        <option id="status" value="érvénytelen">érvénytelen</option>
     </select>
 
-    <label for="suspension_end_date">Eltiltás vágének dátuma (ha van):</label>
-    <input type="date" name="suspension_end_date" id="suspension_end_date" placeholder="Eltiltás vágének dátuma"></input>
+    <div class="suspDate" id="suspDate" style="display: none;">
+        <label for="suspension_end_date">Eltiltás végének dátuma:</label>
+        <input type="date" name="suspension_end_date" id="suspension_end_date" placeholder="Eltiltás végének dátuma">
+    </div>
 
     <label for="profile_pic">Játékos profilkép:</label>
     <input type="file" name="profile_pic" id="profile_pic" placeholder="Játékoskép" required></input>
@@ -37,6 +39,21 @@ include("../headers/header.php");
 
     <input type="submit" value="Létrehozás" name="create">
 </form>
+
+<script>
+    document.getElementById("status").addEventListener("change", function() {
+        var status = this.value;
+        var suspDateDiv = document.getElementById("suspDate");
+
+        if (status === "eltiltva" || status === "érvénytelen") {
+            suspDateDiv.style.display = "flex";
+            suspDateDiv.style.flexDirection = "column";
+            suspDateDiv.style.gap = "10px";
+        } else {
+            suspDateDiv.style.display = "none";
+        }
+    });
+</script>
 
 <style>
     .p-container {
