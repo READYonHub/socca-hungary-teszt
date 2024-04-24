@@ -18,28 +18,6 @@ if ($id) {
 }
 
 ?>
-<form action="./news_process.php" method="post" class="n-container">
-    <?php
-    while ($data = mysqli_fetch_array($result)) {
-    ?>
-        <label for="title">Cím:</label>
-        <input type="text" name="title" id="title" placeholder="Cím" value="<?php echo $data['title']; ?>" required>
-
-        <label for="content">Tartalom:</label>
-        <textarea name="content" id="content" cols="30" rows="10" placeholder="Poszt" required><?php echo $data['content']; ?></textarea>
-
-        <label for="summary">Összefoglaló:</label>
-        <textarea name="summary" id="summary" cols="30" rows="10" placeholder="Összefoglaló" required><?php echo $data['summary']; ?></textarea>
-
-        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <br>
-        <input type="submit" value="Elküldés" name="update">
-    <?php
-    }
-    ?>
-</form>
-
 <style>
     .n-container {
         display: flex;
@@ -68,7 +46,41 @@ if ($id) {
         border-radius: 8px;
         border: none;
     }
+
+    .n-container input[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .n-container input[type="submit"]:hover {
+        filter: brightness(.9);
+    }
 </style>
+<form action="./news_process.php" method="post" class="n-container">
+    <?php
+    while ($data = mysqli_fetch_array($result)) {
+    ?>
+        <label for="title">Cím:</label>
+        <input type="text" name="title" id="title" placeholder="Cím" value="<?php echo $data['title']; ?>" required>
+
+        <label for="content">Tartalom:</label>
+        <textarea name="content" id="content" cols="30" rows="10" placeholder="Poszt" required><?php echo $data['content']; ?></textarea>
+
+        <label for="summary">Összefoglaló:</label>
+        <textarea name="summary" id="summary" cols="30" rows="10" placeholder="Összefoglaló" required><?php echo $data['summary']; ?></textarea>
+
+        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <br>
+        <input type="submit" value="Elküldés" name="update">
+    <?php
+    }
+    ?>
+</form>
+
+
 
 <?php
 include("../headers/footer.php");

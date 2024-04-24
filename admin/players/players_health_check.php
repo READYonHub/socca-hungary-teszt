@@ -7,7 +7,30 @@ if (!isset($_SESSION['login'])) {
     include("../headers/header.php");
     ?>
 
-<div class="post w-100 bg-light p-5">
+<style>
+    .back-btn {
+        color: gray;
+        text-decoration: none;
+        width: min-content;
+    }
+
+    .back-btn:hover {
+        text-decoration: underline;
+    }
+
+    .players-view-container {
+        display: flex;
+        padding: 30px;
+        background-color: #252525;
+        flex-direction: column;
+        gap: 15px;
+        color: #fff;
+        width: 100vw;
+    }
+</style>
+<div class="players-view-container">
+    <a href="./players_health.php" class="back-btn">Vissza</a>
+
     <?php
     $id = $_GET["id"];
     if ($id) {

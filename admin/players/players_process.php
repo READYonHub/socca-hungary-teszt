@@ -13,7 +13,7 @@ if (isset($_POST["create"])) {
     $status = mysqli_real_escape_string($conn, $_POST["status"]);
     $date = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $suspension_end_date    =   mysqli_real_escape_string($conn, $_POST["suspension_end_date"]);
-    $profile_pic = time() . $_FILES["profile_pic"]["name"];
+    $profile_pic = $_FILES["profile_pic"]["name"] . time();
 
     //-----------------------ELLENŐRZÉSEK------------------------------------
 
@@ -199,7 +199,7 @@ if (isset($_POST["update"])) {
     $status_edit = mysqli_real_escape_string($conn, $_POST["status"]);
     $date_edit = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $suspension_end_date_edit    =   mysqli_real_escape_string($conn, $_POST["new_suspension_end_date"]);
-    $new_profile_pic    = time() . $_FILES['new_profile_pic']['name'];
+    $new_profile_pic    = time() . '_' . $_FILES['new_profile_pic']['name'];
 
     //-----------------------ELLENŐRZÉSEK------------------------------------
 
@@ -328,19 +328,28 @@ if (isset($_POST["update"])) {
     }
 
     // Fájlfeltöltés ellenőrzése és feldolgozása
+    $profile_pic_OK = 0;
     if (isset($_FILES['new_profile_pic']) && $_FILES['new_profile_pic']['error'] === UPLOAD_ERR_OK) {
-        $new_profile_pic = time() . '_' . basename($_FILES["new_profile_pic"]["name"]);
-        $target_dir = $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/players_profile_pic/';
-        $target_file = $target_dir . $new_profile_pic;
 
-        // Fájltípus és méret ellenőrzése
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $allowed_types = array("jpg", "jpeg", "png");
-        if (!in_array($imageFileType, $allowed_types)) {
-            exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
-        }
-        if ($_FILES["new_profile_pic"]["size"] > 5000000) {
-            exit("Error: A fájl mérete meghaladja a maximális limitet.");
+        $old_profile_pic = $_FILES['$old_profile_pic']['name'];
+
+        $sqlCheck  = "SELECT profile_pic FROM players_data WHERE player_id = 797 AND profile_pic = {$old_profile_pic}';";
+
+        if ($_FILES['new_profile_pic'] != $old_profile_pic) {
+            $new_profile_pic = time() . '_' . basename($_FILES["new_profile_pic"]["name"]);
+            $target_dir = $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/players_profile_pic/';
+            $target_file = $target_dir . $new_profile_pic;
+            $profile_pic_OK = 1;
+
+            // Fájltípus és méret ellenőrzése
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $allowed_types = array("jpg", "jpeg", "png");
+            if (!in_array($imageFileType, $allowed_types)) {
+                exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
+            }
+            if ($_FILES["new_profile_pic"]["size"] > 5000000) {
+                exit("Error: A fájl mérete meghaladja a maximális limitet.");
+            }
         }
     }
 
@@ -348,7 +357,8 @@ if (isset($_POST["update"])) {
 
     // SQL lekérdezés összeállítása az adatbázis frissítéséhez
     $sqlUpdate = "UPDATE players_data SET name = '$name_edit', registration_number = '$registration_number_edit', status = '$status_edit', validity_date = '$date_edit', suspension_end_date = '$suspension_end_date_edit'";
-    if ($new_profile_pic) {
+    if ($new_profile_pic && $profile_pic_OK == 1) {
+        //$new_profile_pic .= $new_profile_pic +
         $sqlUpdate .= ", profile_pic = '$new_profile_pic'";
     }
     $sqlUpdate .= " WHERE player_id = $id_edit";

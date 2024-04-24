@@ -8,28 +8,6 @@ if (!isset($_SESSION['login'])) {
 include("../headers/header.php");
 ?>
 
-<div class="players-view-container">
-    <a href="./players_existing.php" class="back-btn">Vissza</a>
-
-    <?php
-    $id = $_GET["id"];
-    if ($id) {
-        include("../../connect.php");
-        $sqlSelectPost = "SELECT * FROM players_data WHERE player_id = $id";
-        $result = mysqli_query($conn, $sqlSelectPost);
-        while ($data = mysqli_fetch_array($result)) {
-    ?>
-            <h1><?php echo  $data['name']; ?></h1>
-            <p><?php echo $data['registration_number']; ?></p>
-            <p><?php echo $data['status']; ?></p>
-    <?php
-        }
-    } else {
-        echo "Player Not Found";
-    }
-    ?>
-</div>
-
 <style>
     .back-btn {
         color: gray;
@@ -51,7 +29,27 @@ include("../headers/header.php");
         width: 100vw;
     }
 </style>
+<div class="players-view-container">
+    <a href="./players_existing.php" class="back-btn">Vissza</a>
 
+    <?php
+    $id = $_GET["id"];
+    if ($id) {
+        include("../../connect.php");
+        $sqlSelectPost = "SELECT * FROM players_data WHERE player_id = $id";
+        $result = mysqli_query($conn, $sqlSelectPost);
+        while ($data = mysqli_fetch_array($result)) {
+    ?>
+            <h1><?php echo  $data['name']; ?></h1>
+            <p><?php echo $data['registration_number']; ?></p>
+            <p><?php echo $data['status']; ?></p>
+    <?php
+        }
+    } else {
+        echo "Player Not Found";
+    }
+    ?>
+</div>
 <?php
 include("../headers/footer.php");
 ?>

@@ -22,45 +22,7 @@ if (isset($_GET['id'])) {
     echo "Player not found";
 }
 
-?>
-<form action="./players_health_process.php" class="player-health-edit-container p-container" method="post" autocomplete="off">
-    <h1>Játékos egészségügyi adatai</h1>
-    <?php
-    while ($data = mysqli_fetch_array($result)) {
-    ?>
-        <!-----------------------Név------------------------------------>
-        <label for="name">Név:</label>
-        <input type="text" name="name" id="name" value="<?php echo $data['name']; ?>" disabled>
-
-        <!-----------------------Sorszám------------------------------------>
-        <label for="registration_number">Sorszám:</label>
-        <input type="text" name="registration_number" id="registration_number" value="<?php echo $data['registration_number']; ?>" disabled>
-
-        <!-----------------------Vércsoport------------------------------------>
-        <label for="blood_group">Vércsoport:</label>
-        <input type="text" name="blood_group" id="blood_group" placeholder="Játékos vércsoportja" value="<?php echo $data['blood_group']; ?>" required>
-
-        <!-----------------------Gyógyszerallergia------------------------------------>
-        <label for="blood_group">Gyógyszerallergia:</label>
-        <input type="text" name="drug_allergies" id="drug_allergies" placeholder="Játékos gyógyszerallergia" value="<?php echo $data['drug_allergies']; ?>" required>
-
-        <!-----------------------Krónikus betegségek------------------------------------>
-        <label for="blood_group">Krónikus betegségek:</label>
-        <input type="text" name="chronic_illness" id="chronic_illness" placeholder="Játékos krónikus betegségei" value="<?php echo $data['chronic_illness']; ?>" required>
-
-
-        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
-        <input type="hidden" name="player_id" id="player_id" value="<?php echo $id; ?>">
-
-        <br>
-        <input type="submit" value="Elküldés" name="update" id="update">
-
-    <?php
-    }
-    ?>
-</form>
-
-<style>
+?><style>
     .p-container {
         display: flex;
         flex-direction: column;
@@ -92,7 +54,54 @@ if (isset($_GET['id'])) {
     .player-health-edit-container input[disabled] {
         color: #000;
     }
+
+    .p-container input[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .p-container input[type="submit"]:hover {
+        filter: brightness(.9);
+    }
 </style>
+<form action="./players_health_process.php" class="player-health-edit-container p-container" method="post" autocomplete="off">
+    <h1>Játékos egészségügyi adatai</h1>
+    <?php
+    while ($data = mysqli_fetch_array($result)) {
+    ?>
+        <!-----------------------Név------------------------------------>
+        <label for="name">Név:</label>
+        <input type="text" name="name" id="name" value="<?php echo $data['name']; ?>" disabled>
+
+        <!-----------------------Sorszám------------------------------------>
+        <label for="registration_number">Sorszám:</label>
+        <input type="text" name="registration_number" id="registration_number" value="<?php echo $data['registration_number']; ?>" disabled>
+
+        <!-----------------------Vércsoport------------------------------------>
+        <label for="blood_group">Vércsoport:</label>
+        <input type="text" name="blood_group" id="blood_group" placeholder="Játékos vércsoportja" value="<?php echo $data['blood_group']; ?>" required>
+
+        <!-----------------------Gyógyszerallergia------------------------------------>
+        <label for="drug_allergies">Gyógyszerallergia:</label>
+        <input type="text" name="drug_allergies" id="drug_allergies" placeholder="Játékos gyógyszerallergia" value="<?php echo $data['drug_allergies']; ?>" required>
+
+        <!-----------------------Krónikus betegségek------------------------------------>
+        <label for="chronic_illness">Krónikus betegségek:</label>
+        <input type="text" name="chronic_illness" id="chronic_illness" placeholder="Játékos krónikus betegségei" value="<?php echo $data['chronic_illness']; ?>" required>
+
+
+        <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
+        <input type="hidden" name="player_id" id="player_id" value="<?php echo $id; ?>">
+
+        <br>
+        <input type="submit" value="Elküldés" name="update" id="update">
+
+    <?php
+    }
+    ?>
+</form>
 <?php
 include("../headers/footer.php");
 ?>

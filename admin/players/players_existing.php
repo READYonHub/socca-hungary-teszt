@@ -8,8 +8,6 @@ if (!isset($_SESSION['login'])) {
 <?php
 include("../headers/header.php");
 ?>
-<!-- JQUERY -->
-<?php include('../lib/jquery/players_jquery.php') ?>
 <style>
     .action {
         display: flex;
@@ -62,15 +60,16 @@ include("../headers/header.php");
         background-color: black;
     }
 
-   /* .p-table th:not(:last-child),
+    /* .p-table th:not(:last-child),
     .p-table td:not(:last-child) {
         border-right: 1px solid #ccc;
     }*/
 </style>
 
+<!-- JQUERY -->
+<?php include('../lib/jquery/players_jquery.php') ?>
+
 <div class="player-table-main-container">
-
-
 
     <!--Táblázat-->
     <table class="p-table" id="players-table-data">

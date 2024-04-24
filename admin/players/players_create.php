@@ -35,7 +35,7 @@ include("../headers/header.php");
 
     <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
 
-    <input type="submit" class="btn btn-primary" value="Létrehozás" name="create">
+    <input type="submit" value="Létrehozás" name="create">
 </form>
 
 <style>
@@ -65,6 +65,17 @@ include("../headers/header.php");
         max-width: 400px;
         border-radius: 8px;
         border: none;
+    }
+
+    .p-container input[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .p-container input[type="submit"]:hover {
+        filter: brightness(.9);
     }
 </style>
 

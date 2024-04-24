@@ -71,6 +71,11 @@ if (isset($_SESSION["delete"])) {
         font-weight: bold;
     }
 
+    .new-admin-form input[type="submit"]:hover {
+        filter: brightness(.9);
+    }
+
+
     .inputs {
         display: flex;
         flex-direction: column;

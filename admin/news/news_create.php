@@ -85,6 +85,17 @@ if (isset($_SESSION["delete"])) {
         background-color: rgb(0, 200, 0);
         border-radius: 8px;
     }
+
+    .n-container input[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .n-container input[type="submit"]:hover {
+        filter: brightness(.9);
+    }
 </style>
 
 <form action="./news_process.php" method="post" class="n-container" autocomplete="off">
