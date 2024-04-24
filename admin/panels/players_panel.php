@@ -12,7 +12,7 @@ include("../headers/header.php");
 <?php
 if (isset($_SESSION["create"])) {
 ?>
-    <div class="message">
+    <div class="message-g">
         <?php
         echo $_SESSION["create"];
         ?>
@@ -24,7 +24,7 @@ if (isset($_SESSION["create"])) {
 <?php
 if (isset($_SESSION["update"])) {
 ?>
-    <div class="message">
+    <div class="message-g">
         <?php
         echo $_SESSION["update"];
         ?>
@@ -43,7 +43,7 @@ if (isset($_SESSION["update"])) {
 </div>
 
 <style>
-    .message {
+    .message-g {
         padding-top: 10px;
         padding-bottom: 10px;
         text-align: center;

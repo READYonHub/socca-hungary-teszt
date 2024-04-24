@@ -8,7 +8,7 @@ if (!isset($_SESSION['login'])) {
 <?php
 if (isset($_SESSION["create"])) {
 ?>
-    <div class="message">
+    <div class="message-g">
         <?php
         echo $_SESSION["create"];
         ?>
@@ -20,7 +20,7 @@ if (isset($_SESSION["create"])) {
 <?php
 if (isset($_SESSION["update"])) {
 ?>
-    <div class="message">
+    <div class="message-g">
         <?php
         echo $_SESSION["update"];
         ?>
@@ -32,7 +32,7 @@ if (isset($_SESSION["update"])) {
 <?php
 if (isset($_SESSION["delete"])) {
 ?>
-    <div class="message">
+    <div class="message-r">
         <?php
         echo $_SESSION["delete"];
         ?>
@@ -81,21 +81,6 @@ if (isset($_SESSION["delete"])) {
         flex-direction: column;
         margin-top: 20px;
         gap: 15px;
-    }
-
-    .message {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-        background-color: transparent;
-        font-weight: bold;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 20px;
-        padding: 10px;
-        background-color: rgb(0, 200, 0);
-        border-radius: 8px;
     }
 </style>
 <div class="admin-create-container">
