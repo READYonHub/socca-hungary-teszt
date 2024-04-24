@@ -23,7 +23,7 @@ include("../headers/header.php");
         gap: 15px;
     }
 
-    .message {
+    .message-g {
         padding-top: 10px;
         padding-bottom: 10px;
         text-align: center;
@@ -35,6 +35,21 @@ include("../headers/header.php");
         margin: 20px;
         padding: 10px;
         background-color: rgb(0, 200, 0);
+        border-radius: 8px;
+    }
+
+    .message-r {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: transparent;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+        padding: 10px;
+        background-color: rgb(200, 0, 0);
         border-radius: 8px;
     }
 
