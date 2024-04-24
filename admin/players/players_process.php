@@ -13,7 +13,7 @@ if (isset($_POST["create"])) {
     $status = mysqli_real_escape_string($conn, $_POST["status"]);
     $date = mysqli_real_escape_string($conn, $_POST["validity_date"]);
     $suspension_end_date    =   mysqli_real_escape_string($conn, $_POST["suspension_end_date"]);
-    $profile_pic = $_FILES["profile_pic"]["name"] . time();
+    $profile_pic = time() . $_FILES["profile_pic"]["name"];
 
     //-----------------------ELLENŐRZÉSEK------------------------------------
 
@@ -141,17 +141,17 @@ if (isset($_POST["create"])) {
             }
         }
     }
-
-
     //Kép feltöltés és ellenőrzés
-    if (isset($profile_pic) && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1 && $eltiltas_vege_OK == 1) {
+    $pic_uploaded = 0;
+
+    if (isset($profile_pic) && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1 && $eltiltas_vege_OK == 1 && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
+        print_r($_FILES['profile_pic']);
 
         if (move_uploaded_file(
             $_FILES["profile_pic"]["tmp_name"],
             $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic
         )) {
-
-            $pic_uploaded = 0;
+            print_r($_FILES['profile_pic']);
             $target_file    =   $_SERVER['DOCUMENT_ROOT'] . '/socca-hungary-teszt/admin/images/palyers_profile_pic/' . $profile_pic;
             $imageFileType  =   strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $picname        =   basename($_FILES["profile_pic"]["name"]);
@@ -159,22 +159,23 @@ if (isset($_POST["create"])) {
             if (
                 $imageFileType != "jpg" && $imageFileType != "jpeg" &&
                 $imageFileType != "png"
-            ) {
-                $pic_uploaded = 0;  ?>
+            ) { ?>
                 <script>
                     alert("Csak a .jpg/.jpeg/.png típusú képeket tölthetsz fel!");
+                    history.back();
                 </script>
-            <?php
-            } else if ($_FILES["profile_pic"]["size"] > 5000000) {
-                $pic_uploaded = 0; ?>
+            <?php } else if ($_FILES["profile_pic"]["size"] > 50000000) { ?>
                 <script>
                     alert("A kép mérete meghaladja a maximum méretet!");
+                    history.back();
                 </script>
-            <?php } else {
+<?php } else {
                 $pic_uploaded = 1;
+                print_r($_FILES['profile_pic']);
             }
         }
     }
+
     //--------------------------------------JÁTÉKOS LÉTREHOZÁSA-------------------------------------
     if ($pic_uploaded == 1 && $nev_OK == 1 && $sorszam_OK == 0 && $ervenyesseg_OK == 1 && $eltiltas_vege_OK == 1) {
 
@@ -189,6 +190,8 @@ if (isset($_POST["create"])) {
         }
     }
 }
+?>
+<?php
 //------------------------------------------Játékos módosítás-------------------------------------
 
 if (isset($_POST["update"])) {
@@ -208,7 +211,7 @@ if (isset($_POST["update"])) {
         $nev_edit_OK = 0;
         // ha név tartalmaz 3-nál több szóközt
         if (preg_match('/^\s*(?:\S+\s+){3,}\S*$/', $name_edit)) {
-            ?>
+?>
             <script>
                 alert("Hiba: A név nem tartalmazhat 3-nál több szóközt!");
                 window.location.href = "./players_edit.php";
@@ -321,7 +324,7 @@ if (isset($_POST["update"])) {
                 //window.location.href = "./players_edit.php";
                 history.back();
             </script>
-<?php
+            <?php
         } else {
             $eltiltas_vege_OK = 1;
         }
@@ -345,33 +348,39 @@ if (isset($_POST["update"])) {
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $allowed_types = array("jpg", "jpeg", "png");
             if (!in_array($imageFileType, $allowed_types)) {
-                exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
+                $pic_uploaded = 0;  ?>
+                <script>
+                    alert("Csak a .jpg/.jpeg/.png típusú képeket tölthetsz fel!");
+                </script><?php
+                            $profile_pic_OK = 0;
+                            exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
+                        }
+                        if ($_FILES["new_profile_pic"]["size"] > 5000000) {
+                            exit("Error: A fájl mérete meghaladja a maximális limitet.");
+                        }
+                    }
+                }
+
+                //---------------------MÓDOSÍTÁS FELTÖLTÉS  ---------------------------------------------
+
+                // SQL lekérdezés összeállítása az adatbázis frissítéséhez
+                $sqlUpdate = "UPDATE players_data SET name = '$name_edit', registration_number = '$registration_number_edit', status = '$status_edit', validity_date = '$date_edit', suspension_end_date = '$suspension_end_date_edit'";
+                if ($new_profile_pic && $profile_pic_OK == 1) {
+                    //$new_profile_pic .= $new_profile_pic +
+                    $sqlUpdate .= ", profile_pic = '$new_profile_pic'";
+                }
+                $sqlUpdate .= " WHERE player_id = $id_edit";
+
+                // Adatbázis frissítése
+                if (mysqli_query($conn, $sqlUpdate)) {
+                    $_SESSION["update"] = "A játékos sikeresen frissítve lett.";
+                    header("Location: ../panels/players_panel.php");
+                    exit();
+                } else {
+                    exit("Error: " . mysqli_error($conn));
+                }
+            } else {
+                exit("Invalid request");
             }
-            if ($_FILES["new_profile_pic"]["size"] > 5000000) {
-                exit("Error: A fájl mérete meghaladja a maximális limitet.");
-            }
-        }
-    }
 
-    //---------------------MÓDOSÍTÁS FELTÖLTÉS  ---------------------------------------------
-
-    // SQL lekérdezés összeállítása az adatbázis frissítéséhez
-    $sqlUpdate = "UPDATE players_data SET name = '$name_edit', registration_number = '$registration_number_edit', status = '$status_edit', validity_date = '$date_edit', suspension_end_date = '$suspension_end_date_edit'";
-    if ($new_profile_pic && $profile_pic_OK == 1) {
-        //$new_profile_pic .= $new_profile_pic +
-        $sqlUpdate .= ", profile_pic = '$new_profile_pic'";
-    }
-    $sqlUpdate .= " WHERE player_id = $id_edit";
-
-    // Adatbázis frissítése
-    if (mysqli_query($conn, $sqlUpdate)) {
-        $_SESSION["update"] = "A játékos sikeresen frissítve lett.";
-        header("Location: ../panels/players_panel.php");
-        exit();
-    } else {
-        exit("Error: " . mysqli_error($conn));
-    }
-} else {
-    exit("Invalid request");
-}
-?>
+                            ?>
