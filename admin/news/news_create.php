@@ -61,6 +61,7 @@ if (isset($_SESSION["delete"])) {
         padding: 10px;
         max-width: 400px;
         border-radius: 8px;
+        font-size: 18px;
         border: none;
     }
 
