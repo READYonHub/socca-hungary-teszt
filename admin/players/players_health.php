@@ -10,7 +10,7 @@ if (!isset($_SESSION['login'])) {
     <?php
     if (isset($_SESSION["create"])) {
     ?>
-        <div class="message">
+        <div class="message-g">
             <?php
             echo $_SESSION["create"];
             ?>
@@ -22,7 +22,7 @@ if (!isset($_SESSION['login'])) {
     <?php
     if (isset($_SESSION["update"])) {
     ?>
-        <div class="message">
+        <div class="message-g">
             <?php
             echo $_SESSION["update"];
             ?>
@@ -34,7 +34,7 @@ if (!isset($_SESSION['login'])) {
     <?php
     if (isset($_SESSION["delete"])) {
     ?>
-        <div class="message">
+        <div class="message-r">
             <?php
             echo $_SESSION["delete"];
             ?>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['login'])) {
             color: #fff;
         }
 
-        .message {
+        .message-g {
             padding-top: 10px;
             padding-bottom: 10px;
             text-align: center;
@@ -81,6 +81,21 @@ if (!isset($_SESSION['login'])) {
             margin: 20px;
             padding: 10px;
             background-color: rgb(0, 200, 0);
+            border-radius: 8px;
+        }
+
+        .message-r {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            background-color: transparent;
+            font-weight: bold;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            padding: 10px;
+            background-color: rgb(200, 0, 0);
             border-radius: 8px;
         }
 
@@ -139,9 +154,6 @@ if (!isset($_SESSION['login'])) {
 
 </div>
 
-<?php
-//include("../headers/visibility.php");
-?>
 <?php
 include("../headers/footer.php");
 ?>

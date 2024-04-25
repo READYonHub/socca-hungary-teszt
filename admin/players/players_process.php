@@ -337,7 +337,7 @@ if (isset($_POST["update"])) {
 
         $old_profile_pic = $_FILES['$old_profile_pic']['name'];
 
-        $sqlCheck  = "SELECT profile_pic FROM players_data WHERE player_id = 797 AND profile_pic = {$old_profile_pic}';";
+        $sqlCheck  = "SELECT profile_pic FROM players_data WHERE player_id = $id_edit AND profile_pic = {$old_profile_pic}';";
 
         if ($_FILES['new_profile_pic'] != $old_profile_pic) {
             $new_profile_pic = time() . '_' . basename($_FILES["new_profile_pic"]["name"]);

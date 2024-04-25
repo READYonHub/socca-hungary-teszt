@@ -64,7 +64,6 @@ include("../headers/header.php");
     <select name="status" id="status">
         <option id="status" value="érvényes">érvényes</option>
         <option id="status" value="eltiltva">eltiltva</option>
-        <option id="status" value="érvénytelen">érvénytelen</option>
     </select>
 
     <div class="suspDate" id="suspDate" style="display: none;">

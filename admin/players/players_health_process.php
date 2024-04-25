@@ -16,7 +16,7 @@ if (!isset($_SESSION['login'])) {
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
             $_SESSION["create"] = "Player added successfully";
-            header("Location:../panels/players_panel.php");
+            header("Location: ./players_health.php");
         } else {
             die("Data is not inserted!");
         }
@@ -55,7 +55,7 @@ if (isset($_POST["update"])) {
     if (mysqli_query($conn, $sqlUpdatePlayersHealth)) {
         session_start();
         $_SESSION["update"] = "A játékos egészségügyi adatai sikeresen módosítva!";
-        header("Location:../panels/players_panel.php");
+        header("Location: ./players_health.php");
     } else {
         mysqli_rollback($conn);
         die("A játékos egészségügyi adatai sikertelnül módosítva: " . mysqli_error($conn));

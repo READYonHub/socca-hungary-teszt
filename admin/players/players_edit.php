@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
         <label for="status" required>Státusz:</label>
         <select name="status" id="status">
             <?php
-            $possible_statuses = array("érvényes", "eltiltva", "érvényletelen");
+            $possible_statuses = array("érvényes", "eltiltva");
             $sqlEdit = "SELECT status FROM players_data WHERE player_id = $id";
             $result = mysqli_query($conn, $sqlEdit);
             if ($result && mysqli_num_rows($result) > 0) {
@@ -133,7 +133,7 @@ if (isset($_GET['id'])) {
         var status = document.getElementById("status").value;
         var suspDateDiv = document.getElementById("suspDate");
 
-        if (status === "eltiltva" || status === "érvénytelen") {
+        if (status === "eltiltva") {
             suspDateDiv.style.display = "block";
             suspDateDiv.style.flexDirection = "column";
             suspDateDiv.style.gap = "10px";

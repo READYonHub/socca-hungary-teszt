@@ -11,7 +11,7 @@ if (!isset($_SESSION['login'])) {
         $sqlDelete = "DELETE FROM players_health WHERE player_id = $id";
         if (mysqli_query($conn, $sqlDelete)) {
             session_start();
-            $_SESSION["delete"] = "Player Health deleted successfully";
+            $_SESSION["delete"] = "A játékos egészségügyi adatai sikeresen törölve!";
             header("Location:players_health.php");
         } else {
             die("Something is not right. Data is not deleted");
