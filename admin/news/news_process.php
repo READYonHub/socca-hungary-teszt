@@ -43,7 +43,7 @@ if (isset($_POST["update"])) {
     $sqlUpdate      =       "UPDATE news SET title = '$title', summary = '$summary', content = '$content', date = '$date' WHERE id = $id";
     if (mysqli_query($conn, $sqlUpdate)) {
         session_start();
-        $_SESSION["update"] = "Post udpated successfully";
+        $_SESSION["update"] = "A hír sikeresen módosítva!";
         header("Location:../news/news_existing.php");
     } else {
         die("Data is not updated!");

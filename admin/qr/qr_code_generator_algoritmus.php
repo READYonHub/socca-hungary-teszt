@@ -72,11 +72,13 @@ if ($id && $type) { // Ellenőrizzük, hogy a GET paraméterek megfelelőek-e
 
         // PNG adatok kiírása
         echo $result->getString();
+        
     } else {
         // Ha nincs eredmény a lekérdezésben
         echo "Nincs megfelelő adat a megadott játékoshoz!";
     }
 } else {
     // Ha hiányzik a player_id vagy a type GET paraméter
+ 
     echo "Hiányzó vagy érvénytelen paraméterek!";
 }

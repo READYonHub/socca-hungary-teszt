@@ -12,7 +12,7 @@ if ($id) {
     $sqlDelete = "DELETE FROM players_data WHERE player_id = $id";
     if (mysqli_query($conn, $sqlDelete)) {
         session_start();
-        $_SESSION["delete"] = "Player deleted successfully";
+        $_SESSION["delete"] = "A játékos sikeresen törölve!";
         header("Location:players_existing.php");
     } else {
         die("Something is not write. Data is not deleted");

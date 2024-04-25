@@ -59,6 +59,7 @@ if ($id) {
     }
 </style>
 <form action="./news_process.php" method="post" class="n-container">
+    <h1>Hír módosítása</h1>
     <?php
     while ($data = mysqli_fetch_array($result)) {
     ?>
@@ -74,7 +75,7 @@ if ($id) {
         <input type="hidden" name="date" value="<?php echo date("Y/m/d"); ?>">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <br>
-        <input type="submit" value="Elküldés" name="update">
+        <input type="submit" value="Módosítás" name="update">
     <?php
     }
     ?>

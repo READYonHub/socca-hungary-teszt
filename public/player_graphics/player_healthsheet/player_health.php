@@ -49,6 +49,7 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['record_id'])) {
     }
 } else {
     // Hiányzó vagy érvénytelen adatok
+
     echo "Hiányzó vagy érvénytelen adatok!";
 }
 

@@ -11,7 +11,7 @@ if (!isset($_SESSION['login'])) {
         $sqlDelete = "DELETE FROM news WHERE id = $id";
         if (mysqli_query($conn, $sqlDelete)) {
             session_start();
-            $_SESSION["delete"] = "Post deleted successfully";
+            $_SESSION["delete"] = "A hír sikeresen törölve!";
             header("Location:news_existing.php");
         } else {
             die("Something is not write. Data is not deleted");

@@ -32,7 +32,7 @@ if (isset($_SESSION["update"])) {
 <?php
 if (isset($_SESSION["delete"])) {
 ?>
-    <div class="message">
+    <div class="message-r">
         <?php
         echo $_SESSION["delete"];
         ?>
@@ -58,7 +58,7 @@ if ($id) {
         $sqlDelete = "DELETE FROM admin_default WHERE id_adm = $id";
         if (mysqli_query($conn, $sqlDelete)) {
             session_start();
-            $_SESSION["delete"] = "Administrator deleted successfully";
+            $_SESSION["delete"] = "Az adminisztrátor sikeresen törölve!";
             header("Location: ../panels/admin_panel.php");
         } else {
             die("Something is not right. Data is not deleted");

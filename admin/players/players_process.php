@@ -102,8 +102,8 @@ if (isset($_POST["create"])) {
     }
 
     //suspension_end_date ellenőrzés
-    if (isset($suspension_end_date)) {
-        $eltiltas_vege_OK = 0;
+    $eltiltas_vege_OK = 1;
+    if (isset($suspension_end_date) && $status != "érvényes") {
 
         // Az aktuális dátum timestampje
         $today_timestamp_end = strtotime(date("Y-m-d"));
@@ -131,6 +131,7 @@ if (isset($_POST["create"])) {
                 window.location.href = "./players_create.php";
             </script>
             <?php
+
         } else {
             if (!(isset($_POST["suspension_end_date"]) && !empty($_POST["suspension_end_date"]))) {
                 $suspension_end_date = NULL;

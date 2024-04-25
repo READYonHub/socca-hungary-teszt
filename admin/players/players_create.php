@@ -4,6 +4,46 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: ../login.php");
 } ?>
+<style>
+    .p-container {
+        display: flex;
+        flex-direction: column;
+        background-color: #252525;
+        width: 100vw;
+        gap: 10px;
+        padding: 30px;
+        color: #fff;
+    }
+
+    .p-container h1 {
+        margin-bottom: 10px;
+    }
+
+    .p-container input {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .p-container select {
+        padding: 10px;
+        max-width: 400px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .p-container input[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .p-container input[type="submit"]:hover {
+        filter: brightness(.9);
+    }
+</style>
 <?php
 include("../headers/header.php");
 ?>
@@ -54,48 +94,6 @@ include("../headers/header.php");
         }
     });
 </script>
-
-<style>
-    .p-container {
-        display: flex;
-        flex-direction: column;
-        background-color: #252525;
-        width: 100vw;
-        gap: 10px;
-        padding: 30px;
-        color: #fff;
-    }
-
-    .p-container h1 {
-        margin-bottom: 10px;
-    }
-
-    .p-container input {
-        padding: 10px;
-        max-width: 400px;
-        border-radius: 8px;
-        border: none;
-    }
-
-    .p-container select {
-        padding: 10px;
-        max-width: 400px;
-        border-radius: 8px;
-        border: none;
-    }
-
-    .p-container input[type="submit"] {
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-
-    .p-container input[type="submit"]:hover {
-        filter: brightness(.9);
-    }
-</style>
-
 <?php
 include("../headers/footer.php");
 ?>

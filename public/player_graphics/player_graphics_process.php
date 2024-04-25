@@ -7,7 +7,6 @@ session_start();
 $row1 = array();
 $row2 = array();
 
-
 // Ellenőrizze, hogy a 'hi' GET paraméter létezik-e és nem üres
 if (isset($_GET["hi"])) {
     $hash = $_GET["hi"];
