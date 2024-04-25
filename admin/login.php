@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
 
 
             // file_put_contents("log.txt", $log, FILE_APPEND);
-            header("Location: ./panels/dashboard_panel.php ");
+            header("Location: ./panels/dashboard_panel.php");
         }
         //sikertelen 
         else {

@@ -43,6 +43,67 @@ if (!isset($_SESSION['login'])) {
         unset($_SESSION["delete"]);
     }
     ?>
+    <style>
+        .action {
+            display: flex;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .actions {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .message-g {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            background-color: transparent;
+            font-weight: bold;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            padding: 10px;
+            background-color: rgb(0, 200, 0);
+            border-radius: 8px;
+        }
+
+        .message-r {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            background-color: transparent;
+            font-weight: bold;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            padding: 10px;
+            background-color: rgb(200, 0, 0);
+            border-radius: 8px;
+        }
+
+        .news-table tr:nth-child(even) {
+            background-color: #303030;
+        }
+
+        .news-container {
+            background-color: #252525;
+            color: #fff;
+            width: 100vw;
+            padding: 30px;
+        }
+
+        #news-table-data .playerRow:hover {
+            color: orange;
+            background-color: black;
+        }
+    </style>
     <!-- JQUERY -->
     <?php include('../lib/jquery/news_jquery.php'); ?>
 
@@ -80,68 +141,6 @@ if (!isset($_SESSION['login'])) {
         </tbody>
     </table>
 </div>
-
-<style>
-    .action {
-        display: flex;
-        text-decoration: none;
-        color: #aaa;
-    }
-
-    .actions {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .message-g {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-        background-color: transparent;
-        font-weight: bold;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 20px;
-        padding: 10px;
-        background-color: rgb(0, 200, 0);
-        border-radius: 8px;
-    }
-
-    .message-r {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-        background-color: transparent;
-        font-weight: bold;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 20px;
-        padding: 10px;
-        background-color: rgb(200, 0, 0);
-        border-radius: 8px;
-    }
-
-    .news-table tr:nth-child(even) {
-        background-color: #303030;
-    }
-
-    .news-container {
-        background-color: #252525;
-        color: #fff;
-        width: 100vw;
-        padding: 30px;
-    }
-
-    #news-table-data .playerRow:hover {
-        color: orange;
-        background-color: black;
-    }
-</style>
 
 <?php
 include("../headers/footer.php");

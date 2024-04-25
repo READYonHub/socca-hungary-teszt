@@ -1,4 +1,10 @@
 <?php
+/* Lapvédelem */
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: ../login.php");
+} ?>
+<?php
 include("../headers/header.php");
 ?>
 
@@ -6,6 +12,7 @@ include("../headers/header.php");
     .action-container {
         display: flex;
         width: 100%;
+        background-color: #303030;
     }
 
     .message-g {
