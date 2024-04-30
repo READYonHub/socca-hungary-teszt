@@ -66,7 +66,7 @@ if (isset($_POST['login'])) {
             $log_datum      =   date("Y-m-d H:i:s");;
             $log_allapot    =   "SIKERTELEN";
             $log_muvelet    =   "Bejelentkezés";
-            $log_email      =   $_SESSION['email'];
+            $log_email      =   $email;
             $log_cim        =   $_SERVER['REMOTE_ADDR'];
 
             //$log    =   $log_datum . "\t" . $log_allapot . "\t" . $log_muvelet . "\t" . $log_email . "\t" . " címről (" . $log_cim . ") \n";
