@@ -18,6 +18,11 @@ if (!isset($_SESSION['login'])) {
         text-align: center;
     }
 
+    .count-container {
+        display: flex;
+        gap: 30px;
+    }
+
     .count-container h2 {
         font-variant: small-caps;
     }
