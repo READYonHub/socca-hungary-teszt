@@ -85,7 +85,10 @@ include("../headers/header.php");
                 <tr class="playerRow">
                     <td><?php echo $data["name"] ?></td>
                     <td><?php echo $data["registration_number"] ?></td>
-                    <td class="actions"><a class="action" href="../qr/choose_generation_method.php?player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a></td>
+                    <td class="actions">
+                        <a class="action" href="../qr/qr_code_generator_algoritmus.php?type=data&player_id=<?php echo $data["player_id"] ?>">QR kód generálás</a>
+                    </td>
+
                 </tr>
             <?php
             }

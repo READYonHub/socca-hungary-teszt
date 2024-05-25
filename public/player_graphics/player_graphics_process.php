@@ -7,6 +7,8 @@ session_start();
 $row1 = array();
 $row2 = array();
 
+print($_GET['id']);
+
 // Ellenőrizze, hogy a 'hi' GET paraméter létezik-e és nem üres
 if (isset($_GET["hi"])) {
     $hash = $_GET["hi"];
@@ -34,6 +36,8 @@ if (isset($_GET["hi"])) {
         $result2 = mysqli_query($conn, $sql2);
 
         $data = array();
+///////// hi=1d65aabe7cc3d2aa9c79b99b597308c317fb8fab
+
 
         // Ellenőrizzük, hogy van-e eredmény a lekérdezésben és hogy a hash megfelel-e valamelyiknek
         while ($row1 = mysqli_fetch_assoc($result1)) {

@@ -4,7 +4,7 @@ session_start(); // Munkamenet kezdése
 include("../../../connect.php"); // Adatbázis kapcsolat létrehozása
 
 // Ellenőrizzük, hogy a szükséges SESSION változók léteznek-e és nem üresek
-if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['record_id'])) {
+if (isset($_SESSION['player_id'], $_SESSION['name'])) {
     $player_id = $_SESSION['player_id']; // Játékos azonosítójának kiolvasása a SESSION-ből
     include("../../../admin/constans.php");
 

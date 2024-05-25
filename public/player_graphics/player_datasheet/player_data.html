@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="player.css">
     <title>{{name}}</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            const threshold = 50; // Minimum távolság pixelben a "swipe" érzékeléséhez
+
+            function handleGesture() {
+                if (touchendX < touchstartX - threshold) {
+                    // Ha jobbról balra húzzák
+                    window.location.href = "../player_healthsheet/player_health.php"; // Irányítás másik weboldalra
+                }
+            }
+
+            document.addEventListener('touchstart', function (event) {
+                touchstartX = event.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', function (event) {
+                touchendX = event.changedTouches[0].screenX;
+                handleGesture();
+            });
+        });
+    </script>
 </head>
 
 <body>
