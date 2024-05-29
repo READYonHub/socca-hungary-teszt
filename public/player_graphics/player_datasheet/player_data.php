@@ -21,7 +21,7 @@ if (isset($_SESSION['player_id'], $_SESSION['name'], $_SESSION['registration_num
         $status = $row['status'];
         $player_profile_pic = $row['profile_pic'];
 
-        $player_profile_pic_path = "http://" . $domain . "/socca-hungary-teszt/admin/images/palyers_profile_pic/" . $player_profile_pic;
+        $player_profile_pic_path = "http://" . $domain . "/socca-hungary-teszt/admin/images/players_profile_pic/" . $player_profile_pic;
 
         $template = file_get_contents("player_data.html");
 
