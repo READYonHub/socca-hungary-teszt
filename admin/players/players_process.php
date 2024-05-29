@@ -331,15 +331,11 @@ if (isset($_POST["update"])) {
         }
     }
 
-    // Fájlfeltöltés ellenőrzése és feldolgozása
-    $profile_pic_OK = 0;
     if (isset($_FILES['new_profile_pic']) && $_FILES['new_profile_pic']['error'] === UPLOAD_ERR_OK) {
+        $old_profile_pic = $_POST['old_profile_pic']; // Feltételezve, hogy az 'old_profile_pic' a POST-ból jön
+        $sqlCheck = "SELECT profile_pic FROM players_data WHERE player_id = $id_edit AND profile_pic = '$old_profile_pic'";
 
-        $old_profile_pic = $_FILES['$old_profile_pic']['name'];
-
-        $sqlCheck  = "SELECT profile_pic FROM players_data WHERE player_id = $id_edit AND profile_pic = {$old_profile_pic}';";
-
-        if ($_FILES['new_profile_pic'] != $old_profile_pic) {
+        if ($_FILES['new_profile_pic']['name'] != $old_profile_pic) {
             $new_profile_pic = time() . '_' . basename($_FILES["new_profile_pic"]["name"]);
             $target_dir = $_SERVER["DOCUMENT_ROOT"] . '/socca-hungary-teszt/admin/images/players_profile_pic/';
             $target_file = $target_dir . $new_profile_pic;
@@ -349,39 +345,50 @@ if (isset($_POST["update"])) {
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $allowed_types = array("jpg", "jpeg", "png");
             if (!in_array($imageFileType, $allowed_types)) {
-                $pic_uploaded = 0;  ?>
+            ?>
                 <script>
                     alert("Csak a .jpg/.jpeg/.png típusú képeket tölthetsz fel!");
-                </script><?php
-                            $profile_pic_OK = 0;
-                            exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
-                        }
-                        if ($_FILES["new_profile_pic"]["size"] > 5000000) {
-                            exit("Error: A fájl mérete meghaladja a maximális limitet.");
-                        }
-                    }
-                }
-
-                //---------------------MÓDOSÍTÁS FELTÖLTÉS  ---------------------------------------------
-
-                // SQL lekérdezés összeállítása az adatbázis frissítéséhez
-                $sqlUpdate = "UPDATE players_data SET name = '$name_edit', registration_number = '$registration_number_edit', status = '$status_edit', validity_date = '$date_edit', suspension_end_date = '$suspension_end_date_edit'";
-                if ($new_profile_pic && $profile_pic_OK == 1) {
-                    //$new_profile_pic .= $new_profile_pic +
-                    $sqlUpdate .= ", profile_pic = '$new_profile_pic'";
-                }
-                $sqlUpdate .= " WHERE player_id = $id_edit";
-
-                // Adatbázis frissítése
-                if (mysqli_query($conn, $sqlUpdate)) {
-                    $_SESSION["update"] = "A játékos sikeresen frissítve lett.";
-                    header("Location: ../players/players_existing.php");
-                    exit();
-                } else {
-                    exit("Error: " . mysqli_error($conn));
-                }
-            } else {
-                exit("Invalid request");
+                </script>
+<?php
+                $profile_pic_OK = 0;
+                exit("Error: Csak JPG, JPEG és PNG fájlokat lehet feltölteni.");
+            }
+            if ($_FILES["new_profile_pic"]["size"] > 5000000) {
+                exit("Error: A fájl mérete meghaladja a maximális limitet.");
             }
 
-                            ?>
+            // Fájl mozgatása a megadott helyre
+            if ($profile_pic_OK == 1) {
+                if (move_uploaded_file($_FILES["new_profile_pic"]["tmp_name"], $target_file)) {
+                    echo "Fájl sikeresen feltöltve: " . $target_file;
+                } else {
+                    echo "Hiba a fájl feltöltése közben.";
+                    error_log("Hiba a fájl feltöltése közben: " . $_FILES["new_profile_pic"]["error"], 3, "/var/log/php_errors.log");
+                    exit();
+                }
+            }
+        }
+    } else {
+        echo "Fájl feltöltési hiba: " . $_FILES['new_profile_pic']['error'];
+        error_log("Fájl feltöltési hiba: " . $_FILES['new_profile_pic']['error'], 3, "/var/log/php_errors.log");
+        exit();
+    }
+
+    //---------------------MÓDOSÍTÁS FELTÖLTÉS  ---------------------------------------------
+
+    // SQL lekérdezés összeállítása az adatbázis frissítéséhez
+    $sqlUpdate = "UPDATE players_data SET name = '$name_edit', registration_number = '$registration_number_edit', status = '$status_edit', validity_date = '$date_edit', suspension_end_date = '$suspension_end_date_edit'";
+    if (!empty($new_profile_pic) && $profile_pic_OK == 1) {
+        $sqlUpdate .= ", profile_pic = '$new_profile_pic'";
+    }
+    $sqlUpdate .= " WHERE player_id = $id_edit";
+
+    // Adatbázis frissítése
+    if (mysqli_query($conn, $sqlUpdate)) {
+        $_SESSION["update"] = "A játékos sikeresen frissítve lett.";
+        header("Location: ../players/players_existing.php");
+        exit();
+    } else {
+        exit("Error: " . mysqli_error($conn));
+    }
+} ?>
