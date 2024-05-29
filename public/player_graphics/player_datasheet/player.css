@@ -154,6 +154,14 @@ body, .carousel, .carousel-item {
     margin-top: auto;
 }
 
+.news-item {
+    width: 500px;
+}
+
+.news-summary {
+    font-weight: bold;
+}
+
 /* Media query for larger screens */
 @media screen and (min-width: 600px) {
     .player-card span, #player-name, #vercsoport, #erzekenyseg, #player-avail, #player-number, #status-green, #status-red {
@@ -197,9 +205,5 @@ body, .carousel, .carousel-item {
 
     #bottom-image {
         max-width: 586px;
-    }
-
-    .news-item {
-        width: 500px;
     }
 }
