@@ -14,10 +14,11 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">
         <div class="carousel-inner">
             <div class="carousel-item" id="news">
-                <div class="d-flex justify-content-center align-items-center min-vh-100 bg-dark text-white p-4">
+                <div
+                    class="d-flex flex-column gap-3 justify-content-center align-items-center min-vh-100 bg-dark text-white p-4">
                     <div id="news-container">
-
                     </div>
+                    <button id="more_news_btn">Több</button>
                 </div>
             </div>
             <div class="carousel-item active" id="datasheet">
@@ -101,43 +102,46 @@
         var lastNewsId = 0; // Variable to store the ID of the last loaded news item
 
         // Function to check if the user has scrolled to the bottom of the page
-        function isScrolledToBottom() {
-            return window.innerHeight + window.scrollY >= document.body.offsetHeight;
-        }
+        // function isScrolledToBottom() {
+        //     return window.innerHeight + window.scrollY >= document.body.offsetHeight;
+        // }
 
         // Function to load more news
         function loadMoreNews() {
-            // Check if the user has scrolled to the bottom
-            if (isScrolledToBottom()) {
-                // Send an AJAX request to fetch more news data
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'fetch_more_news.php?last_id=' + lastNewsId, true);
-                xhr.onload = function () {
-                    console.log(xhr);
-                    if (xhr.status >= 200 && xhr.status < 300) {
-                        // Append the fetched news data to the news container
-                        document.getElementById('news-container').innerHTML += xhr.responseText;
+            // Send an AJAX request to fetch more news data
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetch_more_news.php?last_id=' + lastNewsId, true);
+            xhr.onload = function () {
+                console.log(xhr);
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Append the fetched news data to the news container
+                    document.getElementById('news-container').innerHTML += xhr.responseText;
 
-                        // Update the lastNewsId variable with the ID of the last loaded news item
-                        var lastLoadedNews = document.querySelector('.news-item:last-child');
-                        console.log(lastLoadedNews);
-                        if (lastLoadedNews) {
-                            lastNewsId = lastLoadedNews.dataset.newsid;
-                        }
+                    // Update the lastNewsId variable with the ID of the last loaded news item
+                    var lastLoadedNews = document.querySelector('.news-item:last-child');
+                    console.log(lastLoadedNews);
+                    if (lastLoadedNews) {
+                        lastNewsId = lastLoadedNews.dataset.newsid;
                     }
-                };
-                xhr.send();
-            }
+                }
+
+                if (xhr.responseText == "") {
+                    document.getElementById("more_news_btn").innerText = "Nincs több"
+                }
+            };
+            xhr.send();
         }
 
         // Event listener for scrolling
-        window.addEventListener('scroll', function () {
+        document.getElementById("more_news_btn").addEventListener('click', function () {
             // Load more news when the user scrolls to the bottom
             loadMoreNews();
         });
 
         // Initial load of news
-        loadMoreNews();
+        window.addEventListener('load', function () {
+            loadMoreNews();
+        })
     </script>
 </body>
 

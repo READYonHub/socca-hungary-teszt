@@ -1,82 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* Root variables */
 :root {
     --socca-gradient: linear-gradient(137deg, rgba(186, 156, 66, 1) 0%, rgba(246, 235, 133, 1) 50%, rgba(186, 156, 66, 1) 100%);
-    --image-size: 25vw;
-    /* Size of images */
-    --font-size: 4vw;
-    /* Base font size */
+    --image-size: 30vw; /* Size of images */
+    --font-size-mobile: 4vw; /* Base font size for mobile */
+    --font-size-desktop: 25px; /* Base font size for desktop */
 }
 
-@media screen and (min-width: 600px) {
-    :root {
-        --image-size: 20vw;
-        /* Size of images */
-        --font-size: 2vw;
-        /* Base font size */
-    }
-
-    .label {
-        font-size: 19px !important;
-    }
-
-    .player-card span {
-        font-size: 19px !important;
-        max-width: 510px !important;
-        max-height: 45px !important;
-    }
-
-    .player-card {
-        padding-top: 27px !important;
-        height: 100vh !important;
-        max-width: 590px !important;
-        gap: 17px !important;
-    }
-
-    #player-image,
-    #health-image {
-        max-width: 170px !important;
-        max-height: 170px !important;
-    }
-
-    #socca-logo {
-        max-width: 170px !important;
-    }
-
-    #player-name,
-    #vercsoport,
-    #erzekenyseg {
-        max-width: 510px !important;
-        padding: 8.5px !important;
-    }
-
-    #player-avail,
-    #player-number {
-        max-width: 240px !important;
-        padding: 8.5px !important;
-    }
-
-    #status-green,
-    #status-red {
-        max-width: 510px !important;
-        padding: 8.5px !important;
-    }
-
-    #bottom-image {
-        max-width: 586px !important;
-    }
-
-    .news-item {
-        width: 500px !important;
-    }
-}
-
+/* Reset margins, paddings, and box-sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* General body and font styling */
+body, .carousel, .carousel-item {
+    background-color: #000;
+    font-family: "Kanit", sans-serif;
+}
+
+/* Hide scrollbar for various browsers */
+#news-container::-webkit-scrollbar {
+    width: 0;
+}
+
+#news-container {
+    scrollbar-width: none;           /* IE, Edge, and Safari */
+    overflow: -moz-scrollbars-none;  /* Firefox */
+}
+
+/* News container styling */
 #news-container {
     display: flex;
     flex-direction: column;
@@ -88,26 +43,12 @@
     align-items: center;
 }
 
-/* Hide scrollbar for Firefox */
-#news-container::-webkit-scrollbar {
-    width: 0;
-}
-
-/* Hide scrollbar for IE, Edge, and Safari */
-#news-container {
-    scrollbar-width: none;
-}
-
-/* Hide scrollbar for Chrome, Safari, and Opera */
-#news-container {
-    overflow: -moz-scrollbars-none;
-}
-
+/* News item styling */
 .news-item {
     background-color: #010101;
     padding: 10px;
     border: 0.2vw solid rgb(186, 156, 66);
-    font-size: 14pt;
+    font-size: 16px;
 }
 
 .news-item .news-date {
@@ -115,19 +56,9 @@
     font-style: italic;
 }
 
-body,
-.carousel,
-.carousel-item {
-    background-color: #000;
-    font-family: "Kanit", sans-serif;
-}
-
-.label,
-.news-item h3 {
+/* Label and heading styling */
+.label, .news-item h3 {
     font-weight: bold;
-    font-size: var(--font-size);
-    /* Adjust font size using custom variable */
-    background: rgb(186, 156, 66);
     background: var(--socca-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -135,52 +66,42 @@ body,
 }
 
 .news-item h3 {
-    font-size: 26pt;
+    font-size: 24px;
 }
 
+/* More news button styling */
+#more_news_btn {
+    background-color: transparent;
+    border: 2px solid gray;
+    border-radius: 100px;
+    padding: 10px 30px;
+    color: gray;
+    font-size: 16px;
+}
+
+/* Player card styling */
 .player-card {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 2vw;
-    /* Adjust gap using vw */
+    gap: 2vw; /* Adjust gap using vw */
     background-color: #000;
-    border: 0.2vw solid rgb(186, 156, 66);
-    /* Adjust border thickness using vw */
-    max-width: 70vw;
-    /* Set maximum width using vw */
+    border: 0.2vw solid rgb(186, 156, 66); /* Adjust border thickness using vw */
+    max-width: 70vw; /* Set maximum width using vw */
     width: 100%;
     max-height: 80vh;
     height: 70vh;
-    margin: auto;
-    /* Center the card horizontally */
+    margin: auto; /* Center the card horizontally */
     padding-top: 5vh;
 }
 
-.top {
+.top, .mid, .bot {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3vw;
-    /* Adjust gap using vw */
-    margin-top: 1vw;
-    /* Adjust margin using vw */
-}
-
-#player-image,
-#health-image {
-    background-color: #fff;
-    width: var(--image-size);
-    /* Use custom variable for image size */
-    height: var(--image-size);
-    /* Use custom variable for image size */
-    object-fit: cover;
-}
-
-#socca-logo {
-    width: var(--image-size);
-    /* Use custom variable for image size */
+    gap: 3vw; /* Adjust gap using vw */
+    margin-top: 1vw; /* Adjust margin using vw */
 }
 
 .group-lt {
@@ -190,63 +111,34 @@ body,
     flex-direction: column;
 }
 
-#player-name,
-#vercsoport,
-#erzekenyseg {
+#player-image, #health-image {
+    background-color: #fff;
+    width: var(--image-size); /* Use custom variable for image size */
+    height: var(--image-size); /* Use custom variable for image size */
+    object-fit: cover;
+}
+
+#socca-logo {
+    width: 110px;
+}
+
+#player-name, #vercsoport, #erzekenyseg, #player-avail, #player-number, #status-green, #status-red {
     background-color: #fff;
     color: #000;
-    padding: 1vw;
-    /* Adjust padding using vw */
-    width: 60vw;
-    /* Adjust width using vw */
-    max-width: 70vw;
-    /* Set maximum width using vw */
-    font-size: var(--font-size);
-    /* Adjust font size using custom variable */
+    padding: 1vw; /* Adjust padding using vw */
+    width: 60vw; /* Adjust width using vw */
+    max-width: 70vw; /* Set maximum width using vw */
+    font-size: var(--font-size-mobile); /* Adjust font size using custom variable */
     text-align: center;
+    font-weight: bold;
 }
 
-.mid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3vw;
-    /* Adjust gap using vw */
+#player-name {
+    margin-top: 20px;
 }
 
-#player-avail,
-#player-number {
-    background-color: #fff;
-    color: #000;
-    padding: 1vw;
-    /* Adjust padding using vw */
-    width: 30vw;
-    /* Adjust width using vw */
-    max-width: 28vw;
-    /* Set maximum width using vw */
-    font-size: var(--font-size);
-    /* Adjust font size using custom variable */
-    text-align: center;
-}
-
-.bot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#status-green,
-#status-red {
-    background-color: #fff;
-    width: 60vw;
-    /* Adjust width using vw */
-    padding: 1vw;
-    /* Adjust padding using vw */
-    max-width: 70vw;
-    /* Set maximum width using vw */
-    font-size: var(--font-size);
-    /* Adjust font size using custom variable */
-    text-align: center;
+#player-avail, #player-number {
+    max-width: 120px;
 }
 
 #status-green {
@@ -258,7 +150,56 @@ body,
 }
 
 #bottom-image {
-    max-width: 69vw;
-    /* Adjust width using vw */
+    max-width: 69vw; /* Adjust width using vw */
     margin-top: auto;
+}
+
+/* Media query for larger screens */
+@media screen and (min-width: 600px) {
+    .player-card span, #player-name, #vercsoport, #erzekenyseg, #player-avail, #player-number, #status-green, #status-red {
+        font-size: var(--font-size-desktop);
+        max-width: 510px;
+    }
+
+    .label {
+        font-size: 25px;
+    }
+
+    .player-card {
+        padding-top: 27px;
+        height: 100vh;
+        max-width: 590px;
+        gap: 17px;
+    }
+
+    #player-image, #health-image {
+        max-width: 170px;
+        max-height: 170px;
+    }
+
+    #socca-logo {
+        width: 150px;
+    }
+
+    #player-name, #vercsoport, #erzekenyseg {
+        padding: 10px;
+        font-size: 30px;
+    }
+
+    #player-avail, #player-number {
+        max-width: 240px;
+        padding: 10px;
+    }
+
+    #status-green, #status-red {
+        padding: 8.5px;
+    }
+
+    #bottom-image {
+        max-width: 586px;
+    }
+
+    .news-item {
+        width: 500px;
+    }
 }

@@ -6,7 +6,7 @@ include("../../../connect.php");
 $lastId = isset($_GET['last_id']) ? (int)$_GET['last_id'] : 0;
 
 // Query to fetch more news data
-$sql = "SELECT * FROM news WHERE id > $lastId ORDER BY date DESC LIMIT 10";
+$sql = "SELECT * FROM news WHERE id > $lastId ORDER BY date DESC LIMIT 5";
 
 // Execute the query
 $result = mysqli_query($conn, $sql);
