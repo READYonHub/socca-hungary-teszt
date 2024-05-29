@@ -2,6 +2,72 @@
 
 :root {
     --socca-gradient: linear-gradient(137deg, rgba(186, 156, 66, 1) 0%, rgba(246, 235, 133, 1) 50%, rgba(186, 156, 66, 1) 100%);
+    --image-size: 25vw;
+    /* Size of images */
+    --font-size: 4vw;
+    /* Base font size */
+}
+
+@media screen and (min-width: 600px) {
+    :root {
+        --image-size: 20vw;
+        /* Size of images */
+        --font-size: 2vw;
+        /* Base font size */
+    }
+
+    .label {
+        font-size: 19px !important;
+    }
+
+    .player-card span {
+        font-size: 19px !important;
+        max-width: 510px !important;
+        max-height: 45px !important;
+    }
+
+    .player-card {
+        padding-top: 27px !important;
+        max-width: 590px !important;
+        gap: 17px !important;
+    }
+
+    #player-image,
+    #health-image {
+        max-width: 170px !important;
+        max-height: 170px !important;
+    }
+
+    #socca-logo {
+        max-width: 170px !important;
+    }
+
+    #player-name,
+    #vercsoport,
+    #erzekenyseg {
+        max-width: 510px !important;
+        padding: 8.5px !important;
+    }
+
+    #player-avail,
+    #player-number {
+        max-width: 240px !important;
+        padding: 8.5px !important;
+    }
+
+    #status-green,
+    #status-red {
+        max-width: 510px !important;
+        padding: 8.5px !important;
+    }
+
+    #bottom-image {
+        max-width: 586px !important;
+    }
+
+    .news-item {
+        width: 500px !important;
+    }
 }
 
 * {
@@ -10,14 +76,56 @@
     box-sizing: border-box;
 }
 
-body {
+#news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hide scrollbar for Firefox */
+#news-container::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Hide scrollbar for IE, Edge, and Safari */
+#news-container {
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+#news-container {
+    overflow: -moz-scrollbars-none;
+}
+
+.news-item {
+    background-color: #010101;
+    padding: 10px;
+    border: 0.2vw solid rgb(186, 156, 66);
+    font-size: 14pt;
+}
+
+.news-item .news-date {
+    opacity: .6;
+    font-style: italic;
+}
+
+body,
+.carousel,
+.carousel-item {
     background-color: #000;
     font-family: "Kanit", sans-serif;
 }
 
-.label {
+.label,
+.news-item h3 {
     font-weight: bold;
-    font-size: 20pt;
+    font-size: var(--font-size);
+    /* Adjust font size using custom variable */
     background: rgb(186, 156, 66);
     background: var(--socca-gradient);
     -webkit-background-clip: text;
@@ -25,11 +133,8 @@ body {
     text-transform: uppercase;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.news-item h3 {
+    font-size: 26pt;
 }
 
 .player-card {
@@ -37,27 +142,44 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 2vw;
+    /* Adjust gap using vw */
     background-color: #000;
+    border: 0.2vw solid rgb(186, 156, 66);
+    /* Adjust border thickness using vw */
+    max-width: 70vw;
+    /* Set maximum width using vw */
+    width: 100%;
+    max-height: 80vh;
+    height: 100vh;
+    margin: auto;
+    /* Center the card horizontally */
+    padding-top: 10vh;
 }
 
 .top {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    margin-top: 10px;
+    gap: 3vw;
+    /* Adjust gap using vw */
+    margin-top: 1vw;
+    /* Adjust margin using vw */
 }
 
-#player-image {
+#player-image,
+#health-image {
     background-color: #fff;
-    width: 150px;
-    height: 150px;
+    width: var(--image-size);
+    /* Use custom variable for image size */
+    height: var(--image-size);
+    /* Use custom variable for image size */
     object-fit: cover;
 }
 
 #socca-logo {
-    width: 150px;
+    width: var(--image-size);
+    /* Use custom variable for image size */
 }
 
 .group-lt {
@@ -67,28 +189,42 @@ body {
     flex-direction: column;
 }
 
-#player-name {
+#player-name,
+#vercsoport,
+#erzekenyseg {
     background-color: #fff;
-    padding: 8px;
-    width: 90vw;
-    max-width: 450px;
-    font-size: 16pt;
+    color: #000;
+    padding: 1vw;
+    /* Adjust padding using vw */
+    width: 60vw;
+    /* Adjust width using vw */
+    max-width: 70vw;
+    /* Set maximum width using vw */
+    font-size: var(--font-size);
+    /* Adjust font size using custom variable */
+    text-align: center;
 }
 
 .mid {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 3vw;
+    /* Adjust gap using vw */
 }
 
 #player-avail,
 #player-number {
     background-color: #fff;
-    padding: 8px;
-    width: 40vw;
-    max-width: 205px;
-    font-size: 16pt;
+    color: #000;
+    padding: 1vw;
+    /* Adjust padding using vw */
+    width: 30vw;
+    /* Adjust width using vw */
+    max-width: 28vw;
+    /* Set maximum width using vw */
+    font-size: var(--font-size);
+    /* Adjust font size using custom variable */
     text-align: center;
 }
 
@@ -101,10 +237,14 @@ body {
 #status-green,
 #status-red {
     background-color: #fff;
-    width: 90vw;
-    padding: 8px;
-    max-width: 450px;
-    font-size: 16pt;
+    width: 60vw;
+    /* Adjust width using vw */
+    padding: 1vw;
+    /* Adjust padding using vw */
+    max-width: 70vw;
+    /* Set maximum width using vw */
+    font-size: var(--font-size);
+    /* Adjust font size using custom variable */
     text-align: center;
 }
 
@@ -117,6 +257,7 @@ body {
 }
 
 #bottom-image {
-    width: 450px;
+    max-width: 69vw;
+    /* Adjust width using vw */
     margin-top: auto;
 }
